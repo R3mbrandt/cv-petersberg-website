@@ -1,0 +1,22 @@
+---
+layout: layouts/page.njk
+title: Aktuelles
+description: Neuigkeiten, Einladungen und Berichte aus dem Vereinsleben – seit 2011.
+breit: true
+pagination:
+  data: collections.beitraege
+  size: 12
+  alias: beitraege
+permalink: "/aktuelles/{% if pagination.pageNumber > 0 %}seite-{{ pagination.pageNumber + 1 }}/{% endif %}"
+---
+{% include "partials/jahres-nav.njk" %}
+<div class="card-grid">
+  {% for post in beitraege %}{% include "partials/post-card.njk" %}{% endfor %}
+</div>
+{% if pagination.pages.length > 1 %}
+<nav class="pagination" aria-label="Seiten">
+  {% if pagination.href.previous %}<a class="btn btn-ghost" href="{{ pagination.href.previous }}">← Neuere</a>{% endif %}
+  <span>Seite {{ pagination.pageNumber + 1 }} von {{ pagination.pages.length }}</span>
+  {% if pagination.href.next %}<a class="btn btn-ghost" href="{{ pagination.href.next }}">Ältere →</a>{% endif %}
+</nav>
+{% endif %}

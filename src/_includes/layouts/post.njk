@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+---
+<article>
+  <header class="page-hero">
+    <div class="container prose">
+      <p class="kicker"><a href="/aktuelles/">Aktuelles</a> · <time datetime="{{ page.date | iso }}">{{ page.date | datum }}</time></p>
+      <h1>{{ title }}</h1>
+    </div>
+  </header>
+  <div class="container prose section post-body">
+    {{ content | safe }}
+    <p class="post-back"><a class="btn btn-ghost" href="/aktuelles/">← Alle Beiträge</a></p>
+  </div>
+</article>

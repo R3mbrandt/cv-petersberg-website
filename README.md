@@ -1,0 +1,106 @@
+# Website Carnevalverein Petersberg e.V.
+
+Moderne, schnelle und leicht pflegbare Vereinswebsite – gebaut mit
+[Eleventy](https://www.11ty.dev/) als statische Seite, mit Redaktionssystem im Browser.
+
+## Auf einen Blick
+
+| Was | Wie |
+|---|---|
+| **Inhalte pflegen** | Im Browser unter `https://cv-petersberg.de/admin/` (Anmeldung mit GitHub-Konto) – oder direkt die Dateien unten bearbeiten |
+| **Termine** | `src/_data/termine.yaml` – vergangene Termine verschwinden automatisch |
+| **Beiträge** | Eine Markdown-Datei pro Beitrag in `src/aktuelles/` |
+| **Prinzenpaar / Kampagne** | `src/_data/kampagne.yaml` |
+| **Gruppen, Vorstand, Chronik** | `src/_data/gruppen.yaml`, `vorstand.yaml`, `chronik.yaml` |
+| **Name, Kontakt, Menü, Farben, Logo** | `src/_data/site.yaml` |
+| **Bilder & PDFs** | `src/uploads/` |
+
+## Logo und Vereinsfarben
+
+Das offizielle Vektor-Logo (`src/assets/img/logo-cvp.svg`) und seine Farben (Rot `#c81522`, Gelb `#f9ec9e`, Grün `#217c41`) sind übernommen.
+So werden sie geändert:
+
+1. Original-Logo (am besten als SVG, sonst PNG mit transparentem Hintergrund)
+   nach `src/assets/img/` kopieren und den Pfad unter `logo:` in `src/_data/site.yaml` eintragen.
+   Browser- und App-Symbole liegen als `favicon.png`, `icon-180.png` und `icon-192.png` daneben.
+2. In `src/_data/site.yaml` unter `farben:` die drei Farbwerte eintragen
+   (`primaer`, `akzent`, `dunkel`). Alle hellen/dunklen Abstufungen, der Dark Mode
+   und die Hover-Effekte werden automatisch daraus berechnet.
+3. Optional `src/assets/img/og.png` (1200×630, Vorschaubild für WhatsApp/Facebook) ersetzen.
+
+## Lokal starten (für Technik-Verantwortliche)
+
+Voraussetzung: [Node.js](https://nodejs.org/) ab Version 20.
+
+```bash
+npm install
+npm start        # Vorschau unter http://localhost:8080 mit Live-Reload
+npm run build    # fertige Seite im Ordner _site/
+```
+
+Der Ordner `_site/` enthält nur HTML/CSS/JS und läuft auf **jedem** Webspace
+(kein PHP, keine Datenbank, keine Updates oder Sicherheitslücken eines CMS).
+
+## Veröffentlichen
+
+`.github/workflows/deploy.yml` baut die Seite automatisch bei jeder Änderung
+und täglich nachts neu. Voreingestellt ist GitHub Pages; alternativ ist ein
+FTP-Upload auf den bestehenden Webspace vorbereitet (siehe Kommentare in der Datei).
+
+### Redaktionssystem einrichten (einmalig)
+
+1. Projekt in ein GitHub-Repository legen.
+2. In `src/admin/config.yml` bei `repo:` das Repository eintragen.
+3. Redakteurinnen und Redakteure als Mitglieder des Repositorys einladen.
+4. Für den Login ohne eigenen Server: unter `/admin/` „Mit Token anmelden“
+   (persönlicher GitHub-Token) oder eine OAuth-App einrichten – Anleitung:
+   <https://github.com/sveltia/sveltia-cms#authentication>.
+
+Jede Änderung im Redaktionssystem wird als Version gespeichert und lässt sich
+jederzeit rückgängig machen.
+
+## Technik & Qualität
+
+- **Responsiv** vom Smartphone bis zum großen Monitor (fluide Schriftgrößen, Container Queries)
+- **Dark Mode** automatisch nach Geräteeinstellung
+- **Barrierearm**: semantisches HTML, Tastaturbedienung, Skip-Link, sichtbarer Fokus,
+  reduzierte Animationen bei entsprechender Systemeinstellung
+- **Datenschutzfreundlich**: keine Cookies, kein Tracking, Schriften lokal (kein Google Fonts)
+- **Schnell**: ~100 KB Schriften, ein CSS, ein winziges Skript, keine Frameworks im Browser
+- **Moderne Web-Features** mit sauberem Fallback: View Transitions zwischen Seiten,
+  Scroll-Animationen, `color-mix()` für Farbabstufungen
+- **Kalender-Abo** (`/termine.ics`) zum Abonnieren in Handy-Kalendern
+- **SEO**: strukturierte Daten für Verein und Veranstaltungen (Google-Eventanzeige),
+  Sitemap, RSS-Feed, Social-Media-Vorschaubilder
+- **Installierbar** als App auf dem Homescreen (Web-App-Manifest)
+
+## Übernahme von der alten WordPress-Seite
+
+Alle Inhalte von cv-petersberg.de wurden übernommen:
+
+- **148 Beiträge** (2011–2026) inkl. Bilder und PDFs – unter denselben Adressen wie bisher
+  (`/JJJJ/MM/TT/titel/`), damit Google-Treffer und geteilte Links weiter funktionieren
+- Vorstand, Festausschuss, Gruppen mit Fotos, Chronik (1948–2008, ergänzt um 2025),
+  72 Ex-Prinzenpaare seit 1949, Zahlen & Beiträge, Downloads, Fuldaer Randstaaten
+- Alte Seitenadressen (z. B. `/gruppen/green-diamonds/`, `/der-verein/kontakt/`) leiten
+  automatisch auf die neuen Seiten weiter – Liste in `src/_data/weiterleitungen.yaml`
+- Die Termine der Kampagne 2027 aus der Kalender-App (`/kalender/`) – inklusive Kalenderdateien
+  für alle Termine und für jeden einzelnen Termin; `/kalender/` leitet auf `/termine/` weiter
+- 23 alte Startseiten-Slider ohne eigenen Inhalt und die Bildergalerien `/bilder/kampagne-…`
+  (waren schon auf der alten Seite nicht mehr erreichbar) wurden nicht übernommen;
+  ihre Adressen leiten auf das jeweilige Jahresarchiv weiter.
+
+## Offene Punkte (vor dem Livegang prüfen)
+
+Alle Stellen sind im Code mit `TODO` markiert (`grep -rn TODO src`):
+
+- **Impressum:** Vereinsregisternummer (Amtsgericht Fulda) ergänzen
+- **Datenschutz:** Hosting-Anbieter und Speicherdauer der Logfiles eintragen; Text rechtlich prüfen
+  (die alte Erklärung beschrieb WordPress-Plugins und Cookies, die es nicht mehr gibt)
+- **Kontakt:** Die bisherigen Kontaktformulare wurden durch E-Mail-Links ersetzt (kein Formular-Dienst,
+  keine Datenweitergabe). Als Kontaktadresse ist die im alten Impressum genannte private Adresse
+  der Vorsitzenden eingetragen – ggf. eine Vereinsadresse (z. B. info@cv-petersberg.de) einrichten
+  und in `site.yaml` eintragen
+- Nach der **Prinzenkürung** die neue Prinzenmannschaft in `kampagne.yaml` eintragen und die
+  bisherige in `exprinzen.yaml` oben ergänzen
+- **Redaktionssystem:** Login einrichten (siehe „Redaktionssystem einrichten“)

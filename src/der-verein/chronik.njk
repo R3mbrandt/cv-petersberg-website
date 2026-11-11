@@ -1,0 +1,11 @@
+---
+layout: layouts/page.njk
+title: Chronik
+kicker: Der Verein
+description: Die Geschichte des Carnevalverein Petersberg – von den Anfängen 1948 bis heute.
+---
+<ol class="timeline">
+  {% for c in chronik %}
+  <li id="jahr-{{ c.jahr }}"><span class="timeline-year">{{ c.jahr }}</span>{{ c.text | absaetze | safe }}</li>
+  {% endfor %}
+</ol>

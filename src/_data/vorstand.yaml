@@ -1,0 +1,18 @@
+# Vorstand des CVP
+mitglieder:
+  - funktion: "1. Vorsitzende"
+    name: "Sandra Freund"
+  - funktion: "2. Vorsitzender"
+    name: "Manfred Farnung"
+  - funktion: "2. Vorsitzender"
+    name: "Ralf Bott"
+  - funktion: "1. Kassiererin"
+    name: "Beate Weis"
+  - funktion: "2. Kassiererin"
+    name: "Sonja Jahn"
+  - funktion: "1. Schriftführerin"
+    name: "Jennifer Ruhs"
+  - funktion: "Festausschussvorsitz"
+    name: "Markus Gutberlet"
+festausschuss: "Pia Farnung, Jennifer Happ, Julia Mörmel, Uwe Quell und Jan Richter"
+bild: "/uploads/2011/01/VorstandV01_D72_8186-1024x683.png"

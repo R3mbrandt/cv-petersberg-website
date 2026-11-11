@@ -1,0 +1,23 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>{{ site.name }} – Aktuelles</title>
+  <link>{{ site.url }}/aktuelles/</link>
+  <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>{{ site.slogan }}</description>
+  <language>de-de</language>
+  {%- for post in collections.beitraege | limit(20) %}
+  <item>
+    <title>{{ post.data.title }}</title>
+    <link>{{ post.url | absoluteUrl(site.url) }}</link>
+    <guid>{{ post.url | absoluteUrl(site.url) }}</guid>
+    <pubDate>{{ post.date | rfc822 }}</pubDate>
+    <description>{{ post.data.description or (post.content | excerpt) }}</description>
+  </item>
+  {%- endfor %}
+</channel>
+</rss>

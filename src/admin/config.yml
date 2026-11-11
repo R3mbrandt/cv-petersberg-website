@@ -1,0 +1,237 @@
+# Redaktionssystem für die CVP-Website (Sveltia CMS / Decap-kompatibel).
+# Anmeldung über GitHub.
+backend:
+  name: github
+  repo: R3mbrandt/cv-petersberg-website
+  branch: main
+  commit_messages:
+    create: "Neu: {{collection}} „{{slug}}“"
+    update: "Geändert: {{collection}} „{{slug}}“"
+    delete: "Gelöscht: {{collection}} „{{slug}}“"
+
+locale: de
+site_url: https://cv-petersberg.de
+logo_url: /assets/img/logo-cvp.svg
+media_folder: src/uploads
+public_folder: /uploads
+
+collections:
+  - name: aktuelles
+    label: Aktuelles
+    label_singular: Beitrag
+    folder: src/aktuelles
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, title]
+    summary: "{{date | date('DD.MM.YYYY')}} – {{title}}"
+    fields:
+      - { name: title, label: Überschrift, widget: string }
+      - { name: description, label: Kurzbeschreibung (Teaser), widget: text, required: false }
+      - { name: date, label: Datum, widget: datetime, time_format: false, date_format: "DD.MM.YYYY", format: "YYYY-MM-DD" }
+      - { name: bild, label: Titelbild, widget: image, required: false }
+      - { name: bildAlt, label: Bildbeschreibung (für Barrierefreiheit), widget: string, required: false }
+      - { name: entwurf, label: "Entwurf (noch nicht veröffentlichen)", widget: boolean, default: false, required: false }
+      - { name: body, label: Text, widget: markdown }
+
+  - name: daten
+    label: Termine, Gruppen & Verein
+    files:
+      - name: termine
+        label: Termine
+        file: src/_data/termine.yaml
+        fields:
+          - name: termine
+            label: Termine
+            label_singular: Termin
+            widget: list
+            root: true
+            summary: "{{fields.datum}} – {{fields.titel}}"
+            fields:
+              - { name: titel, label: Titel, widget: string }
+              - { name: datum, label: Datum & Uhrzeit, widget: datetime, format: "YYYY-MM-DDTHH:mm", date_format: "DD.MM.YYYY", time_format: "HH:mm" }
+              - { name: ende, label: "Ende (HH:MM, optional)", widget: string, required: false }
+              - { name: ort, label: Ort, widget: string, required: false }
+              - { name: adresse, label: Adresse, widget: string, required: false }
+              - { name: kategorie, label: Kategorie, widget: select, options: [Sitzung, Umzug, Feier, Party, Vorverkauf, Verein, Versammlung, Sonstiges], required: false }
+              - { name: beschreibung, label: Beschreibung, widget: text, required: false }
+              - { name: tickets, label: Ticket-Link, widget: string, required: false }
+      - name: kampagne
+        label: Kampagne & Prinzenpaar
+        file: src/_data/kampagne.yaml
+        fields:
+          - { name: titel, label: Kampagne, widget: string, hint: "z. B. Kampagne 2026/27" }
+          - { name: motto, label: Motto, widget: string, required: false }
+          - name: prinzenpaar
+            label: Prinzenpaar
+            widget: object
+            fields:
+              - { name: zeigen, label: Auf Startseite zeigen, widget: boolean, default: true }
+              - { name: kicker, label: Dachzeile, widget: string, required: false }
+              - { name: titel, label: Überschrift, widget: string }
+              - { name: namen, label: Namen, widget: string }
+              - { name: text, label: Text, widget: text }
+              - { name: bild, label: Foto, widget: image, required: false }
+              - { name: link, label: Link zum Bericht, widget: string, required: false }
+      - name: gruppen
+        label: Garden & Gruppen
+        file: src/_data/gruppen.yaml
+        fields:
+          - name: gruppen
+            label: Gruppen
+            label_singular: Gruppe
+            widget: list
+            root: true
+            summary: "{{fields.name}} ({{fields.kategorie}})"
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: id, label: "Kurzname für Links (nur a–z, Bindestriche)", widget: string }
+              - { name: kategorie, label: Kategorie, widget: select, options: [Aktivengruppe, Tanzgarde] }
+              - { name: art, label: Art, widget: string, hint: "z. B. 1. Tanzgarde, Showtanzgruppe" }
+              - { name: leitung, label: Leitung, widget: string, required: false }
+              - { name: text, label: Beschreibung, widget: text, required: false }
+              - { name: bild, label: Foto, widget: image, required: false }
+      - name: vorstand
+        label: Vorstand
+        file: src/_data/vorstand.yaml
+        fields:
+          - name: mitglieder
+            label: Vorstandsmitglieder
+            label_singular: Person
+            widget: list
+            summary: "{{fields.funktion}}: {{fields.name}}"
+            fields:
+              - { name: funktion, label: Funktion, widget: string }
+              - { name: name, label: Name, widget: string }
+          - { name: festausschuss, label: Mitglieder des Festausschusses, widget: string }
+          - { name: bild, label: Vorstandsfoto, widget: image, required: false }
+      - name: chronik
+        label: Chronik
+        file: src/_data/chronik.yaml
+        fields:
+          - name: chronik
+            label: Meilensteine
+            label_singular: Meilenstein
+            widget: list
+            root: true
+            summary: "{{fields.jahr}}"
+            fields:
+              - { name: jahr, label: Jahr, widget: string }
+              - { name: text, label: Ereignis, widget: text, hint: "Absätze mit einer Leerzeile trennen" }
+      - name: exprinzen
+        label: Ex-Prinzenpaare
+        file: src/_data/exprinzen.yaml
+        fields:
+          - name: exprinzen
+            label: Prinzenmannschaften (neueste oben)
+            label_singular: Prinzenmannschaft
+            widget: list
+            root: true
+            summary: "{{fields.titel}}"
+            fields:
+              - { name: jahr, label: Jahr, widget: string }
+              - { name: titel, label: Titel, widget: string, hint: "z. B. Prinzenmannschaft 2026" }
+              - { name: text, label: Namen, widget: text }
+              - { name: bild, label: Foto, widget: image, required: false }
+      - name: dokumente
+        label: Downloads (Mitgliedschaft)
+        file: src/_data/dokumente.yaml
+        fields:
+          - name: dokumente
+            label: Dokumente
+            label_singular: Dokument
+            widget: list
+            root: true
+            fields:
+              - { name: titel, label: Titel, widget: string }
+              - { name: datei, label: Datei (PDF), widget: file }
+      - name: partner
+        label: Fuldaer Randstaaten
+        file: src/_data/partner.yaml
+        fields:
+          - name: partner
+            label: Vereine
+            label_singular: Verein
+            widget: list
+            root: true
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: url, label: Website, widget: string }
+              - { name: logo, label: Logo, widget: image, required: false }
+
+  - name: einstellungen
+    label: Einstellungen
+    files:
+      - name: site
+        label: Vereinsdaten, Farben & Menü
+        file: src/_data/site.yaml
+        fields:
+          - { name: name, label: Vereinsname, widget: string }
+          - { name: kurzname, label: Kurzname, widget: string }
+          - { name: slogan, label: Slogan, widget: string }
+          - { name: gruendung, label: Gründungsjahr, widget: string }
+          - { name: gruendungsdatum, label: Gründungsdatum, widget: string }
+          - { name: mitglieder, label: Mitgliederzahl, widget: string }
+          - { name: url, label: Website-Adresse, widget: string }
+          - { name: sprache, label: Sprache, widget: hidden, default: de }
+          - { name: narrenruf, label: Narrenruf, widget: string }
+          - { name: heroZeile1, label: "Startseite: Überschrift Zeile 1", widget: string }
+          - { name: heroZeile2, label: "Startseite: Überschrift Zeile 2 (farbig)", widget: string }
+          - name: farben
+            label: Vereinsfarben
+            widget: object
+            fields:
+              - { name: primaer, label: Hauptfarbe, widget: color }
+              - { name: akzent, label: Akzentfarbe, widget: color }
+              - { name: gruen, label: Grün, widget: color }
+              - { name: dunkel, label: Dunkle Farbe (Schrift), widget: color }
+          - { name: logo, label: Logo, widget: image }
+          - { name: logoKlein, label: Logo klein (Kopfzeile), widget: image }
+          - name: kontakt
+            label: Kontakt
+            widget: object
+            fields:
+              - { name: name, label: Ansprechpartner, widget: string, required: false }
+              - { name: email, label: E-Mail, widget: string }
+              - { name: telefon, label: Telefon, widget: string, required: false }
+              - name: adresse
+                label: Adresse
+                widget: object
+                fields:
+                  - { name: strasse, label: Straße, widget: string, required: false }
+                  - { name: plz, label: PLZ, widget: string }
+                  - { name: ort, label: Ort, widget: string }
+          - name: social
+            label: Soziale Medien
+            widget: list
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: url, label: Link, widget: string }
+          - name: navigation
+            label: Hauptmenü
+            widget: list
+            fields:
+              - { name: titel, label: Titel, widget: string }
+              - { name: url, label: Link, widget: string }
+
+  - name: seiten
+    label: Seiten
+    files:
+      - { name: mitmachen, label: Mitmachen, file: src/mitmachen.md, fields: &seitenfelder [ { name: layout, widget: hidden, default: layouts/page.njk }, { name: title, label: Titel, widget: string }, { name: kicker, label: Dachzeile, widget: string, required: false }, { name: description, label: Einleitung, widget: text, required: false }, { name: body, label: Inhalt, widget: markdown } ] }
+      - { name: kontakt, label: Kontakt, file: src/kontakt.md, fields: *seitenfelder }
+      - name: einmarschplan
+        label: Einmarschplan
+        file: src/termine/einmarschplan.md
+        fields:
+          - { name: layout, widget: hidden, default: layouts/page.njk }
+          - { name: title, label: Titel, widget: string }
+          - { name: kicker, label: Dachzeile, widget: string, required: false }
+          - { name: description, label: Einleitung, widget: text, required: false }
+          - name: einmarschplan
+            label: Einmarschplan
+            widget: object
+            fields:
+              - { name: bild, label: Bild, widget: image }
+              - { name: pdf, label: PDF, widget: file }
+          - { name: body, label: Inhalt, widget: markdown }
+      - { name: impressum, label: Impressum, file: src/impressum.md, fields: *seitenfelder }
+      - { name: datenschutz, label: Datenschutz, file: src/datenschutz.md, fields: *seitenfelder }

@@ -1,0 +1,23 @@
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="{{ site.name }} – Startseite">
+      <img src="{{ site.logoKlein or site.logo }}" alt="" width="48" height="48">
+      <span class="brand-text">
+        <span class="brand-short">{{ site.kurzname }}</span>
+        <span class="brand-long">Carnevalverein Petersberg</span>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="hauptnavigation" data-nav-toggle>
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      <span class="visually-hidden">Menü</span>
+    </button>
+    <nav id="hauptnavigation" class="main-nav" aria-label="Hauptnavigation" data-nav>
+      <ul>
+        {%- for item in site.navigation %}
+        {%- set aktiv = page.url == item.url or (item.url != "/" and page.url.startsWith(item.url)) %}
+        <li><a href="{{ item.url }}"{% if aktiv %} aria-current="page"{% endif %}>{{ item.titel }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>

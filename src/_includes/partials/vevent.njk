@@ -1,0 +1,12 @@
+BEGIN:VEVENT
+UID:{{ t.titel | slugify }}-{{ t.datum | iso | replace(':', '') }}@{{ site.url | replace('https://', '') }}
+DTSTAMP:20260101T000000Z
+DTSTART{{ t.datum | icsDatum }}
+DTEND{{ t.datum | icsEnde(t.ende) }}
+SUMMARY:{{ t.titel | icsText | safe }}
+{%- if t.ort or t.adresse %}
+LOCATION:{{ ([t.ort, t.adresse] | select | join(", ")) | icsText | safe }}
+{%- endif %}
+DESCRIPTION:{{ ((t.beschreibung + "\n") if t.beschreibung else "") | icsText | safe }}{{ site.name | icsText | safe }}
+URL:{{ site.url }}/termine/
+END:VEVENT

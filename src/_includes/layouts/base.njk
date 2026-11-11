@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="{{ site.sprache }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- set seitentitel = (title + " · " + site.name) if title and title != site.name else site.name + " – " + site.slogan %}
+  <title>{{ seitentitel }}</title>
+  <meta name="description" content="{{ description or site.slogan }}">
+  <link rel="canonical" href="{{ page.url | absoluteUrl(site.url) }}">
+  <meta name="theme-color" content="{{ site.farben.primaer }}">
+  <meta name="color-scheme" content="light dark">
+  <script>document.documentElement.classList.add("js")</script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ title or site.name }}">
+  <meta property="og:description" content="{{ description or site.slogan }}">
+  <meta property="og:url" content="{{ page.url | absoluteUrl(site.url) }}">
+  <meta property="og:image" content="{{ (bild or '/assets/img/og.png') | absoluteUrl(site.url) }}">
+  <meta property="og:locale" content="de_DE">
+
+  <link rel="icon" href="/assets/img/logo-cvp.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/favicon.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="/assets/img/icon-180.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.name }} – Aktuelles" href="/feed.xml">
+  <link rel="alternate" type="text/calendar" title="{{ site.name }} – Termine" href="/termine.ics">
+
+  <link rel="preload" href="/assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  {# Vereinsfarben aus src/_data/site.yaml – alle Abstufungen berechnet das Stylesheet #}
+  <style>:root{--cv-primaer:{{ site.farben.primaer }};--cv-akzent:{{ site.farben.akzent }};--cv-gruen:{{ site.farben.gruen }};--cv-dunkel:{{ site.farben.dunkel }}}</style>
+  <link rel="stylesheet" href="/assets/css/main.css?v={{ build.version }}">
+  <script src="/assets/js/main.js?v={{ build.version }}" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": {{ site.name | dump | safe }},
+    "alternateName": {{ site.kurzname | dump | safe }},
+    "url": {{ site.url | dump | safe }},
+    "logo": {{ site.logo | absoluteUrl(site.url) | dump | safe }},
+    "foundingDate": {{ site.gruendung | dump | safe }},
+    "email": {{ site.kontakt.email | dump | safe }},
+    "address": { "@type": "PostalAddress", "postalCode": {{ site.kontakt.adresse.plz | dump | safe }}, "addressLocality": {{ site.kontakt.adresse.ort | dump | safe }}, "addressCountry": "DE" }
+  }
+  </script>
+  {% block head %}{% endblock %}
+</head>
+<body class="{{ bodyClass }}">
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  {% include "partials/header.njk" %}
+  <main id="inhalt" tabindex="-1">
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+</body>
+</html>

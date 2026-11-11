@@ -1,0 +1,20 @@
+{# Erwartet die Variable "t" (ein Termin aus termine.yaml) #}
+<li class="event" data-datum="{{ t.datum | iso }}">
+  <time class="event-date" datetime="{{ t.datum | iso }}">
+    <span class="event-weekday">{{ t.datum | datum("weekday") }}</span>
+    <span class="event-day">{{ t.datum | datum("day") }}</span>
+    <span class="event-month">{{ t.datum | datum("month") }}</span>
+  </time>
+  <div class="event-body">
+    {% if t.kategorie %}<p class="event-cat">{{ t.kategorie }}</p>{% endif %}
+    <h3 class="event-title">{{ t.titel }}</h3>
+    <p class="event-meta">
+      {%- if t.datum | uhrzeit %}<span class="meta-time">{{ (t.datum | uhrzeit) | replace(" Uhr", "") }}{% if t.ende %}–{{ t.ende }}{% endif %} Uhr</span>{% endif %}
+      {%- if t.ort %}<span class="meta-place">{{ t.ort }}</span>{% endif %}
+    </p>
+    {% if t.adresse and not kompakt %}<p class="event-address">{{ t.adresse }}</p>{% endif %}
+    {% if t.beschreibung and not kompakt %}<p class="event-text">{{ t.beschreibung }}</p>{% endif %}
+    {% if not kompakt %}<a class="event-ics" href="/termine/{{ t.titel | slugify }}-{{ t.datum | iso | truncate(10, true, '') }}.ics" download>In meinen Kalender</a>{% endif %}
+    {% if t.tickets %}<a class="btn btn-small" href="{{ t.tickets }}">Tickets</a>{% endif %}
+  </div>
+</li>

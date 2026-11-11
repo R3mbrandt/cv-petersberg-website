@@ -1,0 +1,13 @@
+<article class="card">
+  {% if post.data.bild %}
+  <img class="card-img" src="{{ post.data.bild | thumb }}" alt="" loading="lazy" decoding="async">
+  {% else %}
+  <div class="card-img card-img--placeholder" aria-hidden="true"></div>
+  {% endif %}
+  <div class="card-body">
+    <time class="card-date" datetime="{{ post.date | iso }}">{{ post.date | datum }}</time>
+    <h3 class="card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+    {% set teaser = post.data.description or (post.content | excerpt) %}
+    {% if teaser %}<p>{{ teaser }}</p>{% endif %}
+  </div>
+</article>

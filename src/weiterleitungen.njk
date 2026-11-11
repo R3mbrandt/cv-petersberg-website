@@ -1,0 +1,21 @@
+---
+pagination:
+  data: weiterleitungen
+  size: 1
+  alias: w
+permalink: "{{ w.von }}index.html"
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Weiterleitung …</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ w.nach | absoluteUrl(site.url) }}">
+  <meta http-equiv="refresh" content="0; url={{ w.nach }}">
+</head>
+<body>
+  <p>Diese Seite ist umgezogen: <a href="{{ w.nach }}">{{ w.nach }}</a></p>
+</body>
+</html>

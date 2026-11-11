@@ -1,0 +1,18 @@
+---
+layout: layouts/page.njk
+title: Ex-Prinzenpaare
+kicker: Der Verein
+description: Alle ehemaligen Prinzenmannschaften und Prinzenpaare des CVP – seit 1949.
+breit: true
+---
+<ul class="prince-grid" role="list">
+  {% for e in exprinzen %}
+  <li class="prince-card" id="p{{ e.jahr | replace(' ', '') | replace('&', '-') }}">
+    {% if e.bild %}<img src="{{ e.bild | thumb }}" alt="{{ e.titel }}" loading="lazy" decoding="async">{% endif %}
+    <div class="prince-body">
+      <p class="event-cat">{{ e.titel }}</p>
+      <p>{{ e.text }}</p>
+    </div>
+  </li>
+  {% endfor %}
+</ul>

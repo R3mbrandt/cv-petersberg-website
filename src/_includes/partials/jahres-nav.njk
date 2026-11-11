@@ -1,0 +1,6 @@
+<nav class="year-nav" aria-label="Archiv nach Jahren">
+  <a href="/aktuelles/"{% if not aktivesJahr %} aria-current="page"{% endif %}>Neueste</a>
+  {%- for j in collections.beitragsJahre %}
+  <a href="/aktuelles/{{ j.jahr }}/"{% if aktivesJahr == j.jahr %} aria-current="page"{% endif %}>{{ j.jahr }}</a>
+  {%- endfor %}
+</nav>

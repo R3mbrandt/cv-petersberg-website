@@ -1,0 +1,12 @@
+---
+layout: layouts/page.njk
+title: Die Fuldaer Randstaaten
+kicker: Befreundete Vereine
+description: Der CVP gehört zu den Fuldaer Randstaaten – hier findest du unsere befreundeten Vereine.
+breit: true
+---
+<ul class="partner-grid" role="list">
+  {% for p in partner %}
+  <li><a href="{{ p.url }}" rel="noopener">{% if p.logo %}<img src="{{ p.logo }}" alt="" loading="lazy">{% endif %}<span>{{ p.name }}</span></a></li>
+  {% endfor %}
+</ul>

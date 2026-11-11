@@ -1,0 +1,112 @@
+---
+layout: layouts/base.njk
+title: Carnevalverein Petersberg e.V.
+bodyClass: home
+---
+{%- set kommend = termine | termineSortiert("kommend") %}
+{%- set naechster = kommend[0] %}
+<section class="hero">
+  <div class="hero-confetti" aria-hidden="true">{% for i in range(0, 18) %}<i></i>{% endfor %}</div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">{{ kampagne.titel }}{% if kampagne.motto %} · „{{ kampagne.motto }}“{% endif %}</p>
+      <h1 class="hero-title">{{ site.heroZeile1 }}<br><span>{{ site.heroZeile2 }}</span></h1>
+      <p class="lead">Seit dem {{ site.gruendungsdatum }} bringt der Carnevalverein Petersberg Garden, Sitzungen und gute Laune auf die Bühne – mit {{ site.mitglieder }} Mitgliedern und {{ gruppen | length }} Aktivengruppen und Tanzgarden.</p>
+      <div class="btn-row">
+        <a class="btn" href="/termine/">Alle Termine</a>
+        <a class="btn btn-ghost" href="/mitmachen/">Mitglied werden</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-logo" src="{{ site.logo }}" alt="Vereinslogo des {{ site.name }}" width="320" height="320">
+      {% if naechster %}
+      <a class="next-card" href="/termine/" data-countdown="{{ naechster.datum | iso }}">
+        <span class="next-label">Nächster Termin</span>
+        <strong class="next-title">{{ naechster.titel }}</strong>
+        <span class="next-date">{{ naechster.datum | datum }}{% if naechster.datum | uhrzeit %}, {{ naechster.datum | uhrzeit }}{% endif %}</span>
+        <span class="next-countdown" data-countdown-out aria-live="polite"></span>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% if kampagne.prinzenpaar.zeigen %}
+<section class="section">
+  <div class="container feature">
+    <div class="feature-media{% if not kampagne.prinzenpaar.bild %} feature-media--placeholder{% endif %}">
+      {% if kampagne.prinzenpaar.bild %}
+        <img src="{{ kampagne.prinzenpaar.bild }}" alt="{{ kampagne.prinzenpaar.namen }}" loading="lazy" decoding="async">
+      {% else %}
+        <img src="{{ site.logo }}" alt="" class="feature-logo">
+      {% endif %}
+    </div>
+    <div class="feature-copy">
+      <p class="kicker">{{ kampagne.prinzenpaar.kicker or kampagne.titel }}</p>
+      <h2>{{ kampagne.prinzenpaar.titel }}</h2>
+      <p class="feature-names">{{ kampagne.prinzenpaar.namen }}</p>
+      <p>{{ kampagne.prinzenpaar.text }}</p>
+      {% if kampagne.prinzenpaar.link %}<a class="link-arrow" href="{{ kampagne.prinzenpaar.link }}">Zum Bericht</a>{% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="section-head">
+      <h2>Kommende Termine</h2>
+      <a class="link-arrow" href="/termine/">Kalender ansehen</a>
+    </div>
+    {% if kommend.length %}
+    <ul class="event-list event-list--grid" data-termine>
+      {% for t in kommend | limit(3) %}{% set kompakt = true %}{% include "partials/termin.njk" %}{% endfor %}
+    </ul>
+    {% else %}
+    <p>Der neue Veranstaltungsfahrplan folgt in Kürze.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Aktuelles</h2>
+      <a class="link-arrow" href="/aktuelles/">Alle Beiträge</a>
+    </div>
+    <div class="card-grid">
+      {% for post in collections.beitraege | limit(3) %}
+      {% include "partials/post-card.njk" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="section-head">
+      <h2>Unsere Garden &amp; Gruppen</h2>
+      <a class="link-arrow" href="/gruppen/">Alle Gruppen</a>
+    </div>
+    <ul class="chip-scroller" role="list">
+      {% for g in gruppen %}
+      <li class="chip-card">
+        <a href="/gruppen/#{{ g.id }}">
+          {% if g.bild %}<img src="{{ g.bild | thumb }}" alt="" loading="lazy" decoding="async" width="480" height="320">{% endif %}
+          <span class="chip-text"><span class="chip-art">{{ g.art }}</span><strong>{{ g.name }}</strong></span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cta">
+    <div>
+      <h2>Mach mit beim CVP!</h2>
+      <p>Ob aktiv in der Vereinsarbeit oder als passives Mitglied – schon ab 12 € im Jahr bist du dabei.</p>
+    </div>
+    <a class="btn btn-accent" href="/mitmachen/">So wirst du Teil des Vereins</a>
+  </div>
+</section>

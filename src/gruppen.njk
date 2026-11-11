@@ -1,0 +1,28 @@
+---
+layout: layouts/page.njk
+title: Gruppen
+kicker: Aktivengruppen & Tanzgarden
+description: Der Carnevalverein Petersberg setzt sich aus seinen Aktivengruppen und Tanzgarden zusammen.
+breit: true
+---
+{% for kat in ["Aktivengruppe", "Tanzgarde"] %}
+<h2 class="group-heading">{{ "Aktivengruppen" if kat == "Aktivengruppe" else "Tanzgarden" }}</h2>
+<ul class="group-grid" role="list">
+  {% for g in gruppen %}{% if g.kategorie == kat %}
+  <li class="group-card" id="{{ g.id }}">
+    {% if g.bild %}<img src="{{ g.bild | thumb }}" alt="{{ g.name }}" loading="lazy" decoding="async" width="480" height="320">{% else %}<div class="group-placeholder" aria-hidden="true">{{ g.name | first }}</div>{% endif %}
+    <div class="group-body">
+      <p class="event-cat">{{ g.art }}</p>
+      <h3>{{ g.name }}</h3>
+      {% if g.leitung %}<p class="group-lead">{{ g.leitung }}</p>{% endif %}
+      {% if g.text %}<p>{{ g.text }}</p>{% endif %}
+      {% if g.bild %}<a class="link-arrow" href="{{ g.bild }}">Foto in groß</a>{% endif %}
+    </div>
+  </li>
+  {% endif %}{% endfor %}
+</ul>
+{% endfor %}
+<div class="cta section">
+  <div><h2>Lust mitzumachen?</h2><p>Ob Tanzgarde, Elferrat oder Musikzug – sprich uns einfach an.</p></div>
+  <a class="btn btn-accent" href="/kontakt/">Kontakt aufnehmen</a>
+</div>

@@ -1,0 +1,29 @@
+---
+layout: layouts/page.njk
+title: Termine
+kicker: Veranstaltungen am Petersberg
+description: Alle Veranstaltungen, Vorverkäufe und Feiern des CVP auf einen Blick.
+---
+{%- set kommend = termine | termineSortiert("kommend") %}
+<div class="calendar-actions">
+  <a class="btn" href="/termine.ics" download>Alle Termine in den Kalender</a>
+  <a class="btn btn-ghost" href="webcal://{{ site.url | replace('https://', '') }}/termine.ics">Kalender abonnieren</a>
+</div>
+{% if kommend.length %}
+<ul class="event-list" data-termine>
+  {% for t in kommend %}{% include "partials/termin.njk" %}{% endfor %}
+</ul>
+{% endif %}
+<p class="empty-hint" data-termine-leer {% if kommend.length %}hidden{% endif %}>Aktuell stehen keine Termine an – der neue Veranstaltungsfahrplan folgt in Kürze.</p>
+
+<h2>Für die Aktiven</h2>
+<ul>
+  <li><a href="/termine/einmarschplan/">Aktueller Einmarschplan</a></li>
+  <li>Einmarsch- oder Auftrittsanfrage? <a href="/kontakt/#auftritte">Hier entlang</a>.</li>
+</ul>
+
+{%- for t in kommend %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Event","name":{{ t.titel | dump | safe }},"startDate":{{ t.datum | iso | dump | safe }},"eventStatus":"https://schema.org/EventScheduled","location":{"@type":"Place","name":{{ (t.ort or site.kontakt.adresse.ort) | dump | safe }},"address":{{ (t.adresse or site.kontakt.adresse.ort) | dump | safe }}},"description":{{ (t.beschreibung or "") | dump | safe }},"organizer":{"@type":"Organization","name":{{ site.name | dump | safe }},"url":{{ site.url | dump | safe }}}}
+</script>
+{%- endfor %}

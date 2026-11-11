@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------
+#  Zentrale Vereinsdaten – hier ändern, wirkt auf der ganzen Seite.
+#  (Auch bequem im Redaktionssystem unter /admin/ bearbeitbar.)
+# ---------------------------------------------------------------
+name: "Carnevalverein Petersberg e.V."
+kurzname: "CVP"
+slogan: "Fastnacht am Petersberg – mit Herz, Tanz und Tradition."
+gruendung: "1950"
+gruendungsdatum: "11.11.1950"
+mitglieder: "294"
+url: "https://cv-petersberg.de"
+sprache: "de"
+narrenruf: "Petersberg, Helau!"
+# Große Überschrift auf der Startseite (zweite Zeile farbig)
+heroZeile1: "Petersberg,"
+heroZeile2: "Helau!"
+
+# Vereinsfarben – exakt aus dem offiziellen Vereinslogo (SVG) übernommen.
+# Alle anderen Farbtöne (hell, dunkel, Flächen, Dark Mode) werden automatisch daraus berechnet.
+farben:
+  primaer: "#c81522"         # Rot (Wappenfeld)
+  akzent: "#f9ec9e"          # Gelb (Ring)
+  gruen: "#217c41"           # Grün (Hügel)
+  dunkel: "#183a2a"          # Dunkelgrün für Schrift und dunkle Flächen (aus dem Logo-Grün abgeleitet)
+
+logo: "/assets/img/logo-cvp.svg"      # offizielles Vektor-Logo
+logoKlein: "/assets/img/logo-cvp.svg"
+
+kontakt:
+  name: "Sandra Freund (1. Vorsitzende)"
+  email: "l.s.v.freund@arcor.de"
+  telefon: "0661 607150"
+  adresse:
+    strasse: "Adelberostraße 18"
+    plz: "36100"
+    ort: "Petersberg"
+
+social:
+  - name: "Instagram"
+    url: "https://www.instagram.com/cv_petersberg"
+  - name: "Facebook"
+    url: "https://www.facebook.com/profile.php?id=100064435522422"
+
+navigation:
+  - titel: "Aktuelles"
+    url: "/aktuelles/"
+  - titel: "Termine"
+    url: "/termine/"
+  - titel: "Verein"
+    url: "/der-verein/"
+  - titel: "Gruppen"
+    url: "/gruppen/"
+  - titel: "Mitmachen"
+    url: "/mitmachen/"
+  - titel: "Kontakt"
+    url: "/kontakt/"

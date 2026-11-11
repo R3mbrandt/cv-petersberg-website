@@ -1,0 +1,39 @@
+---
+layout: layouts/page.njk
+title: Der Verein
+eleventyComputed:
+  kicker: "Seit {{ site.gruendungsdatum }}"
+description: Seit über 75 Jahren pflegt der Carnevalverein Petersberg die Fastnacht am Petersberg.
+breit: true
+---
+<div class="stats">
+  <div class="stat"><span class="stat-value">{{ site.gruendungsdatum }}</span><span class="stat-label">Vereinsgründung</span></div>
+  <div class="stat"><span class="stat-value">{{ site.mitglieder }}</span><span class="stat-label">Mitglieder</span></div>
+  <div class="stat"><span class="stat-value">{{ gruppen | length }}</span><span class="stat-label">Aktivengruppen &amp; Tanzgarden</span></div>
+  <div class="stat"><span class="stat-value">{{ exprinzen | length }}</span><span class="stat-label">Prinzenpaare seit 1949</span></div>
+</div>
+
+<div class="link-tiles">
+  <a class="link-tile" href="/der-verein/chronik/"><strong>Chronik</strong><span>Die Geschichte des CVP – von 1948 bis heute</span></a>
+  <a class="link-tile" href="/der-verein/ex-prinzenpaare/"><strong>Ex-Prinzenpaare</strong><span>Alle Prinzenmannschaften seit 1949</span></a>
+  <a class="link-tile" href="/gruppen/"><strong>Gruppen</strong><span>Aktivengruppen und Tanzgarden</span></a>
+  <a class="link-tile" href="/links/"><strong>Fuldaer Randstaaten</strong><span>Unsere befreundeten Vereine</span></a>
+</div>
+
+<section class="section-sm" aria-labelledby="vorstand">
+  <h2 id="vorstand">Vorstand</h2>
+  {% if vorstand.bild %}<img class="wide-image" src="{{ vorstand.bild }}" alt="Der Vorstand des Carnevalverein Petersberg" loading="lazy" decoding="async">{% endif %}
+  <ul class="people">
+    {% for p in vorstand.mitglieder %}
+    <li><span class="people-role">{{ p.funktion }}</span><strong>{{ p.name }}</strong></li>
+    {% endfor %}
+  </ul>
+  <h3 id="festausschuss">Festausschuss</h3>
+  <p>Mitglieder des Festausschusses: {{ vorstand.festausschuss }}. {%- for p in vorstand.mitglieder %}{% if p.funktion == "Festausschussvorsitz" %} Den Vorsitz hat {{ p.name }}.{% endif %}{% endfor %}</p>
+</section>
+
+<section class="section-sm" aria-labelledby="zahlen">
+  <h2 id="zahlen">Der Verein in Zahlen</h2>
+  <img class="wide-image" src="/uploads/2024/10/0_Gruppenbild-scaled.jpg" alt="Gruppenbild aller Aktiven des CVP" loading="lazy" decoding="async">
+  <p>Vereinsanschrift: {{ site.name }}, {{ site.kontakt.adresse.strasse }}, {{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}.</p>
+</section>

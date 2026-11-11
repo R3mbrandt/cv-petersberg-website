@@ -1,0 +1,17 @@
+---
+layout: layouts/page.njk
+breit: true
+pagination:
+  data: collections.beitragsJahre
+  size: 1
+  alias: eintrag
+permalink: "/aktuelles/{{ eintrag.jahr }}/"
+eleventyComputed:
+  title: "Aktuelles {{ eintrag.jahr }}"
+  description: "Alle Beiträge aus dem Jahr {{ eintrag.jahr }}."
+---
+{% set aktivesJahr = eintrag.jahr %}
+{% include "partials/jahres-nav.njk" %}
+<div class="card-grid">
+  {% for post in eintrag.beitraege %}{% include "partials/post-card.njk" %}{% endfor %}
+</div>

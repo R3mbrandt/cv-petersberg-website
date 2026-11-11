@@ -1,0 +1,46 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="{{ site.logoKlein or site.logo }}" alt="" width="64" height="64" loading="lazy">
+      <p><strong>{{ site.name }}</strong><br>{{ site.slogan }}</p>
+      <p class="narrenruf" aria-hidden="true">{{ site.narrenruf }}</p>
+    </div>
+    <div>
+      <h2 class="footer-title">Kontakt</h2>
+      <address>
+        {% if site.kontakt.adresse.strasse %}{{ site.kontakt.adresse.strasse }}<br>{% endif %}
+        {{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}<br>
+        {% if site.kontakt.email %}<a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a><br>{% endif %}
+        {% if site.kontakt.telefon %}<a href="tel:{{ site.kontakt.telefon | replace(' ', '') }}">{{ site.kontakt.telefon }}</a>{% endif %}
+      </address>
+    </div>
+    <div>
+      <h2 class="footer-title">Verein</h2>
+      <ul class="footer-links">
+        <li><a href="/der-verein/chronik/">Chronik</a></li>
+        <li><a href="/der-verein/ex-prinzenpaare/">Ex-Prinzenpaare</a></li>
+        <li><a href="/links/">Fuldaer Randstaaten</a></li>
+        <li><a href="/termine/einmarschplan/">Einmarschplan</a></li>
+        <li><a href="/mitmachen/">Mitglied werden</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-title">Folgen</h2>
+      <ul class="footer-links">
+        {%- for s in site.social %}
+        <li><a href="{{ s.url }}" rel="noopener">{{ s.name }}</a></li>
+        {%- endfor %}
+        <li><a href="/termine.ics">Termine abonnieren (Kalender)</a></li>
+        <li><a href="/feed.xml">News-Feed (RSS)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© {{ "" | jahr }} {{ site.name }}</p>
+    <nav class="footer-legal" aria-label="Rechtliches">
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+      <a href="#inhalt" class="to-top">Nach oben ↑</a>
+    </nav>
+  </div>
+</footer>
