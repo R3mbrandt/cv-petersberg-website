@@ -542,3 +542,4 @@ address { font-style: normal; overflow-wrap: anywhere; }
 .footer-legal a { text-decoration: none; }
 .footer-legal a:hover { text-decoration: underline; }
 .meta-price { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z'/%3E%3Cpath d='M14 6v12' stroke-dasharray='2 2'/%3E%3C/svg%3E"); }
+.aktive-hinweis { margin-top: 2.5rem; padding: 1rem 1.25rem; border-radius: var(--radius); background: var(--bg-tint); border: 1px solid var(--border); font-weight: 600; }

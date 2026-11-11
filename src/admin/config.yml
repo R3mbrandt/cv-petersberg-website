@@ -219,11 +219,12 @@ collections:
     files:
       - { name: mitmachen, label: Mitmachen, file: src/mitmachen.md, fields: &seitenfelder [ { name: layout, widget: hidden, default: layouts/page.njk }, { name: title, label: Titel, widget: string }, { name: kicker, label: Dachzeile, widget: string, required: false }, { name: description, label: Einleitung, widget: text, required: false }, { name: body, label: Inhalt, widget: markdown } ] }
       - { name: kontakt, label: Kontakt, file: src/kontakt.md, fields: *seitenfelder }
-      - name: einmarschplan
-        label: Einmarschplan
-        file: src/termine/einmarschplan.md
+      - name: aktive
+        label: Für Aktive (Einmarschplan)
+        file: src/aktive.md
         fields:
           - { name: layout, widget: hidden, default: layouts/page.njk }
+          - { name: permalink, widget: hidden, default: /aktive/ }
           - { name: title, label: Titel, widget: string }
           - { name: kicker, label: Dachzeile, widget: string, required: false }
           - { name: description, label: Einleitung, widget: text, required: false }
@@ -231,6 +232,7 @@ collections:
             label: Einmarschplan
             widget: object
             fields:
+              - { name: titel, label: Überschrift, widget: string, hint: "z. B. Einmarschplan 2027" }
               - { name: bild, label: Bild, widget: image }
               - { name: pdf, label: PDF, widget: file }
           - { name: body, label: Inhalt, widget: markdown }

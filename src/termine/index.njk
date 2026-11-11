@@ -16,11 +16,6 @@ description: Alle Veranstaltungen, Vorverkäufe und Feiern des CVP auf einen Bli
 {% endif %}
 <p class="empty-hint" data-termine-leer {% if kommend.length %}hidden{% endif %}>Aktuell stehen keine Termine an – der neue Veranstaltungsfahrplan folgt in Kürze.</p>
 
-<h2>Für die Aktiven</h2>
-<ul>
-  <li><a href="/termine/einmarschplan/">Aktueller Einmarschplan</a></li>
-  <li>Einmarsch- oder Auftrittsanfrage? <a href="/kontakt/#auftritte">Hier entlang</a>.</li>
-</ul>
 
 {%- for t in kommend %}
 <script type="application/ld+json">
