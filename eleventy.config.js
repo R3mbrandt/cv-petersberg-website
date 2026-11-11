@@ -102,6 +102,13 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("htRegex", (p = "") =>
     String(p).replace(/^\//, "").replace(/\/$/, "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
   );
+  /** Erster Betrag aus einem Eintritts-Text ("20,– €", "5 Euro") -> "20.00"; "frei" -> "0" */
+  eleventyConfig.addFilter("preis", (text = "") => {
+    const t = String(text).toLowerCase();
+    if (/frei|kostenlos/.test(t)) return "0";
+    const m = t.match(/(\d+)(?:[,.](\d{1,2}))?/);
+    return m ? `${m[1]}.${(m[2] || "0").padEnd(2, "0")}` : "";
+  });
   eleventyConfig.addFilter("limit", (arr = [], n) => arr.slice(0, n));
   eleventyConfig.addFilter("jahr", () => new Date().getFullYear());
   eleventyConfig.addFilter("absoluteUrl", (path, base) => new URL(path, base).href);

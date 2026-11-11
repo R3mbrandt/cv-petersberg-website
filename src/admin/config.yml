@@ -48,8 +48,10 @@ collections:
             summary: "{{fields.datum}} – {{fields.titel}}"
             fields:
               - { name: titel, label: Titel, widget: string }
-              - { name: datum, label: Datum & Uhrzeit, widget: datetime, format: "YYYY-MM-DDTHH:mm", date_format: "DD.MM.YYYY", time_format: "HH:mm" }
-              - { name: ende, label: "Ende (HH:MM, optional)", widget: string, required: false }
+              - { name: datum, label: "Datum & Beginn", widget: datetime, format: "YYYY-MM-DDTHH:mm", date_format: "DD.MM.YYYY", time_format: "HH:mm" }
+              - { name: einlass, label: "Einlass (HH:MM, optional)", widget: string, required: false, pattern: ['^$|^\d{1,2}:\d{2}$', "Bitte als HH:MM eingeben, z. B. 18:31"] }
+              - { name: ende, label: "Ende (HH:MM, optional)", widget: string, required: false, pattern: ['^$|^\d{1,2}:\d{2}$', "Bitte als HH:MM eingeben, z. B. 21:00"] }
+              - { name: eintritt, label: "Eintritt (optional)", widget: string, required: false, hint: "z. B. 20 € · Erwachsene 3 €, Kinder 1,50 € · frei" }
               - { name: ort, label: Ort, widget: string, required: false }
               - { name: adresse, label: Adresse, widget: string, required: false }
               - { name: kategorie, label: Kategorie, widget: select, options: [Sitzung, Umzug, Feier, Party, Vorverkauf, Verein, Versammlung, Sonstiges], required: false }

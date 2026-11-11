@@ -9,10 +9,12 @@
     {% if t.kategorie %}<p class="event-cat">{{ t.kategorie }}</p>{% endif %}
     <h3 class="event-title">{{ t.titel }}</h3>
     <p class="event-meta">
-      {%- if t.datum | uhrzeit %}<span class="meta-time">{{ (t.datum | uhrzeit) | replace(" Uhr", "") }}{% if t.ende %}–{{ t.ende }}{% endif %} Uhr</span>{% endif %}
-      {%- if t.ort %}<span class="meta-place">{{ t.ort }}</span>{% endif %}
+      {%- set beginn = (t.datum | uhrzeit) | replace(" Uhr", "") %}
+      {%- if t.einlass %}<span class="meta-time">Einlass {{ t.einlass }}{% if beginn %} · Beginn {{ beginn }}{% endif %} Uhr</span>
+      {%- elif beginn %}<span class="meta-time">{{ beginn }}{% if t.ende %}–{{ t.ende }}{% endif %} Uhr</span>{% endif %}
+      {%- if t.ort %}<span class="meta-place"><span>{{ t.ort }}{% if t.adresse and not kompakt %}, {{ t.adresse }}{% endif %}</span></span>{% endif %}
+      {%- if t.eintritt %}<span class="meta-price">Eintritt: {{ t.eintritt }}</span>{% endif %}
     </p>
-    {% if t.adresse and not kompakt %}<p class="event-address">{{ t.adresse }}</p>{% endif %}
     {% if t.beschreibung and not kompakt %}<p class="event-text">{{ t.beschreibung }}</p>{% endif %}
     {% if not kompakt %}<a class="event-ics" href="/termine/{{ t.titel | slugify }}-{{ t.datum | iso | truncate(10, true, '') }}.ics" download>In meinen Kalender</a>{% endif %}
     {% if t.tickets %}<a class="btn btn-small" href="{{ t.tickets }}">Tickets</a>{% endif %}

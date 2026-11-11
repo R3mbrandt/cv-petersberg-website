@@ -1,4 +1,7 @@
-# Termine der Kampagne. Datum als JJJJ-MM-TT (ganztägig) oder JJJJ-MM-TTTHH:MM.
+# Termine der Kampagne.
+#   datum:    JJJJ-MM-TT (ganztägig) oder JJJJ-MM-TTTHH:MM (= Beginn)
+#   einlass:  optional, HH:MM          ende:     optional, HH:MM
+#   eintritt: optional, freier Text, z. B. "20 €", "Erwachsene 3 €, Kinder 1,50 €", "frei"
 # Vergangene Termine verschwinden automatisch aus "Kommende Termine".
 # Quelle: Veranstaltungskalender 2027 (cv-petersberg.de/kalender/)
 - titel: "Kartenvorverkauf"

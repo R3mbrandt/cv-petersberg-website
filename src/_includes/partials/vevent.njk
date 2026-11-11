@@ -7,6 +7,11 @@ SUMMARY:{{ t.titel | icsText | safe }}
 {%- if t.ort or t.adresse %}
 LOCATION:{{ ([t.ort, t.adresse] | select | join(", ")) | icsText | safe }}
 {%- endif %}
-DESCRIPTION:{{ ((t.beschreibung + "\n") if t.beschreibung else "") | icsText | safe }}{{ site.name | icsText | safe }}
+{%- set info = [
+  ("Einlass: " + t.einlass + " Uhr") if t.einlass else "",
+  ("Eintritt: " + t.eintritt) if t.eintritt else "",
+  t.beschreibung or "",
+  site.name ] | select | join("\n") %}
+DESCRIPTION:{{ info | icsText | safe }}
 URL:{{ site.url }}/termine/
 END:VEVENT
