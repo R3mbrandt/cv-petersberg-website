@@ -30,7 +30,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - id: pages
+        uses: actions/configure-pages@v5
+      # Bei github.io-Adressen liegt die Seite im Unterordner /<repo>/;
+      # mit eigener Domain (cv-petersberg.de) ist base_path leer.
       - run: npm run build
+        env:
+          PATH_PREFIX: ${{ steps.pages.outputs.base_path }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

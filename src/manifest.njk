@@ -5,10 +5,10 @@ eleventyExcludeFromCollections: true
 {
   "name": {{ site.name | dump | safe }},
   "short_name": {{ site.kurzname | dump | safe }},
-  "start_url": "/",
+  "start_url": "{{ '/' | url }}",
   "display": "standalone",
   "lang": "de",
   "background_color": "#ffffff",
   "theme_color": {{ site.farben.primaer | dump | safe }},
-  "icons": [{ "src": "/assets/img/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+  "icons": [{ "src": "{{ '/assets/img/icon-192.png' | url }}", "sizes": "192x192", "type": "image/png" }]
 }

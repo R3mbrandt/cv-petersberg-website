@@ -1,4 +1,5 @@
 import * as yaml from "js-yaml";
+import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -29,6 +30,10 @@ const asUTC = (p) => new Date(Date.UTC(p.y, p.m - 1, p.d, p.hh, p.mm));
 const pad = (n) => String(n).padStart(2, "0");
 
 export default function (eleventyConfig) {
+  // Unterordner-Betrieb (z. B. GitHub Pages unter /cv-petersberg-website/):
+  // alle Links und Bilder in HTML werden automatisch angepasst.
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+
   // YAML-Datendateien, alle Werte als Text (Datumsangaben bleiben so wie eingegeben)
   eleventyConfig.addDataExtension("yaml,yml", (contents) =>
     yaml.load(contents, { schema: yaml.JSON_SCHEMA })
@@ -149,6 +154,7 @@ export default function (eleventyConfig) {
   });
 
   return {
+    pathPrefix: process.env.PATH_PREFIX || "/",
     dir: { input: "src", output: "_site", includes: "_includes", data: "_data" },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",

@@ -47,10 +47,20 @@ Der Ordner `_site/` enthält nur HTML/CSS/JS und läuft auf **jedem** Webspace
 und täglich nachts neu. Voreingestellt ist GitHub Pages; alternativ ist ein
 FTP-Upload auf den bestehenden Webspace vorbereitet (siehe Kommentare in der Datei).
 
+**Testadresse:** https://r3mbrandt.github.io/cv-petersberg-website/
+
+Einmalig nötig: im Repository unter *Settings → Pages → Build and deployment*
+als *Source* „GitHub Actions“ wählen.
+
+**Umzug auf cv-petersberg.de:** unter *Settings → Pages → Custom domain*
+`cv-petersberg.de` eintragen und beim Domain-Anbieter die DNS-Einträge laut
+[GitHub-Anleitung](https://docs.github.com/de/pages/configuring-a-custom-domain-for-your-github-pages-site)
+setzen. Der Unterordner entfällt dann automatisch.
+
 ### Redaktionssystem einrichten (einmalig)
 
 1. Projekt in ein GitHub-Repository legen.
-2. In `src/admin/config.yml` bei `repo:` das Repository eintragen.
+2. In `src/admin/config.yml` ist das Repository `R3mbrandt/cv-petersberg-website` bereits eingetragen.
 3. Redakteurinnen und Redakteure als Mitglieder des Repositorys einladen.
 4. Für den Login ohne eigenen Server: unter `/admin/` „Mit Token anmelden“
    (persönlicher GitHub-Token) oder eine OAuth-App einrichten – Anleitung:
