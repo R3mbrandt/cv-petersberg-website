@@ -98,6 +98,10 @@ export default function (eleventyConfig) {
       .sort((a, b) => asUTC(parts(a.datum)) - asUTC(parts(b.datum)));
   });
 
+  /** Pfad als Apache-Regex (für .htaccess-Weiterleitungen) */
+  eleventyConfig.addFilter("htRegex", (p = "") =>
+    String(p).replace(/^\//, "").replace(/\/$/, "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  );
   eleventyConfig.addFilter("limit", (arr = [], n) => arr.slice(0, n));
   eleventyConfig.addFilter("jahr", () => new Date().getFullYear());
   eleventyConfig.addFilter("absoluteUrl", (path, base) => new URL(path, base).href);

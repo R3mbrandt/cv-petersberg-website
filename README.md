@@ -43,19 +43,46 @@ Der Ordner `_site/` enthält nur HTML/CSS/JS und läuft auf **jedem** Webspace
 
 ## Veröffentlichen
 
-`.github/workflows/deploy.yml` baut die Seite automatisch bei jeder Änderung
-und täglich nachts neu. Voreingestellt ist GitHub Pages; alternativ ist ein
-FTP-Upload auf den bestehenden Webspace vorbereitet (siehe Kommentare in der Datei).
+`.github/workflows/deploy.yml` baut die Seite bei jeder Änderung (auch aus dem
+Redaktionssystem) und jede Nacht neu und lädt sie hoch – auf das OVH-Webhosting
+(FTP) und/oder auf GitHub Pages.
 
-**Testadresse:** https://r3mbrandt.github.io/cv-petersberg-website/
+### Live auf cv-petersberg.de (OVH-Webhosting)
 
-Einmalig nötig: im Repository unter *Settings → Pages → Build and deployment*
-als *Source* „GitHub Actions“ wählen.
+Die neue Seite kommt in einen **eigenen Ordner** auf dem bestehenden Webhosting.
+WordPress bleibt unangetastet daneben liegen – das Umschalten ist ein Klick und
+jederzeit rückgängig zu machen. DNS und E-Mail werden nicht verändert.
 
-**Umzug auf cv-petersberg.de:** unter *Settings → Pages → Custom domain*
-`cv-petersberg.de` eintragen und beim Domain-Anbieter die DNS-Einträge laut
-[GitHub-Anleitung](https://docs.github.com/de/pages/configuring-a-custom-domain-for-your-github-pages-site)
-setzen. Der Unterordner entfällt dann automatisch.
+1. **Sicherung:** Im OVH-Kundencenter unter *Web Cloud → Hosting → Datenbanken*
+   die WordPress-Datenbank sichern (*Sicherung erstellen*) und per FTP den
+   bisherigen Ordner `www/` herunterladen.
+2. **Testadresse anlegen:** *Hosting → Multisite → Domain hinzufügen*:
+   `neu.cv-petersberg.de`, Wurzelverzeichnis `cvp-neu`, SSL aktivieren.
+3. **FTP-Zugang in GitHub hinterlegen:** im Repository unter
+   *Settings → Secrets and variables → Actions*
+   - Secrets: `FTP_SERVER` (z. B. `ftp.clusterXXX.hosting.ovh.net`, steht im
+     OVH-Kundencenter unter *Hosting → FTP-SSH*), `FTP_BENUTZER`, `FTP_PASSWORT`
+     – am besten einen eigenen FTP-Benutzer nur für den Ordner `cvp-neu` anlegen
+   - Variable: `FTP_ZIELORDNER` = `cvp-neu/`
+4. **Upload starten:** *Actions → Website veröffentlichen → Run workflow*.
+   Danach unter https://neu.cv-petersberg.de alles prüfen.
+5. **Umschalten:** *Hosting → Multisite* bei `cv-petersberg.de` **und**
+   `www.cv-petersberg.de` das Wurzelverzeichnis von `www` auf `cvp-neu` ändern.
+   Nach wenigen Minuten ist die neue Seite live. *Zurück:* wieder `www` eintragen.
+6. **HTTPS erzwingen:** Wenn alles läuft, in `src/htaccess.njk` die drei
+   HTTPS-Zeilen aktivieren (Kommentarzeichen `#` entfernen).
+7. Nach einigen Wochen ohne Probleme kann WordPress gelöscht werden
+   (Ordner `www/` und Datenbank) – das beendet auch dessen Sicherheitsupdates.
+
+Die erzeugte `.htaccess` sorgt für echte 301-Weiterleitungen aller alten
+WordPress-Adressen (Liste: `src/_data/weiterleitungen.yaml`), die eigene
+Fehlerseite, Browser-Caching und Sicherheits-Header.
+
+### GitHub Pages (Testadresse)
+
+https://r3mbrandt.github.io/cv-petersberg-website/ – einmalig unter
+*Settings → Pages → Source* „GitHub Actions“ wählen. Wird GitHub Pages nicht
+gebraucht, die Variable `GITHUB_PAGES` = `false` setzen.
 
 ### Redaktionssystem einrichten (einmalig)
 

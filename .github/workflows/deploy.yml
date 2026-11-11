@@ -1,14 +1,19 @@
 # Baut die Website bei jeder Änderung (auch aus dem Redaktionssystem) und
-# veröffentlicht sie. Variante A: GitHub Pages (kostenlos). Variante B: per FTP
-# auf bestehenden Webspace – dafür unten "deploy-ftp" aktivieren und die Secrets
-# FTP_SERVER, FTP_USERNAME, FTP_PASSWORD im Repository hinterlegen.
+# veröffentlicht sie – täglich nachts zusätzlich, damit vergangene Termine verschwinden.
+#
+# Ziel 1 – OVH-Webhosting per FTP (cv-petersberg.de):
+#   läuft, sobald unter Settings → Secrets and variables → Actions
+#   die Variable FTP_ZIELORDNER (z. B. "cvp-neu/") und die Secrets
+#   FTP_SERVER, FTP_BENUTZER, FTP_PASSWORT angelegt sind.
+# Ziel 2 – GitHub Pages (Testadresse r3mbrandt.github.io/…):
+#   läuft, solange die Variable GITHUB_PAGES nicht auf "false" steht.
 name: Website veröffentlichen
 
 on:
   push:
     branches: [main]
   schedule:
-    - cron: "17 3 * * *"   # täglich neu bauen, damit vergangene Termine verschwinden
+    - cron: "17 3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -17,11 +22,33 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: veroeffentlichen
+  cancel-in-progress: false
 
 jobs:
-  build:
+  ovh-ftp:
+    if: vars.FTP_ZIELORDNER != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Upload auf das OVH-Webhosting
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_BENUTZER }}
+          password: ${{ secrets.FTP_PASSWORT }}
+          protocol: ftps
+          local-dir: ./_site/
+          server-dir: ${{ vars.FTP_ZIELORDNER }}
+
+  pages-build:
+    if: vars.GITHUB_PAGES != 'false'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +60,7 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
       # Bei github.io-Adressen liegt die Seite im Unterordner /<repo>/;
-      # mit eigener Domain (cv-petersberg.de) ist base_path leer.
+      # mit eigener Domain ist base_path leer.
       - run: npm run build
         env:
           PATH_PREFIX: ${{ steps.pages.outputs.base_path }}/
@@ -41,8 +68,8 @@ jobs:
         with:
           path: _site
 
-  deploy-pages:
-    needs: build
+  pages-deploy:
+    needs: pages-build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -50,18 +77,3 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
-
-  # deploy-ftp:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with: { node-version: 22, cache: npm }
-  #     - run: npm ci && npm run build
-  #     - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-  #       with:
-  #         server: ${{ secrets.FTP_SERVER }}
-  #         username: ${{ secrets.FTP_USERNAME }}
-  #         password: ${{ secrets.FTP_PASSWORD }}
-  #         local-dir: ./_site/
