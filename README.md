@@ -115,7 +115,7 @@ jederzeit rückgängig machen.
 
 Alle Inhalte von cv-petersberg.de wurden übernommen:
 
-- **148 Beiträge** (2011–2026) inkl. Bilder und PDFs – unter denselben Adressen wie bisher
+- **38 Beiträge** (2011–2026: Berichte, Prinzenmannschaften, Proklamationen u. a.) inkl. Bilder – unter denselben Adressen wie bisher
   (`/JJJJ/MM/TT/titel/`), damit Google-Treffer und geteilte Links weiter funktionieren
 - Vorstand, Festausschuss, Gruppen mit Fotos, Chronik (1948–2008, ergänzt um 2025),
   72 Ex-Prinzenpaare seit 1949, Zahlen & Beiträge, Downloads, Fuldaer Randstaaten
@@ -123,6 +123,8 @@ Alle Inhalte von cv-petersberg.de wurden übernommen:
   automatisch auf die neuen Seiten weiter – Liste in `src/_data/weiterleitungen.yaml`
 - Die Termine der Kampagne 2027 aus der Kalender-App (`/kalender/`) – inklusive Kalenderdateien
   für alle Termine und für jeden einzelnen Termin; `/kalender/` leitet auf `/termine/` weiter
+- 110 reine Einladungs-, Flyer- und Terminbeiträge wurden bewusst nicht übernommen;
+  ihre Adressen leiten auf das jeweilige Jahresarchiv weiter
 - 23 alte Startseiten-Slider ohne eigenen Inhalt und die Bildergalerien `/bilder/kampagne-…`
   (waren schon auf der alten Seite nicht mehr erreichbar) wurden nicht übernommen;
   ihre Adressen leiten auf das jeweilige Jahresarchiv weiter.
