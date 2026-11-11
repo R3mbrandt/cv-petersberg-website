@@ -1,5 +1,5 @@
 {# Erwartet die Variable "t" (ein Termin aus termine.yaml) #}
-<li class="event" data-datum="{{ t.datum | iso }}">
+<li class="event" data-datum="{{ t.datum | iso }}"{% if versteckt %} hidden{% endif %}>
   <time class="event-date" datetime="{{ t.datum | iso }}">
     <span class="event-weekday">{{ t.datum | datum("weekday") }}</span>
     <span class="event-day">{{ t.datum | datum("day") }}</span>

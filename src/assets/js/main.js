@@ -24,28 +24,45 @@ document.addEventListener("DOMContentLoaded", () => {
     onScroll();
   }
 
-  // Vergangene Termine ausblenden (die Seite ist statisch – so bleibt sie aktuell)
-  const heute = new Date(); heute.setHours(0, 0, 0, 0);
+  // ---------------------------------------------------------------
+  //  Termine im Browser aktuell halten – die Seite ist statisch und wird
+  //  nur nachts neu gebaut. Ein Termin gilt bis zum Ende seines Tages.
+  // ---------------------------------------------------------------
+  const parse = (iso) => new Date(iso.length > 10 ? iso : iso + "T00:00");
+  const tagesende = (iso) => { const d = parse(iso); d.setHours(23, 59, 59, 999); return d; };
+  const jetzt = () => new Date();
+
+  // Listen: vergangene Termine entfernen, höchstens "data-termine-max" zeigen
   document.querySelectorAll("[data-termine]").forEach((list) => {
     list.querySelectorAll("[data-datum]").forEach((el) => {
-      if (new Date(el.dataset.datum.slice(0, 10) + "T23:59:59") < heute) el.remove();
+      if (tagesende(el.dataset.datum) < jetzt()) el.remove();
     });
+    const max = Number(list.dataset.termineMax) || Infinity;
+    [...list.children].forEach((el, i) => { el.hidden = i >= max; });
     if (!list.children.length) {
       list.hidden = true;
-      document.querySelector("[data-termine-leer]")?.removeAttribute("hidden");
+      list.parentElement.querySelector("[data-termine-leer]")?.removeAttribute("hidden");
     }
   });
 
-  // Countdown zum nächsten Termin
-  const card = document.querySelector("[data-countdown]");
-  const out = card?.querySelector("[data-countdown-out]");
-  if (card && out) {
-    const ziel = new Date(card.dataset.countdown.length > 10 ? card.dataset.countdown : card.dataset.countdown + "T00:00");
+  // Karte "Nächster Termin" mit Countdown
+  const card = document.querySelector("[data-next-card]");
+  const datenEl = document.getElementById("termine-daten");
+  if (card && datenEl) {
+    let termine = [];
+    try { termine = JSON.parse(datenEl.textContent); } catch {}
+    const titleEl = card.querySelector("[data-next-title]");
+    const dateEl = card.querySelector("[data-next-date]");
+    const out = card.querySelector("[data-countdown-out]");
     const tick = () => {
-      const diff = ziel - new Date();
+      const t = termine.find((x) => tagesende(x.start) >= jetzt());
+      if (!t) { card.hidden = true; return; }
+      titleEl.textContent = t.titel;
+      dateEl.textContent = t.text;
+      const diff = parse(t.start) - jetzt();
       if (diff <= 0) { out.textContent = "Heute – wir sehen uns!"; return; }
-      const t = Math.floor(diff / 864e5), h = Math.floor(diff / 36e5) % 24, m = Math.floor(diff / 6e4) % 60;
-      out.textContent = t > 0 ? `Noch ${t} ${t === 1 ? "Tag" : "Tage"}, ${h} Std.` : `Noch ${h} Std. ${m} Min.`;
+      const tage = Math.floor(diff / 864e5), h = Math.floor(diff / 36e5) % 24, m = Math.floor(diff / 6e4) % 60;
+      out.textContent = tage > 0 ? `Noch ${tage} ${tage === 1 ? "Tag" : "Tage"}, ${h} Std.` : `Noch ${h} Std. ${m} Min.`;
     };
     tick();
     setInterval(tick, 30000);
