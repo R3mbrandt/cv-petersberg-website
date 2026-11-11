@@ -75,15 +75,15 @@ export default function (eleventyConfig) {
       ? `;TZID=${TZ}:${p.y}${pad(p.m)}${pad(p.d)}T${pad(p.hh)}${pad(p.mm)}00`
       : `;VALUE=DATE:${p.y}${pad(p.m)}${pad(p.d)}`;
   });
-  /** Ende: ganztägig -> Folgetag; mit "ende" (HH:MM) -> gleicher Tag; sonst +2 Stunden */
-  eleventyConfig.addFilter("icsEnde", (value, ende) => {
+  /** Kalender-Ende: ganztägig -> Folgetag; mit Uhrzeit -> Beginn + 3 Stunden */
+  eleventyConfig.addFilter("icsEnde", (value) => {
     const p = parts(value);
     if (!p.hasTime) {
       const n = new Date(Date.UTC(p.y, p.m - 1, p.d + 1));
       return `;VALUE=DATE:${n.getUTCFullYear()}${pad(n.getUTCMonth() + 1)}${pad(n.getUTCDate())}`;
     }
-    let [hh, mm] = ende ? String(ende).split(":").map(Number) : [p.hh + 2, p.mm];
-    return `;TZID=${TZ}:${p.y}${pad(p.m)}${pad(p.d)}T${pad(Math.min(hh, 23))}${pad(mm)}00`;
+    const e = new Date(Date.UTC(p.y, p.m - 1, p.d, p.hh + 3, p.mm));
+    return `;TZID=${TZ}:${e.getUTCFullYear()}${pad(e.getUTCMonth() + 1)}${pad(e.getUTCDate())}T${pad(e.getUTCHours())}${pad(e.getUTCMinutes())}00`;
   });
   eleventyConfig.addFilter("icsText", (s = "") =>
     String(s).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n")

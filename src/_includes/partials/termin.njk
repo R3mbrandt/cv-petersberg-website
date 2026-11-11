@@ -11,7 +11,7 @@
     <p class="event-meta">
       {%- set beginn = (t.datum | uhrzeit) | replace(" Uhr", "") %}
       {%- if t.einlass %}<span class="meta-time">Einlass {{ t.einlass }}{% if beginn %} · Beginn {{ beginn }}{% endif %} Uhr</span>
-      {%- elif beginn %}<span class="meta-time">{{ beginn }}{% if t.ende %}–{{ t.ende }}{% endif %} Uhr</span>{% endif %}
+      {%- elif beginn %}<span class="meta-time">{{ beginn }} Uhr</span>{% endif %}
       {%- if t.ort %}<span class="meta-place"><span>{{ t.ort }}{% if t.adresse and not kompakt %}, {{ t.adresse }}{% endif %}</span></span>{% endif %}
       {%- if t.eintritt %}<span class="meta-price">Eintritt: {{ t.eintritt }}</span>{% endif %}
     </p>

@@ -2,7 +2,7 @@ BEGIN:VEVENT
 UID:{{ t.titel | slugify }}-{{ t.datum | iso | replace(':', '') }}@{{ site.url | replace('https://', '') }}
 DTSTAMP:20260101T000000Z
 DTSTART{{ t.datum | icsDatum }}
-DTEND{{ t.datum | icsEnde(t.ende) }}
+DTEND{{ t.datum | icsEnde }}
 SUMMARY:{{ t.titel | icsText | safe }}
 {%- if t.ort or t.adresse %}
 LOCATION:{{ ([t.ort, t.adresse] | select | join(", ")) | icsText | safe }}

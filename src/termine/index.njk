@@ -26,7 +26,6 @@ description: Alle Veranstaltungen, Vorverkäufe und Feiern des CVP auf einen Bli
 <script type="application/ld+json">
 {%- set tag = t.datum | iso | truncate(10, true, "") -%}
 {"@context":"https://schema.org","@type":"Event","name":{{ t.titel | dump | safe }},"startDate":{{ t.datum | iso | dump | safe }}
-{%- if t.ende %},"endDate":{{ (tag + "T" + t.ende) | dump | safe }}{% endif %}
 {%- if t.einlass %},"doorTime":{{ (tag + "T" + t.einlass) | dump | safe }}{% endif %},"eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":{{ (t.ort or site.kontakt.adresse.ort) | dump | safe }},"address":{{ (t.adresse or site.kontakt.adresse.ort) | dump | safe }}}
 {%- set preis = t.eintritt | preis %}
 {%- if preis == "0" %},"isAccessibleForFree":true{% elif preis %},"offers":{"@type":"Offer","price":{{ preis | dump | safe }},"priceCurrency":"EUR","url":{{ (site.url + "/termine/") | dump | safe }},"availability":"https://schema.org/InStock"}{% endif %},"description":{{ (t.beschreibung or t.titel) | dump | safe }},"organizer":{"@type":"Organization","name":{{ site.name | dump | safe }},"url":{{ site.url | dump | safe }}}}
