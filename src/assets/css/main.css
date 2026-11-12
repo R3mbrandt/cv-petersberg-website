@@ -82,6 +82,8 @@
 }
 
 /* ---------- Basis ---------- */
+/* "hidden" muss immer gewinnen, auch gegen display:flex/grid einzelner Bausteine */
+[hidden] { display: none !important; }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 1rem); }
 body {
