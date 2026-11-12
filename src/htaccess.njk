@@ -20,6 +20,7 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # Weiterleitungen mit vollständiger Adresse (sonst hängt OVH ":443" an)
 
   # www.cv-petersberg.de -> cv-petersberg.de
   RewriteCond %{HTTP_HOST} ^www\.cv-petersberg\.de$ [NC]
@@ -33,11 +34,11 @@ ErrorDocument 404 /404.html
 
   # Alte Adressen der WordPress-Seite (dauerhaft umgezogen)
 {%- for w in weiterleitungen %}
-  RewriteRule ^{{ w.von | htRegex | safe }}/?$ {{ w.nach | safe }} [R=301,NE,L]
+  RewriteRule ^{{ w.von | htRegex | safe }}/?$ https://%{HTTP_HOST}{{ w.nach | safe }} [R=301,NE,L]
 {%- endfor %}
 
   # Alte WordPress-Pfade, die es nicht mehr gibt
-  RewriteRule ^wp-content/uploads/(.*)$ /uploads/$1 [R=301,NE,L]
+  RewriteRule ^wp-content/uploads/(.*)$ https://%{HTTP_HOST}/uploads/$1 [R=301,NE,L]
   RewriteRule ^(wp-admin|wp-login\.php|xmlrpc\.php) - [R=410,L]
 </IfModule>
 
