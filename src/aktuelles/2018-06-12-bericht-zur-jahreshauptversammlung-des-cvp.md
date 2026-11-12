@@ -2,10 +2,12 @@
 title: "Bericht zur Jahreshauptversammlung des CVP"
 date: 2018-06-12
 description: "Nach der Begrüßung durch die erste Vorsitzende Sandra Freund wurde die Beschlussfähigkeit der Versammlung festgestellt und die Punkte der Tagesordnung ordnungsgemäß abgehandelt. …"
-bild: "/uploads/2018/06/Ehrungen-50-Jahre-e1528823977511-225x300.jpg"
+bild: "/uploads/2018/06/Ehrungen-50-Jahre-e1528823977511.jpg"
 ---
 
-![Ehrungen 50 Jahre](/uploads/2018/06/Ehrungen-50-Jahre-e1528823977511-225x300.jpg)Nach der Begrüßung durch die erste Vorsitzende Sandra Freund wurde die Beschlussfähigkeit der Versammlung festgestellt und die Punkte der Tagesordnung ordnungsgemäß abgehandelt. Neben dem Dank an die noch amtierende Prinzenmannschaft, Prinz Andreas 67. vom Rhönblick, mit Prinzessin Tabitha und den Adjutanten Andre und Max, sowie Prinzenmariechen Anna-Lena wurden verdiente Mitglieder des Vereins für ihre langjährige Vereinstätigkeit geehrt.
+Nach der Begrüßung durch die erste Vorsitzende Sandra Freund wurde die Beschlussfähigkeit der Versammlung festgestellt und die Punkte der Tagesordnung ordnungsgemäß abgehandelt. Neben dem Dank an die noch amtierende Prinzenmannschaft, Prinz Andreas 67. vom Rhönblick, mit Prinzessin Tabitha und den Adjutanten Andre und Max, sowie Prinzenmariechen Anna-Lena wurden verdiente Mitglieder des Vereins für ihre langjährige Vereinstätigkeit geehrt.
+
+![Ehrungen 50 Jahre](/uploads/2018/06/Ehrungen-50-Jahre-e1528823977511.jpg)
 
 Für 50 Jahre Mitgliedschaft wurden Lia Preidel und Renate Schwab ausgezeichnet.
 

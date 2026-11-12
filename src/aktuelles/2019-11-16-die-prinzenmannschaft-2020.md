@@ -7,7 +7,9 @@ bild: "/uploads/2019/11/Hauptbild-683x1024.jpg"
 
 ## Karneval am Petersberg  – knallbunt und voll entspannt
 
-> Musik, Tanz und Traditionen prägen das Lebensgefühl ![Hauptbild Prinzenmannschaft 2020](/uploads/2019/11/Hauptbild-683x1024.jpg)
+> Musik, Tanz und Traditionen prägen das Lebensgefühl
+
+![Hauptbild Prinzenmannschaft 2020](/uploads/2019/11/Hauptbild-683x1024.jpg)
 
 **Prinz Thomas der 69. vom närrischen Familienclan** (Thomas Buchhagen) und **Prinzessin Yvonne** (Yvonne Buchhagen) regieren in der Kampagnensession 2019/20 am Petersberg.
 

@@ -2,10 +2,10 @@
 title: "Die Prinzenmannschaft 2016 stellt sich vor"
 date: 2015-11-17
 description: "Die Petersberger Narren werden absofort von Prinz Gernot Advocatus Carnevalensis der 65. und seiner Prinzessin Julia regiert. Ihnen stehen die Adjutanten Kai Völler (erster …"
-bild: "/uploads/2015/11/Prinz-Prinzessin-197x300.jpg"
+bild: "/uploads/2015/11/Prinz-Prinzessin.jpg"
 ---
 
-![Prinz und Prinzessin 2016](/uploads/2015/11/Prinz-Prinzessin-197x300.jpg)
+![Prinz und Prinzessin 2016](/uploads/2015/11/Prinz-Prinzessin.jpg)
 
 Die Petersberger Narren werden absofort von Prinz
 

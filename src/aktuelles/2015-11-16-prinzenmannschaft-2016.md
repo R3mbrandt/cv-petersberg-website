@@ -5,7 +5,9 @@ description: "Steckbrief Prinz Märchen beginnen mit „es war einmal“. Sicher
 bild: "/uploads/2015/11/CVP-1-web-1024x683.jpg"
 ---
 
-![Prinzenmannschaft 2016](/uploads/2015/11/CVP-1-web-1024x683.jpg)**Steckbrief Prinz**
+**Steckbrief Prinz**
+
+![Prinzenmannschaft 2016](/uploads/2015/11/CVP-1-web-1024x683.jpg)
 
 Märchen beginnen mit „es war einmal“. Sicherlich hat es etwas märchenhaftes, Petersberger Prinz zu sein. Es war also einmal am 27.02.1976, als Prinz Gernot das Licht der Welt erblickte. Hausgeburten waren zu diesem Zeitpunkt schon sehr selten geworden, so dass in seiner Geburtsurkunde zwar Fulda steht. Dort hielt er es aber nicht wirklich lange aus -nur wenige Tage-  und zog es vor, am schönen Petersberg aufzuwachsen. Nach der Grundschule an der Johannes-Hack-Schule und dem Abitur an der Freiherr-vom-Stein-Schule absolvierte er eine Ausbildung zum Bankkaufmann bei der Sparkasse Fulda. Es schloss sich sodann ein Studium der Rechtswissenschaften an der Philipps-Universität Marburg und der Julius-Maximilians-Universität Würzburg an. Das Referendariat absolvierte er beim Landgericht Fulda und legte 2007 seine zweite Staatsprüfung ab. Seitdem ist er als Rechtsanwalt tätig. Deshalb ist auch der Prinzenname „Gernot LXV. Advocatus Carnevalensis“ entstanden. Erste Erfahrungen als aktiver Karnevalist sammelte er im Kinderelferrat des CVP. Jedoch wurde es dann in der Fastnacht still um ihn. Dauergast ist er bei der Feuerwehr und in der Politik. Dort fühlt er sich heimisch. Seit Dezember 2011 ist er Vorsitzender des CDU-Ortsverbands Petersberg, seit 1999 Kreisausbilder des Kreisfeuerwehrverbands Fulda. Das Prinzenamt bedeutet für ihn ein neues Durchstarten als aktiver Narr nach vielen Jahren Abstinenz. Unterstützen Sie ihn durch Frohsinn und Ausgelassenheit, damit die Kampagne 2015/2016 ein voller Erfolg wird.
 

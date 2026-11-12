@@ -7,7 +7,9 @@ bild: "/uploads/2021/11/Prinzenmannschaft_2022-1024x684.jpg"
 
 #### **Jubelprinz Andy vom kreativen Haus- und Wagenbau und Prinzessin Trixi inthronisiert**
 
-***„Jo, wir schaffen das!“*** hallte es am Samstagabend nach der coronabedingten Zwangspause durch die gut gefüllte Narrhalla im Petersberger Propsteihaus:![Prinzenmannschaft 2022](/uploads/2021/11/Prinzenmannschaft_2022-1024x684.jpg)
+***„Jo, wir schaffen das!“*** hallte es am Samstagabend nach der coronabedingten Zwangspause durch die gut gefüllte Narrhalla im Petersberger Propsteihaus:
+
+![Prinzenmannschaft 2022](/uploads/2021/11/Prinzenmannschaft_2022-1024x684.jpg)
 
 Feierlich wurde die neue Prinzenmannschaft vorgestellt: In diesem Jahr führen **Prinz Andy** (Andreas Hieber) **der 70. vom kreativen Haus- und Wagenbau** mit seiner **Prinzessin Trixi** (Beatrix Hieber), den **Adjutanten Falko & Detlef** Müller sowie den **Hofdamen Simone** Müller und **Janine** Pausinger, die Narren an.
 

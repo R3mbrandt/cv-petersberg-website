@@ -2,12 +2,14 @@
 title: "Bericht zur Jahreshauptversammlung"
 date: 2011-07-05
 description: "Rückblick auf eine gelungene Kampagne Am 08.06.2011 kam der CVP zur Jahreshauptversammlung im Vereinslokal „Casino“ am Petersberg zusammen. Zahlreiche Mitglieder waren gekommen, …"
-bild: "/uploads/2011/07/Ehrungen-Jahreshauptversammlung-300x225.jpg"
+bild: "/uploads/2011/07/Ehrungen-Jahreshauptversammlung.jpg"
 ---
 
 *Rückblick auf eine gelungene Kampagne*
 
-![Ehrungen Jahreshauptversammlung](/uploads/2011/07/Ehrungen-Jahreshauptversammlung-300x225.jpg "Ehrungen")Am 08.06.2011 kam der CVP zur Jahreshauptversammlung im Vereinslokal „Casino“ am Petersberg zusammen. Zahlreiche Mitglieder waren gekommen, um den Geschäftsbericht des vergangen Jahres zu hören. Nach der Begrüßung aller Mitglieder, des Vorstandes, des Ortsvorstehers Hartwig Blum und Ehrenpräsident Richard Birkenbach durch den 1. Vorsitzenden Kai Völler.
+Am 08.06.2011 kam der CVP zur Jahreshauptversammlung im Vereinslokal „Casino“ am Petersberg zusammen. Zahlreiche Mitglieder waren gekommen, um den Geschäftsbericht des vergangen Jahres zu hören. Nach der Begrüßung aller Mitglieder, des Vorstandes, des Ortsvorstehers Hartwig Blum und Ehrenpräsident Richard Birkenbach durch den 1. Vorsitzenden Kai Völler.
+
+![Ehrungen Jahreshauptversammlung](/uploads/2011/07/Ehrungen-Jahreshauptversammlung.jpg "Ehrungen")
 
 Anschließend überbrachte Hartwig Blum die Grüße der Gemeinde und bedankte sich für die Leistung des Vereins. Er war über zahlreiche Anwesenheit der Mitglieder sehr erfreut.
 
