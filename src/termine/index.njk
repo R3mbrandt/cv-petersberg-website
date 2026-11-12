@@ -9,6 +9,7 @@ description: Alle Veranstaltungen, Vorverkäufe und Feiern des CVP auf einen Bli
   <a class="btn" href="/termine.ics" download>Alle Termine in den Kalender</a>
   <a class="btn btn-ghost" href="/termine.ics" data-webcal>Kalender abonnieren</a>
 </div>
+{% include "partials/kalender-abo-hinweis.njk" %}
 {% if kommend.length %}
 <ul class="event-list" data-termine>
   {% for t in kommend %}{% include "partials/termin.njk" %}{% endfor %}

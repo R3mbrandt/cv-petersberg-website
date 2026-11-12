@@ -340,7 +340,7 @@ main:focus { outline: none; }
   .event-date { width: 3.75rem; }
   .event-day { font-size: 1.5rem; }
 }
-.calendar-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; }
+.calendar-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 1rem; }
 .empty-hint { padding: 2rem; border: 2px dashed var(--border); border-radius: var(--radius); text-align: center; color: var(--text-muted); }
 
 /* ---------- Karten (Beiträge) ---------- */
@@ -578,3 +578,18 @@ address { font-style: normal; overflow-wrap: anywhere; }
 @media (max-width: 40rem) { .lightbox-prev, .lightbox-next { top: auto; bottom: .75rem; translate: none; } }
 .group-photo { margin: 0; }
 .group-photo figcaption { color: var(--text-muted); font-size: .92rem; margin-top: -.75rem; }
+
+/* ---------- Hinweis Kalender-Abo ---------- */
+.abo-hinweis { margin: 0 0 2rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-tint); font-size: .95rem; }
+.abo-hinweis summary { cursor: pointer; padding: .8rem 1.1rem; font-weight: 650; list-style: none; display: flex; align-items: flex-start; gap: .6rem; line-height: 1.4; }
+.abo-hinweis summary::-webkit-details-marker { display: none; }
+.abo-hinweis summary::before { content: ""; flex: none; width: .5em; height: .5em; margin-top: .45em; border-right: 2px solid var(--primary); border-bottom: 2px solid var(--primary); transform: rotate(-45deg); transition: transform .2s; }
+.abo-hinweis[open] summary::before { transform: rotate(45deg); margin-top: .3em; }
+.abo-hinweis-inhalt { padding: 0 1.1rem 1rem; }
+.abo-hinweis-inhalt p { margin: 0 0 .6rem; }
+.abo-hinweis-inhalt ol { margin: 0 0 .6rem; padding-left: 1.25rem; display: grid; gap: .5rem; }
+.abo-hinweis-inhalt ol > li { min-width: 0; }
+.abo-url { display: flex; gap: .5rem; margin-top: .4rem; }
+.abo-url input { flex: 1; min-width: 0; font: inherit; font-size: .88rem; padding: .45rem .7rem; border: 1px solid var(--border); border-radius: .5rem; background: var(--surface); color: var(--text); }
+.abo-url .btn-small { margin-top: 0; flex: none; }
+.abo-hinweis-klein { font-size: .85rem; color: var(--text-muted); }

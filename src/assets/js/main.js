@@ -22,6 +22,22 @@ document.addEventListener("DOMContentLoaded", () => {
     a.href = a.href.replace(/^https?:/, "webcal:");
   });
 
+  // Abo-Hinweis: Adresse der aktuellen Seite eintragen und kopieren
+  const aboLink = document.querySelector("a[data-webcal]");
+  document.querySelectorAll("[data-abo-url]").forEach((input) => {
+    if (aboLink) input.value = aboLink.href.replace(/^webcal:/, location.protocol);
+    input.addEventListener("focus", () => input.select());
+  });
+  document.querySelectorAll("[data-abo-kopieren]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const input = btn.parentElement.querySelector("[data-abo-url]");
+      try { await navigator.clipboard.writeText(input.value); }
+      catch { input.select(); document.execCommand?.("copy"); }
+      const alt = btn.textContent; btn.textContent = "Kopiert ✓";
+      setTimeout(() => { btn.textContent = alt; }, 2000);
+    });
+  });
+
   // Schatten am Header beim Scrollen
   const header = document.querySelector("[data-header]");
   if (header) {

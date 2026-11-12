@@ -21,6 +21,8 @@ einmarschplan:
 
 <p><a class="btn btn-ghost" href="/termine.ics" data-webcal>Kalender abonnieren</a> <a class="btn btn-ghost" href="/termine/">Alle Termine</a></p>
 
+{% include "partials/kalender-abo-hinweis.njk" %}
+
 <h2 id="anfragen">Einmarsch- und Auftrittsanfragen</h2>
 
 <p>Anfragen anderer Vereine für Einmärsche oder Auftritte unserer Gruppen laufen über die <a href="/kontakt/#auftritte">Kontaktseite</a>.</p>
