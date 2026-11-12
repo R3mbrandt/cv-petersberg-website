@@ -29,18 +29,11 @@ Schreibt uns mit Datum, Ort, Verein/Gruppe und eurem Wunsch:
 
 <p><a class="btn" href="mailto:{{ site.kontakt.einmarsch }}?subject=Auftritts-%20%2F%20Einmarschanfrage&body=Verein%20%2F%20Gruppe%3A%0D%0ADatum%20und%20Uhrzeit%3A%0D%0AOrt%3A%0D%0AGew%C3%BCnschte%20Gruppe%3A%0D%0AAnsprechpartner%20und%20Telefon%3A%0D%0A">Anfrage per E-Mail senden</a></p>
 
-<h2>Telefon &amp; Post</h2>
+<h2>Post</h2>
 
-<div class="contact-cards">
-  <a class="contact-card" href="tel:+49{{ site.kontakt.telefon | replace(' ', '') | replace('0661', '661') }}">
-    <span class="contact-label">Telefon</span>
-    <strong>{{ site.kontakt.telefon }}</strong>
-  </a>
-  <div class="contact-card">
-    <span class="contact-label">Post</span>
-    <strong>{{ site.name }}<br>{{ site.kontakt.adresse.strasse }}<br>{{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}</strong>
-  </div>
-</div>
+<p>{{ site.name }}<br>
+{{ site.kontakt.adresse.strasse }}<br>
+{{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}</p>
 
 ## Folge uns
 

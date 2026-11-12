@@ -10,8 +10,7 @@
       <address>
         {% if site.kontakt.adresse.strasse %}{{ site.kontakt.adresse.strasse }}<br>{% endif %}
         {{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}<br>
-        {% if site.kontakt.email %}<a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a><br>{% endif %}
-        {% if site.kontakt.telefon %}<a href="tel:{{ site.kontakt.telefon | replace(' ', '') }}">{{ site.kontakt.telefon }}</a>{% endif %}
+        {% if site.kontakt.email %}<a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% endif %}
       </address>
     </div>
     <div>

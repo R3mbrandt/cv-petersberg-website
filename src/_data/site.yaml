@@ -31,7 +31,7 @@ kontakt:
   email: "kontakt@cv-petersberg.de"        # allgemeine Anfragen
   einmarsch: "einmarsch@cv-petersberg.de"  # Auftritts- und Einmarschanfragen
   vorstand: "vorstand@cv-petersberg.de"    # Mitgliedschaft, Kündigung, Datenänderungen
-  telefon: "0661 607150"
+  telefon: "0661 607150"                  # nur in Impressum und Datenschutz
   adresse:
     strasse: "Adelberostraße 18"
     plz: "36100"
