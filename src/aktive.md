@@ -19,7 +19,7 @@ einmarschplan:
 
 <p>Alle Veranstaltungen des CVP lassen sich im Handy-Kalender abonnieren – neue oder geänderte Termine erscheinen dann automatisch.</p>
 
-<p><a class="btn btn-ghost" href="webcal://{{ site.url | replace('https://', '') }}/termine.ics">Kalender abonnieren</a> <a class="btn btn-ghost" href="/termine/">Alle Termine</a></p>
+<p><a class="btn btn-ghost" href="/termine.ics" data-webcal>Kalender abonnieren</a> <a class="btn btn-ghost" href="/termine/">Alle Termine</a></p>
 
 <h2 id="anfragen">Einmarsch- und Auftrittsanfragen</h2>
 

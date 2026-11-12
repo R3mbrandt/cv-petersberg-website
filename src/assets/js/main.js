@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
     matchMedia("(min-width: 52.01rem)").addEventListener("change", () => setOpen(false));
   }
 
+  // Kalender-Abo: Link auf die Adresse, unter der die Seite gerade läuft,
+  // mit webcal:// – so öffnet sich direkt die Kalender-App zum Abonnieren.
+  document.querySelectorAll("a[data-webcal]").forEach((a) => {
+    a.href = a.href.replace(/^https?:/, "webcal:");
+  });
+
   // Schatten am Header beim Scrollen
   const header = document.querySelector("[data-header]");
   if (header) {

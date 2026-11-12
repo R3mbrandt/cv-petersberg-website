@@ -7,7 +7,7 @@ description: Alle Veranstaltungen, Vorverkäufe und Feiern des CVP auf einen Bli
 {%- set kommend = termine | termineSortiert("kommend") %}
 <div class="calendar-actions">
   <a class="btn" href="/termine.ics" download>Alle Termine in den Kalender</a>
-  <a class="btn btn-ghost" href="webcal://{{ site.url | replace('https://', '') }}/termine.ics">Kalender abonnieren</a>
+  <a class="btn btn-ghost" href="/termine.ics" data-webcal>Kalender abonnieren</a>
 </div>
 {% if kommend.length %}
 <ul class="event-list" data-termine>
