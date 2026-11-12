@@ -5,9 +5,13 @@
 #   läuft, sobald unter Settings → Secrets and variables → Actions
 #   die Variable FTP_ZIELORDNER (z. B. "cvp-neu/") und die Secrets
 #   FTP_SERVER, FTP_BENUTZER, FTP_PASSWORT angelegt sind.
+#   FTP_ZIELORDNER ist relativ zum Startordner des FTP-Benutzers; ist der Benutzer
+#   schon auf den Ordner der Website beschränkt, "./" eintragen.
 #   Variable FTP_PROTOKOLL: "sftp" (Standard, verschlüsselt, ab OVH-Tarif Pro)
 #   oder "ftp" (unverschlüsselt, alle Tarife). OVH unterstützt kein FTPS.
-#   Optional: Variable FTP_PORT (Standard 22 bei SFTP).
+#   Optional: Variable FTP_PORT (Standard 22 bzw. 21).
+#   Sicherheit: enthält der Zielordner WordPress oder einen Ordner www, bricht der
+#   Upload ab (der Abgleich löscht im Zielordner alles, was nicht zur Seite gehört).
 # Ziel 2 – GitHub Pages (Testadresse r3mbrandt.github.io/…):
 #   läuft, solange die Variable GITHUB_PAGES nicht auf "false" steht.
 name: Website veröffentlichen
@@ -40,38 +44,32 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Zielordner prüfen
-        env:
-          ZIEL: ${{ vars.FTP_ZIELORDNER }}
-        run: |
-          z="${ZIEL#/}"; z="${z%/}"
-          if [ -z "$z" ] || [ "$z" = "." ] || [ "$z" = "www" ]; then
-            echo "::error::FTP_ZIELORDNER '$ZIEL' ist nicht erlaubt (Hauptverzeichnis oder WordPress-Ordner www)."; exit 1
-          fi
-      - name: Upload per SFTP (verschlüsselt)
-        if: vars.FTP_PROTOKOLL != 'ftp'
+      - name: Upload zu OVH (${{ vars.FTP_PROTOKOLL || 'sftp' }})
         env:
           SERVER: ${{ secrets.FTP_SERVER }}
           BENUTZER: ${{ secrets.FTP_BENUTZER }}
           LFTP_PASSWORD: ${{ secrets.FTP_PASSWORT }}
           ZIEL: ${{ vars.FTP_ZIELORDNER }}
-          PORT: ${{ vars.FTP_PORT || '22' }}
+          PROTOKOLL: ${{ vars.FTP_PROTOKOLL || 'sftp' }}
+          PORT: ${{ vars.FTP_PORT }}
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
-          lftp --env-password -u "$BENUTZER" -p "$PORT" "sftp://$SERVER" -e "
-            set sftp:auto-confirm yes; set net:max-retries 2; set net:timeout 30;
-            mirror --reverse --delete --parallel=4 --exclude-glob .ftp-deploy-sync-state.json _site/ ${ZIEL%/}/;
-            bye"
-      - name: Upload per FTP (unverschlüsselt)
-        if: vars.FTP_PROTOKOLL == 'ftp'
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_BENUTZER }}
-          password: ${{ secrets.FTP_PASSWORT }}
-          protocol: ftp
-          local-dir: ./_site/
-          server-dir: ${{ vars.FTP_ZIELORDNER }}
+          [ -n "$PORT" ] || { [ "$PROTOKOLL" = "ftp" ] && PORT=21 || PORT=22; }
+          ZIEL="${ZIEL%/}"; ZIEL="${ZIEL:-.}"
+          verbinden() {
+            lftp --env-password -u "$BENUTZER" -p "$PORT" "$PROTOKOLL://$SERVER" -e "
+              set sftp:auto-confirm yes; set ftp:ssl-allow no; set net:max-retries 2; set net:timeout 30;
+              $1; bye"
+          }
+          # Sicherheitsprüfung: Im Zielordner darf kein WordPress und kein www-Ordner liegen,
+          # denn der Abgleich löscht dort alles, was nicht zur neuen Seite gehört.
+          verbinden "mkdir -p -f '$ZIEL'; cls -1 --classify '$ZIEL/'" > inhalt.txt
+          echo "Zielordner '$ZIEL' enthält $(wc -l < inhalt.txt) Einträge."
+          if grep -qiE '(^|/)(www|wp-admin|wp-content|wp-includes)/?$|(^|/)wp-config\.php$' inhalt.txt; then
+            echo "::error::Im Zielordner '$ZIEL' liegt WordPress bzw. der Ordner www – Upload abgebrochen."; exit 1
+          fi
+          verbinden "mirror --reverse --delete --parallel=4 --exclude-glob .ftp-deploy-sync-state.json _site/ '$ZIEL/'"
+          echo "Upload abgeschlossen: $(find _site -type f | wc -l) Dateien."
 
   pages-build:
     if: vars.GITHUB_PAGES != 'false'

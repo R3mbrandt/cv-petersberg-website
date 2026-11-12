@@ -62,7 +62,9 @@ jederzeit rückgängig zu machen. DNS und E-Mail werden nicht verändert.
    *Settings → Secrets and variables → Actions* (Reiter **Repository**, nicht Environment)
    - Secrets: `FTP_SERVER`, `FTP_BENUTZER`, `FTP_PASSWORT` – am besten einen eigenen
      Benutzer nur für den Ordner `cvp-neu` anlegen (OVH-Kundencenter → *Hosting → FTP-SSH*)
-   - Variable: `FTP_ZIELORDNER` = `cvp-neu/` (Hauptverzeichnis und `www` werden zur Sicherheit abgelehnt)
+   - Variable `FTP_ZIELORDNER`: Ordner relativ zum Start des FTP-Benutzers – ist der Benutzer auf den
+     Ordner der Website beschränkt: `./`, sonst z. B. `cvp-neu/`. Liegt im Ziel WordPress oder ein
+     Ordner `www`, bricht der Upload zur Sicherheit ab.
    - Variable `FTP_PROTOKOLL`: leer bzw. `sftp` = verschlüsselt (ab OVH-Tarif *Pro*; beim
      Benutzer „FTP, SFTP und SSH“ erlauben; als `FTP_SERVER` den angezeigten **SSH-Server**
      eintragen) – oder `ftp` = unverschlüsselt (alle Tarife). FTPS unterstützt OVH nicht.
