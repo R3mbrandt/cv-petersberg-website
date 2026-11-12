@@ -580,16 +580,18 @@ address { font-style: normal; overflow-wrap: anywhere; }
 .group-photo figcaption { color: var(--text-muted); font-size: .92rem; margin-top: -.75rem; }
 
 /* ---------- Hinweis Kalender-Abo ---------- */
-.abo-hinweis { margin: 0 0 2rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-tint); font-size: .95rem; }
-.abo-hinweis summary { cursor: pointer; padding: .8rem 1.1rem; font-weight: 650; list-style: none; display: flex; align-items: flex-start; gap: .6rem; line-height: 1.4; }
+.abo-hinweis { margin: -.25rem 0 2rem; font-size: .85rem; color: var(--text-muted); max-width: 36rem; }
+.abo-hinweis:not([open]) { width: fit-content; }
+.abo-hinweis summary { cursor: pointer; padding: .2rem 0; list-style: none; display: inline-flex; align-items: center; gap: .45rem; font-weight: 600; }
+.abo-hinweis summary:hover { color: var(--text); }
 .abo-hinweis summary::-webkit-details-marker { display: none; }
-.abo-hinweis summary::before { content: ""; flex: none; width: .5em; height: .5em; margin-top: .45em; border-right: 2px solid var(--primary); border-bottom: 2px solid var(--primary); transform: rotate(-45deg); transition: transform .2s; }
-.abo-hinweis[open] summary::before { transform: rotate(45deg); margin-top: .3em; }
-.abo-hinweis-inhalt { padding: 0 1.1rem 1rem; }
-.abo-hinweis-inhalt p { margin: 0 0 .6rem; }
-.abo-hinweis-inhalt ol { margin: 0 0 .6rem; padding-left: 1.25rem; display: grid; gap: .5rem; }
+.abo-hinweis summary::before { content: ""; flex: none; width: .42em; height: .42em; border-right: 2px solid var(--primary); border-bottom: 2px solid var(--primary); transform: rotate(-45deg); transition: transform .2s; }
+.abo-hinweis[open] summary::before { transform: rotate(45deg); }
+.abo-hinweis-inhalt { margin-top: .5rem; padding: .75rem .9rem; border: 1px solid var(--border); border-radius: .75rem; background: var(--bg-tint); color: var(--text); }
+.abo-hinweis-inhalt p { margin: 0 0 .5rem; }
+.abo-hinweis-inhalt ol { margin: 0 0 .5rem; padding-left: 1.1rem; display: grid; gap: .35rem; }
 .abo-hinweis-inhalt ol > li { min-width: 0; }
-.abo-url { display: flex; gap: .5rem; margin-top: .4rem; }
-.abo-url input { flex: 1; min-width: 0; font: inherit; font-size: .88rem; padding: .45rem .7rem; border: 1px solid var(--border); border-radius: .5rem; background: var(--surface); color: var(--text); }
-.abo-url .btn-small { margin-top: 0; flex: none; }
-.abo-hinweis-klein { font-size: .85rem; color: var(--text-muted); }
+.abo-url { display: flex; gap: .4rem; margin-top: .3rem; }
+.abo-url input { flex: 1; min-width: 0; font: inherit; font-size: .8rem; padding: .3rem .55rem; border: 1px solid var(--border); border-radius: .4rem; background: var(--surface); color: var(--text); }
+.abo-url .btn-small { margin-top: 0; flex: none; min-height: 1.9rem; padding: .2rem .8rem; font-size: .8rem; }
+.abo-hinweis-klein { font-size: .78rem; color: var(--text-muted); margin: 0 !important; }
