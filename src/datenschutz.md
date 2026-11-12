@@ -4,7 +4,7 @@ title: Datenschutzerklärung
 ---
 ## Verantwortlicher
 
-{{ site.name }}, vertreten durch die 1. Vorsitzende Sandra Freund<br>
+{{ site.name }}, vertreten durch den Vorstand (siehe [Impressum](/impressum/))<br>
 {{ site.kontakt.adresse.strasse }}, {{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}<br>
 Telefon: {{ site.kontakt.telefon }} · E-Mail: <a href="mailto:{{ site.kontakt.vorstand }}">{{ site.kontakt.vorstand }}</a>
 

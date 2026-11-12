@@ -134,7 +134,6 @@ Alle Inhalte von cv-petersberg.de wurden übernommen:
 
 Alle Stellen sind im Code mit `TODO` markiert (`grep -rn TODO src`):
 
-- **Impressum:** Vereinsregisternummer (Amtsgericht Fulda) ergänzen
 - **Datenschutz:** Hosting-Anbieter und Speicherdauer der Logfiles eintragen; Text rechtlich prüfen
   (die alte Erklärung beschrieb WordPress-Plugins und Cookies, die es nicht mehr gibt)
 - **E-Mail-Adressen einrichten** (OVH-Kundencenter → *E-Mails*): `kontakt@`, `einmarsch@` und
