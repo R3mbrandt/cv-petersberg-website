@@ -58,12 +58,14 @@ jederzeit rückgängig zu machen. DNS und E-Mail werden nicht verändert.
    bisherigen Ordner `www/` herunterladen.
 2. **Testadresse anlegen:** *Hosting → Multisite → Domain hinzufügen*:
    `neu.cv-petersberg.de`, Wurzelverzeichnis `cvp-neu`, SSL aktivieren.
-3. **FTP-Zugang in GitHub hinterlegen:** im Repository unter
-   *Settings → Secrets and variables → Actions*
-   - Secrets: `FTP_SERVER` (z. B. `ftp.clusterXXX.hosting.ovh.net`, steht im
-     OVH-Kundencenter unter *Hosting → FTP-SSH*), `FTP_BENUTZER`, `FTP_PASSWORT`
-     – am besten einen eigenen FTP-Benutzer nur für den Ordner `cvp-neu` anlegen
-   - Variable: `FTP_ZIELORDNER` = `cvp-neu/`
+3. **Zugang in GitHub hinterlegen:** im Repository unter
+   *Settings → Secrets and variables → Actions* (Reiter **Repository**, nicht Environment)
+   - Secrets: `FTP_SERVER`, `FTP_BENUTZER`, `FTP_PASSWORT` – am besten einen eigenen
+     Benutzer nur für den Ordner `cvp-neu` anlegen (OVH-Kundencenter → *Hosting → FTP-SSH*)
+   - Variable: `FTP_ZIELORDNER` = `cvp-neu/` (Hauptverzeichnis und `www` werden zur Sicherheit abgelehnt)
+   - Variable `FTP_PROTOKOLL`: leer bzw. `sftp` = verschlüsselt (ab OVH-Tarif *Pro*; beim
+     Benutzer „FTP, SFTP und SSH“ erlauben; als `FTP_SERVER` den angezeigten **SSH-Server**
+     eintragen) – oder `ftp` = unverschlüsselt (alle Tarife). FTPS unterstützt OVH nicht.
 4. **Upload starten:** *Actions → Website veröffentlichen → Run workflow*.
    Danach unter https://neu.cv-petersberg.de alles prüfen.
 5. **Umschalten:** *Hosting → Multisite* bei `cv-petersberg.de` **und**

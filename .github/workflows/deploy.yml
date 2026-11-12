@@ -1,10 +1,13 @@
 # Baut die Website bei jeder Änderung (auch aus dem Redaktionssystem) und
 # veröffentlicht sie – täglich nachts zusätzlich, damit vergangene Termine verschwinden.
 #
-# Ziel 1 – OVH-Webhosting per FTP (cv-petersberg.de):
+# Ziel 1 – OVH-Webhosting (cv-petersberg.de):
 #   läuft, sobald unter Settings → Secrets and variables → Actions
 #   die Variable FTP_ZIELORDNER (z. B. "cvp-neu/") und die Secrets
 #   FTP_SERVER, FTP_BENUTZER, FTP_PASSWORT angelegt sind.
+#   Variable FTP_PROTOKOLL: "sftp" (Standard, verschlüsselt, ab OVH-Tarif Pro)
+#   oder "ftp" (unverschlüsselt, alle Tarife). OVH unterstützt kein FTPS.
+#   Optional: Variable FTP_PORT (Standard 22 bei SFTP).
 # Ziel 2 – GitHub Pages (Testadresse r3mbrandt.github.io/…):
 #   läuft, solange die Variable GITHUB_PAGES nicht auf "false" steht.
 name: Website veröffentlichen
@@ -30,20 +33,43 @@ jobs:
     if: vars.FTP_ZIELORDNER != ''
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Upload auf das OVH-Webhosting
+      - name: Zielordner prüfen
+        env:
+          ZIEL: ${{ vars.FTP_ZIELORDNER }}
+        run: |
+          z="${ZIEL#/}"; z="${z%/}"
+          if [ -z "$z" ] || [ "$z" = "." ] || [ "$z" = "www" ]; then
+            echo "::error::FTP_ZIELORDNER '$ZIEL' ist nicht erlaubt (Hauptverzeichnis oder WordPress-Ordner www)."; exit 1
+          fi
+      - name: Upload per SFTP (verschlüsselt)
+        if: vars.FTP_PROTOKOLL != 'ftp'
+        env:
+          SERVER: ${{ secrets.FTP_SERVER }}
+          BENUTZER: ${{ secrets.FTP_BENUTZER }}
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORT }}
+          ZIEL: ${{ vars.FTP_ZIELORDNER }}
+          PORT: ${{ vars.FTP_PORT || '22' }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
+          lftp --env-password -u "$BENUTZER" -p "$PORT" "sftp://$SERVER" -e "
+            set sftp:auto-confirm yes; set net:max-retries 2; set net:timeout 30;
+            mirror --reverse --delete --parallel=4 --exclude-glob .ftp-deploy-sync-state.json _site/ ${ZIEL%/}/;
+            bye"
+      - name: Upload per FTP (unverschlüsselt)
+        if: vars.FTP_PROTOKOLL == 'ftp'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_BENUTZER }}
           password: ${{ secrets.FTP_PASSWORT }}
-          protocol: ftps
+          protocol: ftp
           local-dir: ./_site/
           server-dir: ${{ vars.FTP_ZIELORDNER }}
 
@@ -51,8 +77,8 @@ jobs:
     if: vars.GITHUB_PAGES != 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
