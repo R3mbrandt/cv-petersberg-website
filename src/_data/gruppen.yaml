@@ -3,7 +3,12 @@
   kategorie: Aktivengruppe
   art: Elferrat
   leitung: Elferratschef Markus Gutberlet
-  text: ''
+  text: Die weiße Wand von Petersberg! Der trinkfeste, stimmgewaltige Elferrat.
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2024/10/CVP-11_Elferrat-scaled.jpg
 - name: Ratsfrauen
   id: ratsfrauen
@@ -11,6 +16,11 @@
   art: Ratsfrauen
   leitung: Ratsfrauenchefin Irina Aschenbrücker
   text: 1997 von aktiven Frauen ins Leben gerufen – damit man bei Auswärtseinmärschen nicht „in der Ecke stehen muss“.
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2024/10/CVP-10_Ratsfrauen-scaled.jpg
 - name: Kinder-Jugend-Elferrat
   id: kinder-jugend-elferrat
@@ -18,6 +28,11 @@
   art: Nachwuchs
   leitung: ''
   text: ''
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2025/01/CVP-13-2024_Kinder-Jugend-Elferrat-scaled.jpg
 - name: Green Diamonds
   id: green-diamonds
