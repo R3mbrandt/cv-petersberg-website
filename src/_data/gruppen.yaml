@@ -3,7 +3,7 @@
   kategorie: Aktivengruppe
   art: Elferrat
   leitung: Elferratschef Markus Gutberlet
-  text: Der Elferrat des CVP.
+  text: ''
   bild: /uploads/2024/10/CVP-11_Elferrat-scaled.jpg
 - name: Ratsfrauen
   id: ratsfrauen
@@ -17,54 +17,89 @@
   kategorie: Aktivengruppe
   art: Nachwuchs
   leitung: ''
-  text: Der Kinder-Jugend-Elferrat des CVP.
+  text: ''
   bild: /uploads/2025/01/CVP-13-2024_Kinder-Jugend-Elferrat-scaled.jpg
 - name: Green Diamonds
   id: green-diamonds
   kategorie: Tanzgarde
   art: 1. Tanzgarde
   leitung: ''
-  text: Die 1. Tanzgarde des CVP.
+  text: ''
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2025/01/CVP-09-2024_Green-Diamonds-scaled.jpg
 - name: Shotzz
   id: shotzz
   kategorie: Tanzgarde
   art: Showtanzgruppe
   leitung: ''
-  text: Die Showtanzgruppe des CVP.
+  text: ''
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2025/01/CVP-11-2024_Shotzz-scaled.jpg
 - name: Tanzmariechen Angelina
   id: tanzmariechen
   kategorie: Tanzgarde
   art: Tanzmariechen
   leitung: ''
-  text: Unser Tanzmariechen Angelina.
+  text: ''
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2025/01/CVP-12-2023_Angelina-scaled.jpg
 - name: Blue Babes
   id: blue-babes
   kategorie: Tanzgarde
   art: Tanzgarde
   leitung: ''
-  text: Die Tanzgarde Blue Babes.
+  text: ''
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2025/01/CVP-07-2024_Blue-Babes-scaled.jpg
 - name: Little Blue Babes
   id: little-blue-babes
   kategorie: Tanzgarde
   art: Tanzgarde
   leitung: ''
-  text: Die Tanzgarde Little Blue Babes.
+  text: ''
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2025/01/CVP-05-2024_Little-Blue-Babes-scaled.jpg
 - name: Crazy Kids
   id: crazy-kids
   kategorie: Tanzgarde
   art: Showtanzgruppe
   leitung: ''
-  text: Die Showtanzgruppe Crazy Kids.
+  text: ''
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2025/01/CVP-03-2024_Crazy-Kids-scaled.jpg
 - name: Tanzmäuse
   id: tanzmaeuse
   kategorie: Tanzgarde
   art: Tanzgarde
   leitung: ''
-  text: Unsere Jüngsten, die Tanzmäuse.
+  text: ''
+  alter: ''
+  trainer: ''
+  training: ''
+  ort: ''
+  email: ''
   bild: /uploads/2025/01/CVP-01-2024_Tanzmaeuse-scaled.jpg

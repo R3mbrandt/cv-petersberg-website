@@ -622,3 +622,11 @@ a[data-mail], a[href^="mailto:"] { white-space: nowrap; }
   .social-icons a { width: 2.5rem; height: 2.5rem; }
 }
 @media (max-width: 22rem) { .brand-long { display: none; } }
+
+/* ---------- Gruppen: Alter, Training, Ort, Kontakt ---------- */
+.group-facts { display: grid; gap: .45rem; margin: .9rem 0 0; padding-top: .9rem; border-top: 1px solid var(--border); font-size: .92rem; }
+.group-facts div { display: grid; grid-template-columns: 6.5rem 1fr; gap: .5rem; }
+.group-facts dt { font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--primary); padding-top: .12rem; }
+.group-facts dd { margin: 0; overflow-wrap: anywhere; }
+@media (prefers-color-scheme: dark) { .group-facts dt { color: var(--link); } }
+.group-facts a[data-mail], .group-facts a[href^="mailto:"] { white-space: normal; }

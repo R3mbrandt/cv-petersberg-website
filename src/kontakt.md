@@ -29,7 +29,3 @@ Schreibt uns mit Datum, Ort, Verein/Gruppe und eurem Wunsch an <a href="mailto:{
 <p>{{ site.name }}<br>
 {{ site.kontakt.adresse.strasse }}<br>
 {{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}</p>
-
-## Folge uns
-
-{% for s in site.social %}<a class="btn btn-ghost" href="{{ s.url }}" rel="noopener">{{ s.name }}</a> {% endfor %}

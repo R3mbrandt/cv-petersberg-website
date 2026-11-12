@@ -90,6 +90,11 @@ collections:
               - { name: art, label: Art, widget: string, hint: "z. B. 1. Tanzgarde, Showtanzgruppe" }
               - { name: leitung, label: Leitung, widget: string, required: false }
               - { name: text, label: Beschreibung, widget: text, required: false }
+              - { name: alter, label: Alter, widget: string, required: false, hint: "z. B. 4 bis 7 Jahre" }
+              - { name: trainer, label: Trainerteam, widget: string, required: false, hint: "z. B. Anna Muster und Lisa Beispiel" }
+              - { name: training, label: Trainingszeiten, widget: text, required: false, hint: "z. B. Dienstag 17:00–18:30 Uhr – eine Zeile pro Termin" }
+              - { name: ort, label: Trainingsort, widget: string, required: false, hint: "z. B. Propsteihaus Petersberg" }
+              - { name: email, label: "E-Mail (Kontakt zur Gruppe)", widget: string, required: false }
               - { name: bild, label: Foto, widget: image, required: false }
       - name: vorstand
         label: Vorstand

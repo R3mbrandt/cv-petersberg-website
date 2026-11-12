@@ -16,6 +16,15 @@ breit: true
       <h3>{{ g.name }}</h3>
       {% if g.leitung %}<p class="group-lead">{{ g.leitung }}</p>{% endif %}
       {% if g.text %}<p>{{ g.text }}</p>{% endif %}
+      {%- if g.alter or g.trainer or g.training or g.ort or g.email %}
+      <dl class="group-facts">
+        {% if g.alter %}<div><dt>Alter</dt><dd>{{ g.alter }}</dd></div>{% endif %}
+        {% if g.trainer %}<div><dt>Trainerteam</dt><dd>{{ g.trainer }}</dd></div>{% endif %}
+        {% if g.training %}<div><dt>Training</dt><dd>{{ g.training | escape | replace("\n", "<br>") | safe }}</dd></div>{% endif %}
+        {% if g.ort %}<div><dt>Ort</dt><dd>{{ g.ort }}</dd></div>{% endif %}
+        {% if g.email %}<div><dt>Kontakt</dt><dd><a href="mailto:{{ g.email }}?subject={{ ('Anfrage ' + g.name) | urlencode }}">{{ g.email }}</a></dd></div>{% endif %}
+      </dl>
+      {%- endif %}
     </div>
   </li>
   {% endif %}{% endfor %}
