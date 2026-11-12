@@ -2,6 +2,7 @@ import * as yaml from "js-yaml";
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 import fs from "node:fs";
 import path from "node:path";
+import { imageSizeFromFile } from "image-size/fromFile";
 
 /**
  * Eleventy-Konfiguration für die Website des Carnevalverein Petersberg e.V.
@@ -133,6 +134,16 @@ export default function (eleventyConfig) {
     } catch {}
     thumbCache.set(src, result);
     return result;
+  });
+
+  /** Breite eines Bildes aus src/uploads in Pixeln (0, falls unbekannt) – z. B. ob sich Vergrößern lohnt */
+  const breiten = new Map();
+  eleventyConfig.addAsyncFilter("bildBreite", async (src) => {
+    if (!src || !src.startsWith("/")) return 0;
+    if (!breiten.has(src)) {
+      breiten.set(src, imageSizeFromFile(path.join("src", src)).then((d) => d.width || 0).catch(() => 0));
+    }
+    return breiten.get(src);
   });
 
   /** "2026-02-10" -> "2026/02/10" (für Beitrags-URLs wie bei WordPress) */

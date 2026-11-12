@@ -10,13 +10,12 @@ breit: true
 <ul class="group-grid" role="list">
   {% for g in gruppen %}{% if g.kategorie == kat %}
   <li class="group-card" id="{{ g.id }}">
-    {% if g.bild %}<img src="{{ g.bild | thumb }}" alt="{{ g.name }}" loading="lazy" decoding="async" width="480" height="320">{% else %}<div class="group-placeholder" aria-hidden="true">{{ g.name | first }}</div>{% endif %}
+    {% if g.bild %}{% set breite = g.bild | bildBreite %}{% if breite >= 700 %}<a class="zoom" href="{{ g.bild }}" data-lightbox="gruppen" data-caption="{{ g.name }}{% if g.art and (g.art not in g.name) %} – {{ g.art }}{% endif %}" aria-label="Foto {{ g.name }} vergrößern"><img src="{{ g.bild | thumb }}" alt="{{ g.name }}" loading="lazy" decoding="async" width="480" height="320"></a>{% else %}<img src="{{ g.bild | thumb }}" alt="{{ g.name }}" loading="lazy" decoding="async" width="480" height="320">{% endif %}{% else %}<div class="group-placeholder" aria-hidden="true">{{ g.name | first }}</div>{% endif %}
     <div class="group-body">
       <p class="event-cat">{{ g.art }}</p>
       <h3>{{ g.name }}</h3>
       {% if g.leitung %}<p class="group-lead">{{ g.leitung }}</p>{% endif %}
       {% if g.text %}<p>{{ g.text }}</p>{% endif %}
-      {% if g.bild %}<a class="link-arrow" href="{{ g.bild }}">Foto in groß</a>{% endif %}
     </div>
   </li>
   {% endif %}{% endfor %}

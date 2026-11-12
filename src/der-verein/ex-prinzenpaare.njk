@@ -8,7 +8,7 @@ breit: true
 <ul class="prince-grid" role="list">
   {% for e in exprinzen %}
   <li class="prince-card" id="p{{ e.jahr | replace(' ', '') | replace('&', '-') }}">
-    {% if e.bild %}<img src="{{ e.bild | thumb }}" alt="{{ e.titel }}" loading="lazy" decoding="async">{% endif %}
+    {% if e.bild %}{% set breite = e.bild | bildBreite %}{% if breite >= 700 %}<a class="zoom" href="{{ e.bild }}" data-lightbox="exprinzen" data-caption="{{ e.titel }}: {{ e.text }}" aria-label="Foto {{ e.titel }} vergrößern"><img src="{{ e.bild | thumb }}" alt="{{ e.titel }}" loading="lazy" decoding="async"></a>{% else %}<img src="{{ e.bild | thumb }}" alt="{{ e.titel }}" loading="lazy" decoding="async">{% endif %}{% endif %}
     <div class="prince-body">
       <p class="event-cat">{{ e.titel }}</p>
       <p>{{ e.text }}</p>

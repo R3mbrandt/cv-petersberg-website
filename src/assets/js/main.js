@@ -67,4 +67,57 @@ document.addEventListener("DOMContentLoaded", () => {
     tick();
     setInterval(tick, 30000);
   }
+
+  // ---------------------------------------------------------------
+  //  Bildvergrößerung: Links mit data-lightbox öffnen das große Foto.
+  //  Ohne JavaScript öffnet der Link einfach die Bilddatei.
+  // ---------------------------------------------------------------
+  const zoomLinks = [...document.querySelectorAll("a[data-lightbox]")];
+  if (zoomLinks.length && "HTMLDialogElement" in window) {
+    const dlg = document.createElement("dialog");
+    dlg.className = "lightbox";
+    dlg.setAttribute("aria-label", "Bildansicht");
+    dlg.innerHTML = `
+      <figure class="lightbox-figure"><img alt=""><figcaption></figcaption></figure>
+      <button type="button" class="lightbox-btn lightbox-close" aria-label="Schließen">×</button>
+      <button type="button" class="lightbox-btn lightbox-prev" aria-label="Vorheriges Foto">‹</button>
+      <button type="button" class="lightbox-btn lightbox-next" aria-label="Nächstes Foto">›</button>`;
+    document.body.append(dlg);
+    const img = dlg.querySelector("img"), cap = dlg.querySelector("figcaption");
+    let gruppe = [], pos = 0;
+
+    const zeige = (i) => {
+      pos = (i + gruppe.length) % gruppe.length;
+      const a = gruppe[pos];
+      img.src = a.href;
+      img.alt = a.querySelector("img")?.alt || "";
+      cap.textContent = a.dataset.caption || "";
+      dlg.classList.toggle("is-single", gruppe.length < 2);
+    };
+    zoomLinks.forEach((a) => a.addEventListener("click", (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return; // neuer Tab bleibt möglich
+      e.preventDefault();
+      gruppe = zoomLinks.filter((x) => x.dataset.lightbox === a.dataset.lightbox);
+      zeige(gruppe.indexOf(a));
+      dlg.showModal();
+    }));
+    dlg.querySelector(".lightbox-close").addEventListener("click", () => dlg.close());
+    dlg.querySelector(".lightbox-prev").addEventListener("click", () => zeige(pos - 1));
+    dlg.querySelector(".lightbox-next").addEventListener("click", () => zeige(pos + 1));
+    dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.classList.contains("lightbox-figure")) dlg.close(); });
+    dlg.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") zeige(pos - 1);
+      if (e.key === "ArrowRight") zeige(pos + 1);
+    });
+    dlg.addEventListener("close", () => { img.removeAttribute("src"); });
+    // Wischen auf dem Handy
+    let startX = null;
+    dlg.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    dlg.addEventListener("touchend", (e) => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 50) zeige(pos + (dx < 0 ? 1 : -1));
+      startX = null;
+    });
+  }
 });
