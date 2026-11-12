@@ -134,9 +134,9 @@ Alle Inhalte von cv-petersberg.de wurden übernommen:
 
 Alle Stellen sind im Code mit `TODO` markiert (`grep -rn TODO src`):
 
-- **Datenschutz:** Im Abschnitt „Hosting“ den Rechenzentrums-Standort und im Abschnitt
-  „Server-Logfiles“ die Speicherdauer laut OVH eintragen (beide als `TODO` markiert);
-  Auftragsverarbeitungsvertrag mit OVH im Kundencenter abschließen; prüfen, ob das CDN aktiv ist
+- **Datenschutz:** Auftragsverarbeitungsvertrag mit OVH im Kundencenter abschließen; prüfen, ob das
+  CDN aktiv ist (sonst den CDN-Absatz streichen). Optional die genaue Speicherdauer der Logfiles
+  beim OVH-Support erfragen und im Abschnitt „Server-Logfiles“ eintragen
 - **E-Mail-Adressen einrichten** (OVH-Kundencenter → *E-Mails*): `kontakt@`, `einmarsch@` und
   `vorstand@cv-petersberg.de` – auf der Website sind sie bereits eingetragen (`src/_data/site.yaml`)
   und gegen Adress-Sammler geschützt (im HTML verschlüsselt, siehe `eleventy.config.js`)

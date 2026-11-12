@@ -14,7 +14,7 @@ Diese Website kommt **ohne Cookies, ohne Tracking, ohne Kontaktformular und ohne
 
 ## Hosting
 
-Diese Website wird bei der **OVH GmbH**, Oskar-Jäger-Straße 173/K6, 50825 Köln, gehostet (Konzernmutter: OVH SAS, Roubaix, Frankreich). Die Website liegt auf Servern in einem Rechenzentrum in [TODO: Standort aus dem OVH-Kundencenter, z. B. „Gravelines, Frankreich“]. Mit OVH besteht ein Vertrag über die Auftragsverarbeitung nach Art. 28 DSGVO; OVH verarbeitet die Daten nur nach unseren Weisungen.
+Diese Website wird bei der **OVH GmbH**, Oskar-Jäger-Straße 173/K6, 50825 Köln, gehostet (Konzernmutter: OVH SAS, Roubaix, Frankreich). Die Website liegt auf Servern im OVH-Rechenzentrum in Gravelines (Frankreich), also innerhalb der EU. Mit OVH besteht ein Vertrag über die Auftragsverarbeitung nach Art. 28 DSGVO; OVH verarbeitet die Daten nur nach unseren Weisungen.
 
 ## Server-Logfiles
 
@@ -27,7 +27,7 @@ Bei jedem Aufruf dieser Website erfasst der Server von OVH automatisch folgende 
 - zuvor besuchte Seite (Referrer), sofern vom Browser übermittelt
 - Browser und Betriebssystem
 
-Diese Daten sind technisch nötig, um die Website auszuliefern, und dienen der Sicherheit (z. B. zum Erkennen von Angriffen) und der Fehlersuche. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO. Wir sehen die Logfiles nur bei Störungen oder Angriffen ein und führen sie nicht mit anderen Daten zusammen. Die Logfiles werden nach [TODO: Speicherdauer laut OVH, z. B. „12 Monaten“] automatisch gelöscht.
+Diese Daten sind technisch nötig, um die Website auszuliefern, und dienen der Sicherheit (z. B. zum Erkennen von Angriffen) und der Fehlersuche. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO. Wir sehen die Logfiles nur bei Störungen oder Angriffen ein und führen sie nicht mit anderen Daten zusammen. Wir selbst speichern oder exportieren die Logfiles nicht. Die Speicherdauer legt OVH fest; für vergleichbare Dienste nennt OVH bis zu zwölf Monate. Danach werden die Daten automatisch gelöscht.
 
 Aus den Zugriffsdaten erstellt OVH für uns außerdem eine anonyme Besucherstatistik (Anzahl der Aufrufe, Herkunftsland, Browser). IP-Adressen werden dafür nur gekürzt verwendet; Rückschlüsse auf einzelne Personen sind nicht möglich. Cookies werden dafür nicht gesetzt.
 
