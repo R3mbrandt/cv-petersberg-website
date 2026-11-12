@@ -42,7 +42,6 @@
     "url": {{ site.url | dump | safe }},
     "logo": {{ site.logo | absoluteUrl(site.url) | dump | safe }},
     "foundingDate": {{ site.gruendung | dump | safe }},
-    "email": {{ site.kontakt.email | dump | safe }},
     "address": { "@type": "PostalAddress", "postalCode": {{ site.kontakt.adresse.plz | dump | safe }}, "addressLocality": {{ site.kontakt.adresse.ort | dump | safe }}, "addressCountry": "DE" }
   }
   </script>

@@ -16,6 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
     matchMedia("(min-width: 52.01rem)").addEventListener("change", () => setOpen(false));
   }
 
+  // E-Mail-Adressen entschlüsseln (Spam-Schutz, siehe eleventy.config.js)
+  const entschluesseln = (s) => {
+    try { return [...new TextDecoder().decode(Uint8Array.from(atob(s), (c) => c.charCodeAt(0)))].reverse().join(""); }
+    catch { return ""; }
+  };
+  document.querySelectorAll("[data-mail-text]").forEach((el) => {
+    const adr = entschluesseln(el.dataset.mailText);
+    if (adr) el.replaceWith(document.createTextNode(adr));
+  });
+  document.querySelectorAll("a[data-mail]").forEach((a) => {
+    const adr = entschluesseln(a.dataset.mail);
+    if (adr) a.href = "mailto:" + adr + (a.dataset.mailQ || "");
+  });
+
   // Kalender-Abo: Link auf die Adresse, unter der die Seite gerade läuft,
   // mit webcal:// – so öffnet sich direkt die Kalender-App zum Abonnieren.
   document.querySelectorAll("a[data-webcal]").forEach((a) => {

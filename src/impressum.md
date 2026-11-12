@@ -12,7 +12,8 @@ Diese Webseite ist ein publizistisches Angebot des
 
 **Kontakt:**<br>
 Telefon: {{ site.kontakt.telefon }}<br>
-E-Mail: <a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>
+E-Mail: <a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a><br>
+Vorstand: <a href="mailto:{{ site.kontakt.vorstand }}">{{ site.kontakt.vorstand }}</a>
 
 **Registereintrag:** Eingetragen im Vereinsregister beim Amtsgericht Fulda (seit 23.07.1970). Registernummer: VR [TODO]
 

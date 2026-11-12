@@ -137,10 +137,9 @@ Alle Stellen sind im Code mit `TODO` markiert (`grep -rn TODO src`):
 - **Impressum:** Vereinsregisternummer (Amtsgericht Fulda) ergänzen
 - **Datenschutz:** Hosting-Anbieter und Speicherdauer der Logfiles eintragen; Text rechtlich prüfen
   (die alte Erklärung beschrieb WordPress-Plugins und Cookies, die es nicht mehr gibt)
-- **Kontakt:** Die bisherigen Kontaktformulare wurden durch E-Mail-Links ersetzt (kein Formular-Dienst,
-  keine Datenweitergabe). Als Kontaktadresse ist die im alten Impressum genannte private Adresse
-  der Vorsitzenden eingetragen – ggf. eine Vereinsadresse (z. B. info@cv-petersberg.de) einrichten
-  und in `site.yaml` eintragen
+- **E-Mail-Adressen einrichten** (OVH-Kundencenter → *E-Mails*): `kontakt@`, `einmarsch@` und
+  `vorstand@cv-petersberg.de` – auf der Website sind sie bereits eingetragen (`src/_data/site.yaml`)
+  und gegen Adress-Sammler geschützt (im HTML verschlüsselt, siehe `eleventy.config.js`)
 - Nach der **Prinzenkürung** die neue Prinzenmannschaft in `kampagne.yaml` eintragen und die
   bisherige in `exprinzen.yaml` oben ergänzen
 - **Redaktionssystem:** Login einrichten (siehe „Redaktionssystem einrichten“)

@@ -28,7 +28,9 @@ logoKlein: "/assets/img/logo-cvp.svg"
 
 kontakt:
   name: "Sandra Freund (1. Vorsitzende)"
-  email: "l.s.v.freund@arcor.de"
+  email: "kontakt@cv-petersberg.de"        # allgemeine Anfragen
+  einmarsch: "einmarsch@cv-petersberg.de"  # Auftritts- und Einmarschanfragen
+  vorstand: "vorstand@cv-petersberg.de"    # Mitgliedschaft, Kündigung, Datenänderungen
   telefon: "0661 607150"
   adresse:
     strasse: "Adelberostraße 18"

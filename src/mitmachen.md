@@ -24,10 +24,16 @@ Du hast Interesse an der aktiven Vereinsarbeit im Carnevalverein Petersberg e.V.
 
 ## Antrag abgeben
 
-Den ausgefüllten Aufnahmeantrag schickst du an:
+Den ausgefüllten und unterschriebenen Aufnahmeantrag schickst du per Post an
 
 {{ site.name }}<br>
 {{ site.kontakt.adresse.strasse }}<br>
 {{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}
+
+oder eingescannt per E-Mail an <a href="mailto:{{ site.kontakt.vorstand }}">{{ site.kontakt.vorstand }}</a>.
+
+## Änderungen und Kündigung
+
+Neue Adresse, neue Bankverbindung oder Kündigung der Mitgliedschaft? Bitte wende dich direkt an den Vorstand: <a href="mailto:{{ site.kontakt.vorstand }}">{{ site.kontakt.vorstand }}</a> oder per Post an die Vereinsanschrift. Für Änderungen kannst du auch den [Aufnahmeantrag / Änderungsmeldung (PDF)](/uploads/2021/01/20210118_Anmeldung_CVP.pdf) verwenden.
 
 Fragen? [Schreib uns](/kontakt/) – wir freuen uns auf dich!

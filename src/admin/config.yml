@@ -192,7 +192,9 @@ collections:
             widget: object
             fields:
               - { name: name, label: Ansprechpartner, widget: string, required: false }
-              - { name: email, label: E-Mail, widget: string }
+              - { name: email, label: "E-Mail allgemein", widget: string }
+              - { name: einmarsch, label: "E-Mail Auftritte & Einmärsche", widget: string }
+              - { name: vorstand, label: "E-Mail Vorstand", widget: string }
               - { name: telefon, label: Telefon, widget: string, required: false }
               - name: adresse
                 label: Adresse

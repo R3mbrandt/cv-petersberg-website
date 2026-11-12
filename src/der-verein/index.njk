@@ -28,6 +28,7 @@ breit: true
     <li><span class="people-role">{{ p.funktion }}</span><strong>{{ p.name }}</strong></li>
     {% endfor %}
   </ul>
+  <p>Den Vorstand erreichst du unter <a href="mailto:{{ site.kontakt.vorstand }}">{{ site.kontakt.vorstand }}</a>.</p>
   <h3 id="festausschuss">Festausschuss</h3>
   <p>Mitglieder des Festausschusses: {{ vorstand.festausschuss }}. {%- for p in vorstand.mitglieder %}{% if p.funktion == "Festausschussvorsitz" %} Den Vorsitz hat {{ p.name }}.{% endif %}{% endfor %}</p>
 </section>

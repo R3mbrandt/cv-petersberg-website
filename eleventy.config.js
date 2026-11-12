@@ -155,6 +155,30 @@ export default function (eleventyConfig) {
     String(text).split(/\n\s*\n/).map((t) => `<p>${t.trim()}</p>`).join("")
   );
 
+  // ---------- Spam-Schutz für E-Mail-Adressen ----------
+  // Im fertigen HTML steht keine Adresse im Klartext: mailto-Links und Adressen
+  // im Text werden verschlüsselt (umgedreht + Base64) und erst im Browser
+  // wieder zusammengesetzt (siehe assets/js/main.js). Ohne JavaScript sieht man
+  // "name (at) domain.de".
+  const MAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}/g;
+  const verschluesseln = (a) => Buffer.from([...a].reverse().join(""), "utf8").toString("base64");
+  const ersatztext = (a) => a.replace("@", " (at) ");
+  const textSicher = (html) => html.replace(MAIL, (a) =>
+    `<span data-mail-text="${verschluesseln(a)}">${ersatztext(a)}</span>`);
+  eleventyConfig.addTransform("mail-schutz", function (content) {
+    const out = this.page.outputPath || "";
+    if (!out.endsWith(".html") || out.includes("/admin/")) return content;
+    // 1. mailto-Links
+    content = content.replace(/<a\b([^>]*?)\bhref="mailto:([^"?]+)(\?[^"]*)?"([^>]*)>([\s\S]*?)<\/a>/g,
+      (_, vor, adr, query = "", nach, inhalt) =>
+        `<a${vor}href="#" data-mail="${verschluesseln(decodeURIComponent(adr))}"` +
+        (query ? ` data-mail-q="${query}"` : "") + `${nach}>${inhalt}</a>`);
+    // 2. Adressen im sichtbaren Text (nicht in Tags, Skripten, Styles)
+    return content.split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>)/g)
+      .map((teil) => (teil.startsWith("<") ? teil : textSicher(teil)))
+      .join("");
+  });
+
   // Bilder in Texten: verzögert laden
   eleventyConfig.addTransform("lazy-images", function (content) {
     if (!(this.page.outputPath || "").endsWith(".html")) return content;

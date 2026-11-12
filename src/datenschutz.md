@@ -6,7 +6,7 @@ title: Datenschutzerklärung
 
 {{ site.name }}, vertreten durch die 1. Vorsitzende Sandra Freund<br>
 {{ site.kontakt.adresse.strasse }}, {{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}<br>
-Telefon: {{ site.kontakt.telefon }} · E-Mail: {{ site.kontakt.email }}
+Telefon: {{ site.kontakt.telefon }} · E-Mail: <a href="mailto:{{ site.kontakt.vorstand }}">{{ site.kontakt.vorstand }}</a>
 
 ## Grundsatz
 
@@ -18,7 +18,7 @@ Beim Aufruf der Seite verarbeitet unser Hosting-Anbieter technisch notwendige Da
 
 ## Kontakt per E-Mail oder Telefon
 
-Wenn du uns per E-Mail oder Telefon kontaktierst, verarbeiten wir deine Angaben ausschließlich zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO) und löschen sie, sobald sie dafür nicht mehr benötigt werden.
+Wenn du uns per E-Mail (z. B. an {{ site.kontakt.email }}, {{ site.kontakt.einmarsch }} oder {{ site.kontakt.vorstand }}) oder Telefon kontaktierst, verarbeiten wir deine Angaben ausschließlich zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO) und löschen sie, sobald sie dafür nicht mehr benötigt werden.
 
 ## Mitgliedschaft
 

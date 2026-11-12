@@ -1,20 +1,23 @@
 ---
 layout: layouts/page.njk
 title: Kontakt
-description: Nimm Kontakt zu uns auf oder sag uns einfach deine Meinung!
+description: Schreib uns – je nach Anliegen an die passende Adresse, dann landet deine Nachricht direkt bei den Richtigen.
 ---
-<div class="contact-cards">
-  <a class="contact-card" href="mailto:{{ site.kontakt.email }}?subject=Anfrage%20%C3%BCber%20cv-petersberg.de">
-    <span class="contact-label">E-Mail</span>
-    <strong>{{ site.kontakt.email }}</strong>
-  </a>
-  <a class="contact-card" href="tel:+49{{ site.kontakt.telefon | replace(' ', '') | replace('0661', '661') }}">
-    <span class="contact-label">Telefon</span>
-    <strong>{{ site.kontakt.telefon }}</strong>
-  </a>
+<div class="contact-cards contact-cards--wege">
   <div class="contact-card">
-    <span class="contact-label">Post</span>
-    <strong>{{ site.name }}<br>{{ site.kontakt.adresse.strasse }}<br>{{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}</strong>
+    <span class="contact-label">Allgemeine Anfragen</span>
+    <strong><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a></strong>
+    <span class="contact-desc">Fragen zum Verein, zu Veranstaltungen, Training oder Mitmachen – oder einfach deine Meinung.</span>
+  </div>
+  <div class="contact-card">
+    <span class="contact-label">Auftritte &amp; Einmärsche</span>
+    <strong><a href="mailto:{{ site.kontakt.einmarsch }}">{{ site.kontakt.einmarsch }}</a></strong>
+    <span class="contact-desc">Einladungen an unsere Garden, das Prinzenpaar oder den CVP – und Auftrittswünsche bei unseren Veranstaltungen.</span>
+  </div>
+  <div class="contact-card">
+    <span class="contact-label">Vorstand</span>
+    <strong><a href="mailto:{{ site.kontakt.vorstand }}">{{ site.kontakt.vorstand }}</a></strong>
+    <span class="contact-desc">Mitgliedschaft, Kündigung, Änderung von Adresse oder Bankverbindung und alles Vertrauliche.</span>
   </div>
 </div>
 
@@ -24,7 +27,20 @@ Möchtet ihr mit eurem Verein, eurer Büttenrede oder einem sonstigen carnevalis
 
 Schreibt uns mit Datum, Ort, Verein/Gruppe und eurem Wunsch:
 
-<p><a class="btn" href="mailto:{{ site.kontakt.email }}?subject=Auftritts-%20%2F%20Einmarschanfrage&body=Verein%20%2F%20Gruppe%3A%0D%0ADatum%3A%0D%0AOrt%3A%0D%0AAnfrage%3A%0D%0A">Anfrage per E-Mail senden</a></p>
+<p><a class="btn" href="mailto:{{ site.kontakt.einmarsch }}?subject=Auftritts-%20%2F%20Einmarschanfrage&body=Verein%20%2F%20Gruppe%3A%0D%0ADatum%20und%20Uhrzeit%3A%0D%0AOrt%3A%0D%0AGew%C3%BCnschte%20Gruppe%3A%0D%0AAnsprechpartner%20und%20Telefon%3A%0D%0A">Anfrage per E-Mail senden</a></p>
+
+<h2>Telefon &amp; Post</h2>
+
+<div class="contact-cards">
+  <a class="contact-card" href="tel:+49{{ site.kontakt.telefon | replace(' ', '') | replace('0661', '661') }}">
+    <span class="contact-label">Telefon</span>
+    <strong>{{ site.kontakt.telefon }}</strong>
+  </a>
+  <div class="contact-card">
+    <span class="contact-label">Post</span>
+    <strong>{{ site.name }}<br>{{ site.kontakt.adresse.strasse }}<br>{{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}</strong>
+  </div>
+</div>
 
 ## Folge uns
 
