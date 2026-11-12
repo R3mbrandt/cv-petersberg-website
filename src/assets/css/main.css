@@ -527,7 +527,9 @@ address { font-style: normal; overflow-wrap: anywhere; }
 .partner-grid { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); }
 .partner-grid a { display: flex; align-items: center; gap: 1rem; padding: 1rem; height: 100%; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); color: var(--text); text-decoration: none; font-weight: 600; }
 .partner-grid a:hover { border-color: var(--primary); }
-.partner-grid img { width: 64px; height: 64px; object-fit: contain; flex: none; background: #fff; border-radius: .5rem; padding: .25rem; }
+.partner-grid img, .partner-initial { width: 72px; height: 72px; flex: none; border-radius: .75rem; background: #fff; border: 1px solid var(--border); }
+.partner-grid img { object-fit: contain; padding: .2rem; }
+.partner-initial { display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 2rem; color: var(--primary); background: var(--primary-soft); }
 
 .post-body img { border-radius: var(--radius); margin-block: 1.5rem; height: auto; }
 .post-body table { width: 100%; border-collapse: collapse; margin-block: 1.5rem; font-size: .95rem; display: block; overflow-x: auto; }

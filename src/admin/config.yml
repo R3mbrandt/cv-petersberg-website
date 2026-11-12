@@ -162,7 +162,8 @@ collections:
             fields:
               - { name: name, label: Name, widget: string }
               - { name: url, label: Website, widget: string }
-              - { name: logo, label: Logo, widget: image, required: false }
+              - { name: logo, label: Logo, widget: image, required: false, hint: "quadratisch, mind. 160 × 160 Pixel" }
+              - { name: kuerzel, label: "Kürzel (falls kein Logo)", widget: string, required: false }
 
   - name: einstellungen
     label: Einstellungen

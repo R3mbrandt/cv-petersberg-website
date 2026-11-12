@@ -7,6 +7,6 @@ breit: true
 ---
 <ul class="partner-grid" role="list">
   {% for p in partner %}
-  <li><a href="{{ p.url }}" rel="noopener">{% if p.logo %}<img src="{{ p.logo }}" alt="" loading="lazy">{% endif %}<span>{{ p.name }}</span></a></li>
+  <li><a href="{{ p.url }}" rel="noopener">{% if p.logo %}<img src="{{ p.logo }}" alt="" loading="lazy" width="80" height="80">{% else %}<span class="partner-initial" aria-hidden="true">{{ p.kuerzel or (p.name | first) }}</span>{% endif %}<span>{{ p.name }}</span></a></li>
   {% endfor %}
 </ul>
