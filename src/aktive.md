@@ -15,14 +15,6 @@ einmarschplan:
 
 <a href="{{ einmarschplan.pdf }}"><img src="{{ einmarschplan.bild }}" alt="{{ einmarschplan.titel or 'Einmarschplan' }}" class="wide-image"></a>
 
-<h2 id="termine">Termine im eigenen Kalender</h2>
-
-<p>Alle Veranstaltungen des CVP lassen sich im Handy-Kalender abonnieren – neue oder geänderte Termine erscheinen dann automatisch.</p>
-
-<p><a class="btn btn-ghost" href="/termine.ics" data-webcal>Kalender abonnieren</a> <a class="btn btn-ghost" href="/termine/">Alle Termine</a></p>
-
-{% include "partials/kalender-abo-hinweis.njk" %}
-
 <h2 id="anfragen">Einmarsch- und Auftrittsanfragen</h2>
 
 <p>Anfragen anderer Vereine für Einmärsche oder Auftritte unserer Gruppen laufen über die <a href="/kontakt/#auftritte">Kontaktseite</a>.</p>
