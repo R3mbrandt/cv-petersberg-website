@@ -6,7 +6,7 @@ eleventyComputed:
 description: Seit über 75 Jahren pflegt der Carnevalverein Petersberg die Fastnacht am Petersberg.
 breit: true
 ---
-<div class="stats">
+<div class="stats" id="zahlen">
   <div class="stat"><span class="stat-value">{{ site.gruendungsdatum }}</span><span class="stat-label">Vereinsgründung</span></div>
   <div class="stat"><span class="stat-value">{{ site.mitglieder }}</span><span class="stat-label">Mitglieder</span></div>
   <div class="stat"><span class="stat-value">{{ gruppen | length }}</span><span class="stat-label">Aktivengruppen &amp; Tanzgarden</span></div>
@@ -32,8 +32,7 @@ breit: true
   <p>Mitglieder des Festausschusses: {{ vorstand.festausschuss }}. {%- for p in vorstand.mitglieder %}{% if p.funktion == "Festausschussvorsitz" %} Den Vorsitz hat {{ p.name }}.{% endif %}{% endfor %}</p>
 </section>
 
-<section class="section-sm" aria-labelledby="zahlen">
-  <h2 id="zahlen">Der Verein in Zahlen</h2>
+<figure class="section-sm group-photo">
   <img class="wide-image" src="/uploads/2024/10/0_Gruppenbild-scaled.jpg" alt="Gruppenbild aller Aktiven des CVP" loading="lazy" decoding="async">
-  <p>Vereinsanschrift: {{ site.name }}, {{ site.kontakt.adresse.strasse }}, {{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}.</p>
-</section>
+  <figcaption>Alle Aktiven des Carnevalverein Petersberg · Vereinsanschrift: {{ site.name }}, {{ site.kontakt.adresse.strasse }}, {{ site.kontakt.adresse.plz }} {{ site.kontakt.adresse.ort }}</figcaption>
+</figure>

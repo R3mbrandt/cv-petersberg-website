@@ -576,3 +576,5 @@ address { font-style: normal; overflow-wrap: anywhere; }
 .lightbox-next { right: .75rem; top: 50%; translate: 0 -50%; }
 .lightbox.is-single .lightbox-prev, .lightbox.is-single .lightbox-next { display: none; }
 @media (max-width: 40rem) { .lightbox-prev, .lightbox-next { top: auto; bottom: .75rem; translate: none; } }
+.group-photo { margin: 0; }
+.group-photo figcaption { color: var(--text-muted); font-size: .92rem; margin-top: -.75rem; }
