@@ -603,3 +603,22 @@ address { font-style: normal; overflow-wrap: anywhere; }
 .contact-desc { color: var(--text-muted); font-size: .92rem; margin-top: .25rem; }
 /* E-Mail-Adressen nicht am Bindestrich umbrechen */
 a[data-mail], a[href^="mailto:"] { white-space: nowrap; }
+
+/* ---------- Social-Media-Symbole im Kopfbereich ---------- */
+.header-inner .brand { order: 1; margin-right: auto; }
+.header-inner .main-nav { order: 2; }
+.header-inner .social-icons { order: 3; }
+.header-inner .nav-toggle { order: 4; }
+.social-icons { list-style: none; margin: 0; padding: 0 0 0 .5rem; display: flex; gap: .15rem; }
+.social-icons a {
+  display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%;
+  color: var(--text-muted); transition: color .15s, background-color .15s;
+}
+.social-icons a:hover { color: var(--primary); background: var(--primary-soft); }
+.social-icons svg { width: 1.2rem; height: 1.2rem; }
+@media (prefers-color-scheme: dark) { .social-icons a:hover { color: var(--accent); } }
+@media (max-width: 52rem) {
+  .social-icons { padding: 0; margin-right: .35rem; }
+  .social-icons a { width: 2.5rem; height: 2.5rem; }
+}
+@media (max-width: 22rem) { .brand-long { display: none; } }
