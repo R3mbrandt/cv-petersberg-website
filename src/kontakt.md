@@ -10,11 +10,6 @@ description: Schreib uns – je nach Anliegen an die passende Adresse, dann land
     <span class="contact-desc">Fragen zum Verein, zu Veranstaltungen, Training oder Mitmachen – oder einfach deine Meinung.</span>
   </div>
   <div class="contact-card">
-    <span class="contact-label">Auftritte &amp; Einmärsche</span>
-    <strong><a href="mailto:{{ site.kontakt.einmarsch }}">{{ site.kontakt.einmarsch }}</a></strong>
-    <span class="contact-desc">Einladungen an unsere Garden, das Prinzenpaar oder den CVP – und Auftrittswünsche bei unseren Veranstaltungen.</span>
-  </div>
-  <div class="contact-card">
     <span class="contact-label">Vorstand</span>
     <strong><a href="mailto:{{ site.kontakt.vorstand }}">{{ site.kontakt.vorstand }}</a></strong>
     <span class="contact-desc">Mitgliedschaft, Kündigung, Änderung von Adresse oder Bankverbindung und alles Vertrauliche.</span>
@@ -25,7 +20,7 @@ description: Schreib uns – je nach Anliegen an die passende Adresse, dann land
 
 Möchtet ihr mit eurem Verein, eurer Büttenrede oder einem sonstigen carnevalistischen Beitrag einen Auftritt bei einer unserer Veranstaltungen machen? Wollt ihr den CVP oder eine Tanzgruppe des CVP zu einer eurer Veranstaltungen einladen?
 
-Schreibt uns mit Datum, Ort, Verein/Gruppe und eurem Wunsch:
+Schreibt uns mit Datum, Ort, Verein/Gruppe und eurem Wunsch an <a href="mailto:{{ site.kontakt.einmarsch }}">{{ site.kontakt.einmarsch }}</a> – am einfachsten mit unserer Vorlage:
 
 <p><a class="btn" href="mailto:{{ site.kontakt.einmarsch }}?subject=Auftritts-%20%2F%20Einmarschanfrage&body=Verein%20%2F%20Gruppe%3A%0D%0ADatum%20und%20Uhrzeit%3A%0D%0AOrt%3A%0D%0AGew%C3%BCnschte%20Gruppe%3A%0D%0AAnsprechpartner%20und%20Telefon%3A%0D%0A">Anfrage per E-Mail senden</a></p>
 
