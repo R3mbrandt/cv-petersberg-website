@@ -110,6 +110,13 @@ export default function (eleventyConfig) {
     const m = t.match(/(\d+)(?:[,.](\d{1,2}))?/);
     return m ? `${m[1]}.${(m[2] || "0").padEnd(2, "0")}` : "";
   });
+  /** Beitrag anhand des Dateinamens (mit oder ohne Datum, ohne .md) finden */
+  eleventyConfig.addFilter("beitragNach", (beitraege = [], name = "") => {
+    const n = String(name || "").trim().replace(/\.md$/, "").split("/").pop();
+    if (!n) return null;
+    return beitraege.find((p) => path.basename(p.inputPath, ".md") === n || p.fileSlug === n) || null;
+  });
+  eleventyConfig.addFilter("ohne", (liste = [], eintrag) => (eintrag ? liste.filter((x) => x !== eintrag) : liste));
   eleventyConfig.addFilter("limit", (arr = [], n) => arr.slice(0, n));
   eleventyConfig.addFilter("jahr", () => new Date().getFullYear());
   eleventyConfig.addFilter("absoluteUrl", (path, base) => new URL(path, base).href);

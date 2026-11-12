@@ -632,3 +632,11 @@ a[data-mail], a[href^="mailto:"] { white-space: nowrap; }
 .group-facts dd { margin: 0; overflow-wrap: anywhere; }
 @media (prefers-color-scheme: dark) { .group-facts dt { color: var(--link); } }
 .group-facts a[data-mail], .group-facts a[href^="mailto:"] { white-space: normal; }
+
+/* ---------- Hauptbeitrag auf der Startseite ---------- */
+.feature--beitrag h2 a { color: inherit; text-decoration: none; }
+.feature--beitrag h2 a:hover { text-decoration: underline; text-decoration-thickness: .08em; }
+.feature--beitrag .btn { margin-top: .5rem; }
+a.feature-media { display: block; }
+a.feature-media img { transition: transform .4s ease; }
+a.feature-media:hover img { transform: scale(1.03); }

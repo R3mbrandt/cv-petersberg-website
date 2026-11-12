@@ -10,6 +10,7 @@ Moderne, schnelle und leicht pflegbare Vereinswebsite – gebaut mit
 | **Inhalte pflegen** | Im Browser unter `https://cv-petersberg.de/admin/` (Anmeldung mit GitHub-Konto) – oder direkt die Dateien unten bearbeiten |
 | **Termine** | `src/_data/termine.yaml` (mit Beginn, Einlass, Eintritt) – „Nächster Termin“ auf der Startseite und alle Listen aktualisieren sich automatisch (auch ohne Neubau direkt im Browser) |
 | **Beiträge** | Eine Markdown-Datei pro Beitrag in `src/aktuelles/` |
+| **Startseite** (Überschrift, Hauptbeitrag, Aufruf) | `src/_data/startseite.yaml` |
 | **Prinzenpaar / Kampagne** | `src/_data/kampagne.yaml` |
 | **Gruppen, Vorstand, Chronik** | `src/_data/gruppen.yaml`, `vorstand.yaml`, `chronik.yaml` |
 | **Name, Kontakt, Menü, Farben, Logo** | `src/_data/site.yaml` |

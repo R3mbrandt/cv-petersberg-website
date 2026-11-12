@@ -16,6 +16,34 @@ media_folder: src/uploads
 public_folder: /uploads
 
 collections:
+  - name: startseite
+    label: Startseite
+    files:
+      - name: startseite
+        label: Startseite
+        file: src/_data/startseite.yaml
+        fields:
+          - { name: ueberschrift1, label: "Große Überschrift – Zeile 1", widget: string }
+          - { name: ueberschrift2, label: "Große Überschrift – Zeile 2 (farbig)", widget: string }
+          - { name: einleitung, label: "Text unter der Überschrift", widget: text, required: false, hint: "Leer lassen für den automatischen Text mit Gründungsdatum, Mitgliedern und Gruppen." }
+          - name: hauptbeitrag
+            label: Hauptbeitrag
+            widget: relation
+            collection: aktuelles
+            value_field: "{{slug}}"
+            search_fields: [title]
+            display_fields: ["{{title}} ({{date}})"]
+            required: false
+            hint: "Erscheint groß auf der Startseite (und so lange nicht zusätzlich unter „Aktuelles“). Leer = Block „Kampagne & Prinzenpaar“."
+          - name: aufruf
+            label: Aufruf unten
+            widget: object
+            fields:
+              - { name: titel, label: Überschrift, widget: string }
+              - { name: text, label: Text, widget: text, required: false }
+              - { name: knopf, label: Knopftext, widget: string, required: false }
+              - { name: link, label: "Knopf-Link", widget: string, required: false, hint: "z. B. /mitmachen/" }
+
   - name: aktuelles
     label: Aktuelles
     label_singular: Beitrag
@@ -181,8 +209,6 @@ collections:
           - { name: url, label: Website-Adresse, widget: string }
           - { name: sprache, label: Sprache, widget: hidden, default: de }
           - { name: narrenruf, label: Narrenruf, widget: string }
-          - { name: heroZeile1, label: "Startseite: Überschrift Zeile 1", widget: string }
-          - { name: heroZeile2, label: "Startseite: Überschrift Zeile 2 (farbig)", widget: string }
           - name: farben
             label: Vereinsfarben
             widget: object

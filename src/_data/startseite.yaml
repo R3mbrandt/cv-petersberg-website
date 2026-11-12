@@ -1,0 +1,17 @@
+# Inhalte der Startseite (im Redaktionssystem unter „Startseite“).
+# Große Überschrift oben (zweite Zeile farbig)
+ueberschrift1: "Petersberg,"
+ueberschrift2: "Helau!"
+# Text unter der Überschrift – leer lassen für den automatischen Text
+# („Seit dem 11.11.1950 … mit 294 Mitgliedern und 10 Aktivengruppen …“)
+einleitung: ""
+# Hauptbeitrag: Dateiname eines Beitrags aus src/aktuelles ohne „.md“,
+# z. B. "2025-11-15-ready-for-foaset". Leer = Block „Kampagne & Prinzenpaar“.
+# Solange ein Beitrag Hauptbeitrag ist, erscheint er nicht zusätzlich unter „Aktuelles“.
+hauptbeitrag: ""
+# Aufruf unten auf der Startseite
+aufruf:
+  titel: "Mach mit beim CVP!"
+  text: "Ob aktiv in der Vereinsarbeit oder als passives Mitglied – schon ab 12 € im Jahr bist du dabei."
+  knopf: "So wirst du Teil des Vereins"
+  link: "/mitmachen/"

@@ -11,9 +11,6 @@ mitglieder: "294"
 url: "https://cv-petersberg.de"
 sprache: "de"
 narrenruf: "Petersberg, Helau!"
-# Große Überschrift auf der Startseite (zweite Zeile farbig)
-heroZeile1: "Petersberg,"
-heroZeile2: "Helau!"
 
 # Vereinsfarben – exakt aus dem offiziellen Vereinslogo (SVG) übernommen.
 # Alle anderen Farbtöne (hell, dunkel, Flächen, Dark Mode) werden automatisch daraus berechnet.

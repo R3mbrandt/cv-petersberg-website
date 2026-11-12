@@ -5,13 +5,14 @@ bodyClass: home
 ---
 {%- set kommend = termine | termineSortiert("kommend") %}
 {%- set naechster = kommend[0] %}
+{%- set haupt = collections.beitraege | beitragNach(startseite.hauptbeitrag) %}
 <section class="hero">
   <div class="hero-confetti" aria-hidden="true">{% for i in range(0, 18) %}<i></i>{% endfor %}</div>
   <div class="container hero-grid">
     <div class="hero-copy">
       <p class="kicker">{{ kampagne.titel }}{% if kampagne.motto %} · „{{ kampagne.motto }}“{% endif %}</p>
-      <h1 class="hero-title">{{ site.heroZeile1 }}<br><span>{{ site.heroZeile2 }}</span></h1>
-      <p class="lead">Seit dem {{ site.gruendungsdatum }} bringt der Carnevalverein Petersberg Garden, Sitzungen und gute Laune auf die Bühne – mit {{ site.mitglieder }} Mitgliedern und {{ gruppen | length }} Aktivengruppen und Tanzgarden.</p>
+      <h1 class="hero-title">{{ startseite.ueberschrift1 }}<br><span>{{ startseite.ueberschrift2 }}</span></h1>
+      <p class="lead">{% if startseite.einleitung %}{{ startseite.einleitung }}{% else %}Seit dem {{ site.gruendungsdatum }} bringt der Carnevalverein Petersberg Garden, Sitzungen und gute Laune auf die Bühne – mit {{ site.mitglieder }} Mitgliedern und {{ gruppen | length }} Aktivengruppen und Tanzgarden.{% endif %}</p>
       <div class="btn-row">
         <a class="btn" href="/termine/">Alle Termine</a>
         <a class="btn btn-ghost" href="/mitmachen/">Mitglied werden</a>
@@ -36,7 +37,21 @@ bodyClass: home
   </div>
 </section>
 
-{% if kampagne.prinzenpaar.zeigen %}
+{% if haupt %}
+<section class="section">
+  <div class="container feature feature--beitrag">
+    <a class="feature-media{% if not haupt.data.bild %} feature-media--placeholder{% endif %}" href="{{ haupt.url }}" tabindex="-1" aria-hidden="true">
+      {% if haupt.data.bild %}<img src="{{ haupt.data.bild }}" alt="" loading="lazy" decoding="async">{% else %}<img src="{{ site.logo }}" alt="" class="feature-logo">{% endif %}
+    </a>
+    <div class="feature-copy">
+      <p class="kicker">Aktuelles · <time datetime="{{ haupt.date | iso }}">{{ haupt.date | datum }}</time></p>
+      <h2><a href="{{ haupt.url }}">{{ haupt.data.title }}</a></h2>
+      <p>{{ haupt.data.description or (haupt.content | excerpt(260)) }}</p>
+      <a class="btn" href="{{ haupt.url }}">Weiterlesen</a>
+    </div>
+  </div>
+</section>
+{% elif kampagne.prinzenpaar.zeigen %}
 <section class="section">
   <div class="container feature">
     <div class="feature-media{% if not kampagne.prinzenpaar.bild %} feature-media--placeholder{% endif %}">
@@ -81,7 +96,7 @@ bodyClass: home
       <a class="link-arrow" href="/aktuelles/">Alle Beiträge</a>
     </div>
     <div class="card-grid">
-      {% for post in collections.beitraege | limit(3) %}
+      {% for post in collections.beitraege | ohne(haupt) | limit(3) %}
       {% include "partials/post-card.njk" %}
       {% endfor %}
     </div>
@@ -110,9 +125,9 @@ bodyClass: home
 <section class="section">
   <div class="container cta">
     <div>
-      <h2>Mach mit beim CVP!</h2>
-      <p>Ob aktiv in der Vereinsarbeit oder als passives Mitglied – schon ab 12 € im Jahr bist du dabei.</p>
+      <h2>{{ startseite.aufruf.titel }}</h2>
+      {% if startseite.aufruf.text %}<p>{{ startseite.aufruf.text }}</p>{% endif %}
     </div>
-    <a class="btn btn-accent" href="/mitmachen/">So wirst du Teil des Vereins</a>
+    {% if startseite.aufruf.knopf %}<a class="btn btn-accent" href="{{ startseite.aufruf.link or '/mitmachen/' }}">{{ startseite.aufruf.knopf }}</a>{% endif %}
   </div>
 </section>
