@@ -33,6 +33,10 @@ Aus den Zugriffsdaten erstellt OVH für uns außerdem eine anonyme Besucherstati
 
 Zur schnelleren Auslieferung nutzt OVH ein Content Delivery Network (CDN). Dabei werden Kopien der Website auf Servern an verschiedenen Standorten zwischengespeichert, und Anfragen können von einem Server in der Nähe des Besuchers beantwortet werden – auch außerhalb der EU. Auch dort fallen die oben genannten Zugriffsdaten an; OVH verarbeitet sie im Rahmen des Auftragsverarbeitungsvertrags.
 
+## Helles oder dunkles Design
+
+Über das Symbol im Kopfbereich kannst du zwischen hellem und dunklem Design wechseln. Deine Auswahl speichert dein Browser lokal auf deinem Gerät (im sogenannten Local Storage), damit sie beim nächsten Besuch erhalten bleibt. Sie wird nicht an uns oder Dritte übertragen und enthält keine personenbezogenen Daten. Das Speichern ist für die von dir gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst die Einstellung jederzeit über die Browsereinstellungen („Websitedaten löschen“) entfernen; die Seite folgt dann wieder der Einstellung deines Geräts.
+
 ## Kontakt per E-Mail oder Telefon
 
 Wenn du uns per E-Mail (z. B. an {{ site.kontakt.email }}, {{ site.kontakt.einmarsch }} oder {{ site.kontakt.vorstand }}) oder Telefon kontaktierst, verarbeiten wir deine Angaben ausschließlich zur Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO) und löschen sie, sobald sie dafür nicht mehr benötigt werden.

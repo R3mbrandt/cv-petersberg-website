@@ -9,7 +9,11 @@
   <link rel="canonical" href="{{ page.url | absoluteUrl(site.url) }}">
   <meta name="theme-color" content="{{ site.farben.primaer }}">
   <meta name="color-scheme" content="light dark">
-  <script>document.documentElement.classList.add("js")</script>
+  <script>
+    document.documentElement.classList.add("js");
+    // Gewähltes Design (hell/dunkel) sofort anwenden – kein Cookie, nur lokaler Speicher im Browser
+    try { var d = localStorage.getItem("cvp-design"); if (d === "light" || d === "dark") document.documentElement.dataset.theme = d; } catch (e) {}
+  </script>
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ site.name }}">

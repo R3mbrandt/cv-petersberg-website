@@ -52,6 +52,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Schalter helles/dunkles Design (Auswahl bleibt im Browser gespeichert)
+  const designKnopf = document.querySelector("[data-theme-toggle]");
+  if (designKnopf) {
+    const root = document.documentElement;
+    const dunkelSystem = matchMedia("(prefers-color-scheme: dark)");
+    const aktuell = () => root.dataset.theme || (dunkelSystem.matches ? "dark" : "light");
+    const beschriften = () => {
+      const dunkel = aktuell() === "dark";
+      designKnopf.setAttribute("aria-label", dunkel ? "Zum hellen Design wechseln" : "Zum dunklen Design wechseln");
+      designKnopf.title = dunkel ? "Helles Design" : "Dunkles Design";
+    };
+    designKnopf.hidden = false;
+    beschriften();
+    designKnopf.addEventListener("click", () => {
+      root.dataset.theme = aktuell() === "dark" ? "light" : "dark";
+      try { localStorage.setItem("cvp-design", root.dataset.theme); } catch {}
+      beschriften();
+    });
+    dunkelSystem.addEventListener("change", beschriften);
+  }
+
   // Schatten am Header beim Scrollen
   const header = document.querySelector("[data-header]");
   if (header) {
