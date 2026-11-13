@@ -24,7 +24,7 @@ bodyClass: home
       {#- Alle kommenden Termine für den Browser: er wählt selbst den nächsten aus,
           damit die Karte auch ohne nächtlichen Neubau aktuell bleibt. #}
       <script type="application/json" id="termine-daten">[
-        {%- for t in kommend %}{"titel":{{ t.titel | dump | safe }},"start":{{ t.datum | iso | dump | safe }},"text":{{ ((t.datum | datum) + ((", " + (t.datum | uhrzeit)) if (t.datum | uhrzeit) else "")) | dump | safe }}}{% if not loop.last %},{% endif %}{% endfor -%}
+        {%- for t in kommend %}{"titel":{{ t.titel | json | safe }},"start":{{ t.datum | iso | json | safe }},"text":{{ ((t.datum | datum) + ((", " + (t.datum | uhrzeit)) if (t.datum | uhrzeit) else "")) | json | safe }}}{% if not loop.last %},{% endif %}{% endfor -%}
       ]</script>
       <a class="next-card" href="/termine/" data-next-card>
         <span class="next-label">Nächster Termin</span>

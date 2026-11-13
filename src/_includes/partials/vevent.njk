@@ -1,6 +1,6 @@
 BEGIN:VEVENT
 UID:{{ t.titel | slugify }}-{{ t.datum | iso | replace(':', '') }}@{{ site.url | replace('https://', '') }}
-DTSTAMP:20260101T000000Z
+DTSTAMP:{{ build.zeitstempel }}
 DTSTART{{ t.datum | icsDatum }}
 DTEND{{ t.datum | icsEnde }}
 SUMMARY:{{ t.titel | icsText | safe }}

@@ -40,13 +40,13 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SportsOrganization",
-    "name": {{ site.name | dump | safe }},
-    "alternateName": {{ site.kurzname | dump | safe }},
-    "url": {{ site.url | dump | safe }},
-    "logo": {{ site.logo | absoluteUrl(site.url) | dump | safe }},
-    "foundingDate": {{ site.gruendung | dump | safe }},
-    "address": { "@type": "PostalAddress", "postalCode": {{ site.kontakt.adresse.plz | dump | safe }}, "addressLocality": {{ site.kontakt.adresse.ort | dump | safe }}, "addressCountry": "DE" }
+    "@type": "Organization",
+    "name": {{ site.name | json | safe }},
+    "alternateName": {{ site.kurzname | json | safe }},
+    "url": {{ site.url | json | safe }},
+    "logo": {{ site.logo | absoluteUrl(site.url) | json | safe }},
+    "foundingDate": {{ site.gruendung | json | safe }},
+    "address": { "@type": "PostalAddress", "postalCode": {{ site.kontakt.adresse.plz | json | safe }}, "addressLocality": {{ site.kontakt.adresse.ort | json | safe }}, "addressCountry": "DE" }
   }
   </script>
   {% block head %}{% endblock %}

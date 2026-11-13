@@ -37,6 +37,7 @@ Voraussetzung: [Node.js](https://nodejs.org/) ab Version 20.
 npm install
 npm start        # Vorschau unter http://localhost:8080 mit Live-Reload
 npm run build    # fertige Seite im Ordner _site/
+npm test         # gebaute Seite prüfen (Links, Weiterleitungen, Kalender …)
 ```
 
 Der Ordner `_site/` enthält nur HTML/CSS/JS und läuft auf **jedem** Webspace
@@ -64,16 +65,25 @@ jederzeit rückgängig zu machen. DNS und E-Mail werden nicht verändert.
    - Secrets: `FTP_SERVER`, `FTP_BENUTZER`, `FTP_PASSWORT` – am besten einen eigenen
      Benutzer nur für den Ordner `cvp-neu` anlegen (OVH-Kundencenter → *Hosting → FTP-SSH*)
    - Variable `FTP_ZIELORDNER`: Ordner relativ zum Start des FTP-Benutzers – ist der Benutzer auf den
-     Ordner der Website beschränkt: `./`, sonst z. B. `cvp-neu/`. Liegt im Ziel WordPress oder ein
-     Ordner `www`, bricht der Upload zur Sicherheit ab.
-   - Variable `FTP_PROTOKOLL`: leer bzw. `sftp` = verschlüsselt (ab OVH-Tarif *Pro*; beim
-     Benutzer „FTP, SFTP und SSH“ erlauben; als `FTP_SERVER` den angezeigten **SSH-Server**
-     eintragen) – oder `ftp` = unverschlüsselt (alle Tarife). FTPS unterstützt OVH nicht.
+     Ordner der Website beschränkt: `./`, sonst z. B. `cvp-neu/`.
+   - Optional Variable `FTP_PORT` (Standard 22) und Secret `FTP_HOSTKEY`: der Serverschlüssel.
+     Ohne ihn wird jeder Server akzeptiert und im Protokoll eine Warnung mit dem aktuellen
+     Schlüssel ausgegeben – diese Zeile (beginnt mit dem Servernamen) als `FTP_HOSTKEY` eintragen.
+   - Übertragen wird nur per **SFTP** (ab OVH-Tarif *Pro*; beim Benutzer „FTP, SFTP und SSH“
+     erlauben; als `FTP_SERVER` den angezeigten **SSH-Server** eintragen).
+
+   **Schutz vor Fehlern:** Vor dem Upload prüft `npm test` die gebaute Seite (interne Links,
+   Bilder, Weiterleitungsziele, Sitemap, Kalenderdateien, keine E-Mail-Adressen im Klartext).
+   Schlägt etwas fehl, wird nichts hochgeladen. Der Upload löscht auf dem Server alles, was
+   nicht zur Seite gehört – deshalb schreibt er nur in Ordner, die leer sind oder die Datei
+   `.cvp-website` enthalten (legt der Upload selbst an, bitte nicht löschen). Liegen dort
+   fremde Dateien, WordPress oder ein Ordner `www`, bricht er ab.
 4. **Upload starten:** *Actions → Website veröffentlichen → Run workflow*.
    Danach unter https://neu.cv-petersberg.de alles prüfen.
-5. **Umschalten:** *Hosting → Multisite* bei `cv-petersberg.de` **und**
-   `www.cv-petersberg.de` das Wurzelverzeichnis von `www` auf `cvp-neu` ändern.
-   Nach wenigen Minuten ist die neue Seite live. *Zurück:* wieder `www` eintragen.
+5. **Umschalten:** Da das Wurzelverzeichnis der Hauptdomain bei OVH fest `www` ist, werden
+   die Ordner getauscht: per FTP `www` in `www-wordpress-alt` und anschließend `cvp-neu` in
+   `www` umbenennen; danach den FTP-Benutzer auf `www` beschränken (`FTP_ZIELORDNER` bleibt
+   `./`) und ggf. den CDN-Cache leeren. *Zurück:* die Umbenennungen umkehren.
 6. **HTTPS erzwingen:** Wenn alles läuft, in `src/htaccess.njk` die drei
    HTTPS-Zeilen aktivieren (Kommentarzeichen `#` entfernen).
 7. Nach einigen Wochen ohne Probleme kann WordPress gelöscht werden

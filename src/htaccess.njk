@@ -37,6 +37,9 @@ ErrorDocument 404 /404.html
   RewriteRule ^{{ w.von | htRegex | safe }}/?$ https://%{HTTP_HOST}{{ w.nach | safe }} [R=301,NE,L]
 {%- endfor %}
 
+  # Kennzeichendatei des Uploads nicht ausliefern
+  RewriteRule ^\.cvp-website$ - [R=404,L]
+
   # Alte WordPress-Pfade, die es nicht mehr gibt
   RewriteRule ^wp-content/uploads/(.*)$ https://%{HTTP_HOST}/uploads/$1 [R=301,NE,L]
   RewriteRule ^(wp-admin|wp-login\.php|xmlrpc\.php) - [R=410,L]

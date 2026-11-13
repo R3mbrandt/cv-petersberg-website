@@ -46,6 +46,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
   eleventyConfig.addPassthroughCopy("src/admin");
+  eleventyConfig.ignores.add("src/admin/**");
   eleventyConfig.addPassthroughCopy({ "src/assets/img/favicon.png": "favicon.ico" });
   eleventyConfig.addWatchTarget("src/assets/css/");
 
@@ -117,6 +118,13 @@ export default function (eleventyConfig) {
     return beitraege.find((p) => path.basename(p.inputPath, ".md") === n || p.fileSlug === n) || null;
   });
   eleventyConfig.addFilter("ohne", (liste = [], eintrag) => (eintrag ? liste.filter((x) => x !== eintrag) : liste));
+  /** JSON für <script>-Blöcke: wie dump, aber "<", ">" und "&" als Unicode-Escape,
+   *  damit z. B. ein "</script>" in Inhalten den Block nicht beenden kann. */
+  eleventyConfig.addFilter("json", (wert) =>
+    JSON.stringify(wert === undefined ? null : wert)
+      .replace(/</g, "\\u003c").replace(/>/g, "\\u003e").replace(/&/g, "\\u0026")
+      .replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029")
+  );
   eleventyConfig.addFilter("limit", (arr = [], n) => arr.slice(0, n));
   eleventyConfig.addFilter("jahr", () => new Date().getFullYear());
   eleventyConfig.addFilter("absoluteUrl", (path, base) => new URL(path, base).href);
@@ -184,6 +192,23 @@ export default function (eleventyConfig) {
     return content.split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>)/g)
       .map((teil) => (teil.startsWith("<") ? teil : textSicher(teil)))
       .join("");
+  });
+
+  // Kalenderdateien nach iCalendar-Standard (RFC 5545): CRLF-Zeilenenden und
+  // Zeilen über 75 Byte "gefaltet" (Fortsetzung mit führendem Leerzeichen, UTF-8-sicher)
+  eleventyConfig.addTransform("ics-format", function (content) {
+    if (!(this.page.outputPath || "").endsWith(".ics")) return content;
+    const falten = (zeile) => {
+      const teile = []; let aktuell = ""; let bytes = 0; let grenze = 75;
+      for (const zeichen of zeile) {
+        const n = Buffer.byteLength(zeichen);
+        if (bytes + n > grenze) { teile.push(aktuell); aktuell = ""; bytes = 0; grenze = 74; }
+        aktuell += zeichen; bytes += n;
+      }
+      teile.push(aktuell);
+      return teile.join("\r\n ");
+    };
+    return content.split(/\r?\n/).filter((z) => z.trim() !== "").map(falten).join("\r\n") + "\r\n";
   });
 
   // Bilder in Texten: verzögert laden

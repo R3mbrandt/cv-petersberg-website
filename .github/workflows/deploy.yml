@@ -7,11 +7,11 @@
 #   FTP_SERVER, FTP_BENUTZER, FTP_PASSWORT angelegt sind.
 #   FTP_ZIELORDNER ist relativ zum Startordner des FTP-Benutzers; ist der Benutzer
 #   schon auf den Ordner der Website beschränkt, "./" eintragen.
-#   Variable FTP_PROTOKOLL: "sftp" (Standard, verschlüsselt, ab OVH-Tarif Pro)
-#   oder "ftp" (unverschlüsselt, alle Tarife). OVH unterstützt kein FTPS.
-#   Optional: Variable FTP_PORT (Standard 22 bzw. 21).
-#   Sicherheit: enthält der Zielordner WordPress oder einen Ordner www, bricht der
-#   Upload ab (der Abgleich löscht im Zielordner alles, was nicht zur Seite gehört).
+#   Übertragung ausschließlich per SFTP (verschlüsselt). Optional: Variable FTP_PORT
+#   (Standard 22) und Secret FTP_HOSTKEY (Serverschlüssel im known_hosts-Format;
+#   ohne ihn steht der aktuelle Schlüssel als Hinweis im Protokoll des Laufs).
+#   Sicherheit: Hochgeladen wird nur in einen leeren Ordner oder einen Ordner mit der
+#   Kennzeichendatei .cvp-website, nie in einen Ordner mit WordPress oder www.
 # Ziel 2 – GitHub Pages (Testadresse r3mbrandt.github.io/…):
 #   läuft, solange die Variable GITHUB_PAGES nicht auf "false" steht.
 name: Website veröffentlichen
@@ -44,30 +44,57 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Upload zu OVH (${{ vars.FTP_PROTOKOLL || 'sftp' }})
+      - name: Website prüfen (Links, Weiterleitungen, Kalender)
+        run: npm test
+      - name: Upload zu OVH per SFTP
         env:
           SERVER: ${{ secrets.FTP_SERVER }}
           BENUTZER: ${{ secrets.FTP_BENUTZER }}
           LFTP_PASSWORD: ${{ secrets.FTP_PASSWORT }}
+          HOSTKEY: ${{ secrets.FTP_HOSTKEY }}
           ZIEL: ${{ vars.FTP_ZIELORDNER }}
-          PROTOKOLL: ${{ vars.FTP_PROTOKOLL || 'sftp' }}
-          PORT: ${{ vars.FTP_PORT }}
+          PORT: ${{ vars.FTP_PORT || '22' }}
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
-          [ -n "$PORT" ] || { [ "$PROTOKOLL" = "ftp" ] && PORT=21 || PORT=22; }
           ZIEL="${ZIEL%/}"; ZIEL="${ZIEL:-.}"
+
+          # Serverschlüssel: ist das Secret FTP_HOSTKEY gesetzt, wird nur dieser Server akzeptiert.
+          KH="${RUNNER_TEMP:-/tmp}/cvp_known_hosts"
+          if [ -n "$HOSTKEY" ]; then
+            printf '%s\n' "$HOSTKEY" > "$KH"
+            PRUEFUNG="set sftp:auto-confirm no; set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$KH';"
+          else
+            echo "::warning::Kein FTP_HOSTKEY hinterlegt – Serverschlüssel wird ungeprüft akzeptiert. Aktueller Schlüssel des Servers (für das Secret FTP_HOSTKEY):"
+            ssh-keyscan -p "$PORT" -t ed25519 "$SERVER" 2>/dev/null | sed 's/^/    /' || true
+            : > "$KH"
+            PRUEFUNG="set sftp:auto-confirm yes; set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$KH';"
+          fi
           verbinden() {
-            lftp --env-password -u "$BENUTZER" -p "$PORT" "$PROTOKOLL://$SERVER" -e "
-              set sftp:auto-confirm yes; set ftp:ssl-allow no; set net:max-retries 2; set net:timeout 30;
+            lftp --env-password -u "$BENUTZER" -p "$PORT" "sftp://$SERVER" -e "
+              $PRUEFUNG set net:max-retries 2; set net:timeout 30;
               $1; bye"
           }
-          # Sicherheitsprüfung: Im Zielordner darf kein WordPress und kein www-Ordner liegen,
-          # denn der Abgleich löscht dort alles, was nicht zur neuen Seite gehört.
-          verbinden "mkdir -p -f '$ZIEL'; cls -1 --classify '$ZIEL/'" > inhalt.txt
+
+          # Sicherheitsprüfung vor dem Abgleich (der Abgleich löscht im Zielordner alles,
+          # was nicht zur Website gehört): Hochgeladen wird nur in einen leeren Ordner oder
+          # in einen Ordner mit der Kennzeichendatei .cvp-website – nie, wenn WordPress
+          # oder ein Ordner www darin liegt.
+          # Auflisten muss gelingen – sonst Abbruch (nie "leer" annehmen, nur weil die Verbindung hakt)
+          verbinden "mkdir -p -f '$ZIEL'; cls -1a '$ZIEL/'" > liste.txt
+          sed 's#/$##; s#.*/##' liste.txt | grep -vxE '\.{1,2}|' > inhalt.txt || true
           echo "Zielordner '$ZIEL' enthält $(wc -l < inhalt.txt) Einträge."
-          if grep -qiE '(^|/)(www|wp-admin|wp-content|wp-includes)/?$|(^|/)wp-config\.php$' inhalt.txt; then
+          if grep -qixE 'www|wp-admin|wp-content|wp-includes|wp-config\.php' inhalt.txt; then
             echo "::error::Im Zielordner '$ZIEL' liegt WordPress bzw. der Ordner www – Upload abgebrochen."; exit 1
+          elif [ ! -s inhalt.txt ]; then
+            echo "Zielordner ist leer – erster Upload."
+          elif grep -qx '\.cvp-website' inhalt.txt; then
+            echo "Kennzeichendatei gefunden – Ordner gehört zur Website."
+          elif grep -qx '\.htaccess' inhalt.txt && verbinden "cat '$ZIEL/.htaccess'" | grep -q 'Apache-Konfiguration für das OVH-Webhosting'; then
+            echo "Website aus früherem Upload erkannt (vor Einführung der Kennzeichendatei)."
+          else
+            echo "::error::Zielordner '$ZIEL' enthält fremde Dateien und keine Kennzeichendatei .cvp-website – Upload abgebrochen."; exit 1
           fi
+
           verbinden "mirror --reverse --delete --parallel=4 --exclude-glob .ftp-deploy-sync-state.json _site/ '$ZIEL/'"
           echo "Upload abgeschlossen: $(find _site -type f | wc -l) Dateien."
 
@@ -86,6 +113,9 @@ jobs:
       # Bei github.io-Adressen liegt die Seite im Unterordner /<repo>/;
       # mit eigener Domain ist base_path leer.
       - run: npm run build
+        env:
+          PATH_PREFIX: ${{ steps.pages.outputs.base_path }}/
+      - run: npm test
         env:
           PATH_PREFIX: ${{ steps.pages.outputs.base_path }}/
       - uses: actions/upload-pages-artifact@v3

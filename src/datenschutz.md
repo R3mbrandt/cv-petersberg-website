@@ -16,6 +16,10 @@ Diese Website kommt **ohne Cookies, ohne Tracking, ohne Kontaktformular und ohne
 
 Diese Website wird bei der **OVH GmbH**, Oskar-Jäger-Straße 173/K6, 50825 Köln, gehostet (Konzernmutter: OVH SAS, Roubaix, Frankreich). Die Website liegt auf Servern im OVH-Rechenzentrum in Gravelines (Frankreich), also innerhalb der EU. Mit OVH besteht ein Vertrag über die Auftragsverarbeitung nach Art. 28 DSGVO; OVH verarbeitet die Daten nur nach unseren Weisungen.
 
+## Redaktionsbereich
+
+Der nicht öffentliche Redaktionsbereich (`/admin/`) wird nur von Mitgliedern des Redaktionsteams genutzt. Das dort eingesetzte Redaktionsprogramm (Sveltia CMS) liefern wir selbst aus; beim Öffnen lädt es jedoch Sprachdateien, Schriftarten und Statusinformationen von externen Diensten (unpkg.com, cdn.jsdelivr.net, githubstatus.com) und verbindet sich zum Speichern mit GitHub. Dabei wird die IP-Adresse des Redaktionsmitglieds an diese Dienste übertragen. Für Besucherinnen und Besucher der öffentlichen Website gilt das nicht.
+
 ## Server-Logfiles
 
 Bei jedem Aufruf dieser Website erfasst der Server von OVH automatisch folgende Daten:

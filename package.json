@@ -4,7 +4,8 @@
   "description": "Website des Carnevalverein Petersberg e.V.",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy",
+    "test": "node scripts/pruefen.mjs"
   },
   "keywords": [],
   "author": "",
