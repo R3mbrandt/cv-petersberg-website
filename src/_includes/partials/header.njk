@@ -1,6 +1,6 @@
 <header class="site-header" data-header>
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="{{ site.name }} – Startseite">
+    <a class="brand" href="/" aria-label="{{ site.name }} – Startseite" title="Zur Startseite">
       <img src="{{ site.logoKlein or site.logo }}" alt="" width="48" height="48">
       <span class="brand-text">
         <span class="brand-short">{{ site.kurzname }}</span>
@@ -18,6 +18,7 @@
     </button>
     <nav id="hauptnavigation" class="main-nav" aria-label="Hauptnavigation" data-nav>
       <ul>
+        <li class="nav-home"><a href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>Startseite</a></li>
         {%- for item in site.navigation %}
         {%- set aktiv = page.url == item.url or (item.url != "/" and page.url.startsWith(item.url)) %}
         <li><a href="{{ item.url }}"{% if aktiv %} aria-current="page"{% endif %}>{{ item.titel }}</a></li>

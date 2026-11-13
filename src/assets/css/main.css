@@ -669,3 +669,9 @@ a.feature-media:hover img { transform: scale(1.03); }
   .theme-toggle { margin-right: .15rem; }
   .nav-toggle { width: 2.75rem; height: 2.75rem; }
 }
+
+/* „Startseite“ nur im Handy-Menü – am Computer führt das Logo zur Startseite */
+.main-nav .nav-home { display: none; }
+@media (max-width: 52rem) {
+  .main-nav .nav-home { display: block; }
+}
