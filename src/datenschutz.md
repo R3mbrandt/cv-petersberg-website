@@ -35,7 +35,7 @@ Zur schnelleren Auslieferung nutzt OVH ein Content Delivery Network (CDN). Dabei
 
 ## Helles oder dunkles Design
 
-Über das Symbol im Kopfbereich kannst du zwischen hellem und dunklem Design wechseln. Deine Auswahl speichert dein Browser lokal auf deinem Gerät (im sogenannten Local Storage), damit sie beim nächsten Besuch erhalten bleibt. Sie wird nicht an uns oder Dritte übertragen und enthält keine personenbezogenen Daten. Das Speichern ist für die von dir gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst die Einstellung jederzeit über die Browsereinstellungen („Websitedaten löschen“) entfernen; die Seite folgt dann wieder der Einstellung deines Geräts.
+Die Website erscheint im hellen Design. Über das Symbol im Kopfbereich kannst du zum dunklen Design wechseln. Diese Auswahl speichert dein Browser lokal auf deinem Gerät (im sogenannten Local Storage), damit sie beim nächsten Besuch erhalten bleibt. Sie wird nicht an uns oder Dritte übertragen und enthält keine personenbezogenen Daten. Das Speichern ist für die von dir gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst die Einstellung jederzeit über die Browsereinstellungen („Websitedaten löschen“) entfernen; die Seite erscheint dann wieder im hellen Design. Wechselst du über das Symbol zurück zum hellen Design, wird die gespeicherte Einstellung automatisch gelöscht.
 
 ## Kontakt per E-Mail oder Telefon
 

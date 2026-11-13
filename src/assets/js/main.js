@@ -56,8 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const designKnopf = document.querySelector("[data-theme-toggle]");
   if (designKnopf) {
     const root = document.documentElement;
-    const dunkelSystem = matchMedia("(prefers-color-scheme: dark)");
-    const aktuell = () => root.dataset.theme || (dunkelSystem.matches ? "dark" : "light");
+    const aktuell = () => (root.dataset.theme === "dark" ? "dark" : "light");
     const beschriften = () => {
       const dunkel = aktuell() === "dark";
       designKnopf.setAttribute("aria-label", dunkel ? "Zum hellen Design wechseln" : "Zum dunklen Design wechseln");
@@ -66,11 +65,11 @@ document.addEventListener("DOMContentLoaded", () => {
     designKnopf.hidden = false;
     beschriften();
     designKnopf.addEventListener("click", () => {
-      root.dataset.theme = aktuell() === "dark" ? "light" : "dark";
-      try { localStorage.setItem("cvp-design", root.dataset.theme); } catch {}
+      const neu = aktuell() === "dark" ? "light" : "dark";
+      root.dataset.theme = neu;
+      try { neu === "dark" ? localStorage.setItem("cvp-design", "dark") : localStorage.removeItem("cvp-design"); } catch {}
       beschriften();
     });
-    dunkelSystem.addEventListener("change", beschriften);
   }
 
   // Schatten am Header beim Scrollen

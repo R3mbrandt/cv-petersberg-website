@@ -104,7 +104,7 @@ jederzeit rückgängig machen.
 ## Technik & Qualität
 
 - **Responsiv** vom Smartphone bis zum großen Monitor (fluide Schriftgrößen, Container Queries)
-- **Dark Mode** automatisch nach Geräteeinstellung
+- **Helles Design als Standard**, dunkles Design per Schalter im Kopfbereich (ohne Cookies)
 - **Barrierearm**: semantisches HTML, Tastaturbedienung, Skip-Link, sichtbarer Fokus,
   reduzierte Animationen bei entsprechender Systemeinstellung
 - **Datenschutzfreundlich**: keine Cookies, kein Tracking, Schriften lokal (kein Google Fonts)

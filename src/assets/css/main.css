@@ -1,6 +1,8 @@
 /* =====================================================================
    Carnevalverein Petersberg e.V. – Stylesheet
    ---------------------------------------------------------------------
+   Standard ist das helle Design; das dunkle gilt nur, wenn es über den
+   Schalter im Kopfbereich gewählt wurde (:root[data-theme="dark"]).
    Die Vereinsfarben kommen aus src/_data/site.yaml (--cv-primaer,
    --cv-akzent, --cv-gruen, --cv-dunkel). Alle übrigen Töne werden hier daraus
    berechnet – Farbwechsel also NUR in site.yaml vornehmen.
@@ -22,7 +24,7 @@
 @view-transition { navigation: auto; }
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   /* Fallbacks, falls site.yaml nichts liefert */
   --cv-primaer: #c81522;
@@ -65,21 +67,6 @@
   --header-h: 4.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: color-mix(in oklab, var(--cv-dunkel) 92%, black);
-    --bg-tint: color-mix(in oklab, var(--cv-dunkel) 75%, var(--cv-gruen));
-    --surface: color-mix(in oklab, var(--cv-dunkel) 85%, white 3%);
-    --text: #eef3ef;
-    --text-muted: #b8c6bd;
-    --border: rgb(255 255 255 / .12);
-    --link: color-mix(in oklab, var(--cv-primaer) 45%, white);
-    --primary-soft: color-mix(in oklab, var(--cv-primaer) 25%, var(--cv-dunkel));
-    --dark-bg: color-mix(in oklab, var(--cv-dunkel) 70%, black);
-    --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px -8px rgb(0 0 0 / .6);
-    --focus: var(--cv-akzent);
-  }
-}
 :root[data-theme="dark"] {
     --bg: color-mix(in oklab, var(--cv-dunkel) 92%, black);
     --bg-tint: color-mix(in oklab, var(--cv-dunkel) 75%, var(--cv-gruen));
@@ -133,9 +120,6 @@ main:focus { outline: none; }
 
 .kicker { font-family: var(--font-display); font-weight: 700; font-size: var(--step--1); letter-spacing: .12em; text-transform: uppercase; color: var(--primary); margin-bottom: .75rem; }
 .kicker a { color: inherit; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .kicker, :root:not([data-theme="light"]) .people-role, :root:not([data-theme="light"]) .contact-label, :root:not([data-theme="light"]) .timeline-year { color: var(--link); }
-}
 :root[data-theme="dark"] .kicker, :root[data-theme="dark"] .people-role, :root[data-theme="dark"] .contact-label, :root[data-theme="dark"] .timeline-year { color: var(--link); }
 .lead { font-size: var(--step-1); color: var(--text-muted); max-width: 40rem; }
 
@@ -177,9 +161,6 @@ main:focus { outline: none; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
 .brand-short { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; color: var(--primary); }
 .brand-long { font-size: .78rem; color: var(--text-muted); font-weight: 550; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .brand-short { color: var(--accent); }
-}
 :root[data-theme="dark"] .brand-short { color: var(--accent); }
 
 .main-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: .25rem; }
@@ -243,9 +224,6 @@ main:focus { outline: none; }
   background: linear-gradient(100deg, var(--primary) 20%, var(--primary-strong));
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .hero-title span { background: none; color: var(--accent); }
-}
 :root[data-theme="dark"] .hero-title span { background: none; color: var(--accent); }
 .hero-visual { display: grid; justify-items: center; gap: 1.5rem; position: relative; }
 .hero-logo {
@@ -267,10 +245,6 @@ main:focus { outline: none; }
 .next-date { color: var(--text-muted); font-size: .95rem; }
 .next-countdown { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--accent-ink); }
 .next-countdown:empty { display: none; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .next-countdown { color: var(--accent); }
-  :root:not([data-theme="light"]) .next-label { color: var(--link); }
-}
 :root[data-theme="dark"] .next-countdown { color: var(--accent); }
 :root[data-theme="dark"] .next-label { color: var(--link); }
 
@@ -330,9 +304,6 @@ main:focus { outline: none; }
   background: linear-gradient(135deg, var(--primary), color-mix(in oklab, var(--cv-dunkel) 60%, var(--cv-gruen)));
 }
 .feature-names { font-family: var(--font-display); font-size: var(--step-2); font-weight: 700; color: var(--primary); line-height: 1.2; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .feature-names { color: var(--accent); }
-}
 :root[data-theme="dark"] .feature-names { color: var(--accent); }
 
 /* ---------- Termine ---------- */
@@ -355,9 +326,6 @@ main:focus { outline: none; }
 .event-month { font-size: .8rem; text-transform: uppercase; font-weight: 700; color: var(--accent); }
 .event-body { min-width: 0; }
 .event-cat { font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--primary); margin: 0 0 .2rem; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .event-cat { color: var(--link); }
-}
 :root[data-theme="dark"] .event-cat { color: var(--link); }
 .event-title { font-size: var(--step-1); margin: 0 0 .35rem; }
 .event-meta { display: flex; flex-wrap: wrap; gap: .25rem 1rem; color: var(--text-muted); font-size: .92rem; margin: 0; }
@@ -522,9 +490,6 @@ address { font-style: normal; overflow-wrap: anywhere; }
 .stat-value { font-family: var(--font-display); font-weight: 800; font-size: var(--step-2); color: var(--primary); line-height: 1.1; }
 .stat-label { color: var(--text-muted); font-size: .92rem; }
 .stats--small .stat-value { font-size: var(--step-1); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .stat-value { color: var(--accent); }
-}
 :root[data-theme="dark"] .stat-value { color: var(--accent); }
 
 .link-tiles { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
@@ -654,9 +619,6 @@ a[data-mail], a[href^="mailto:"] { white-space: nowrap; }
 }
 .social-icons a:hover { color: var(--primary); background: var(--primary-soft); }
 .social-icons svg { width: 1.2rem; height: 1.2rem; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .social-icons a:hover { color: var(--accent); }
-}
 :root[data-theme="dark"] .social-icons a:hover { color: var(--accent); }
 @media (max-width: 52rem) {
   .social-icons { padding: 0; margin-right: .35rem; }
@@ -669,9 +631,6 @@ a[data-mail], a[href^="mailto:"] { white-space: nowrap; }
 .group-facts div { display: grid; grid-template-columns: 6.5rem 1fr; gap: .5rem; }
 .group-facts dt { font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--primary); padding-top: .12rem; }
 .group-facts dd { margin: 0; overflow-wrap: anywhere; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .group-facts dt { color: var(--link); }
-}
 :root[data-theme="dark"] .group-facts dt { color: var(--link); }
 .group-facts a[data-mail], .group-facts a[href^="mailto:"] { white-space: normal; }
 
@@ -694,11 +653,6 @@ a.feature-media:hover img { transform: scale(1.03); }
 .header-inner .theme-toggle { order: 4; margin-left: .15rem; }
 .header-inner .nav-toggle { order: 5; }
 @media (max-width: 52rem) { .theme-toggle { width: 2.5rem; height: 2.5rem; margin-right: .35rem; } }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
-  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
-  :root:not([data-theme="light"]) .theme-toggle:hover { color: var(--accent); }
-}
 :root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 :root[data-theme="dark"] .theme-toggle:hover { color: var(--accent); }
