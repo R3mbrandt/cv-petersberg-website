@@ -61,11 +61,16 @@ jobs:
           # Serverschlüssel: ist das Secret FTP_HOSTKEY gesetzt, wird nur dieser Server akzeptiert.
           KH="${RUNNER_TEMP:-/tmp}/cvp_known_hosts"
           if [ -n "$HOSTKEY" ]; then
-            printf '%s\n' "$HOSTKEY" > "$KH"
+            # Erlaubt: nur "ssh-ed25519 AAAA…" (Servername wird ergänzt) oder eine vollständige known_hosts-Zeile
+            case "$HOSTKEY" in
+              ssh-*|ecdsa-*) if [ "$PORT" = 22 ]; then N="$SERVER"; else N="[$SERVER]:$PORT"; fi
+                             printf '%s %s\n' "$N" "$HOSTKEY" > "$KH" ;;
+              *)             printf '%s\n' "$HOSTKEY" > "$KH" ;;
+            esac
             PRUEFUNG="set sftp:auto-confirm no; set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$KH';"
           else
             echo "::warning::Kein FTP_HOSTKEY hinterlegt – Serverschlüssel wird ungeprüft akzeptiert. Aktueller Schlüssel des Servers (für das Secret FTP_HOSTKEY):"
-            ssh-keyscan -p "$PORT" -t ed25519 "$SERVER" 2>/dev/null | sed 's/^/    /' || true
+            ssh-keyscan -p "$PORT" -t ed25519 "$SERVER" 2>/dev/null | cut -d' ' -f2- | sed 's/^/    /' || true
             : > "$KH"
             PRUEFUNG="set sftp:auto-confirm yes; set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$KH';"
           fi

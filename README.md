@@ -68,7 +68,7 @@ jederzeit rückgängig zu machen. DNS und E-Mail werden nicht verändert.
      Ordner der Website beschränkt: `./`, sonst z. B. `cvp-neu/`.
    - Optional Variable `FTP_PORT` (Standard 22) und Secret `FTP_HOSTKEY`: der Serverschlüssel.
      Ohne ihn wird jeder Server akzeptiert und im Protokoll eine Warnung mit dem aktuellen
-     Schlüssel ausgegeben – diese Zeile (beginnt mit dem Servernamen) als `FTP_HOSTKEY` eintragen.
+     Schlüssel ausgegeben – diese Zeile (`ssh-ed25519 AAAA…`) als `FTP_HOSTKEY` eintragen.
    - Übertragen wird nur per **SFTP** (ab OVH-Tarif *Pro*; beim Benutzer „FTP, SFTP und SSH“
      erlauben; als `FTP_SERVER` den angezeigten **SSH-Server** eintragen).
 
