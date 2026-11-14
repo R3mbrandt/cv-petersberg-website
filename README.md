@@ -84,8 +84,7 @@ jederzeit rückgängig zu machen. DNS und E-Mail werden nicht verändert.
    die Ordner getauscht: per FTP `www` in `www-wordpress-alt` und anschließend `cvp-neu` in
    `www` umbenennen; danach den FTP-Benutzer auf `www` beschränken (`FTP_ZIELORDNER` bleibt
    `./`) und ggf. den CDN-Cache leeren. *Zurück:* die Umbenennungen umkehren.
-6. **HTTPS erzwingen:** Wenn alles läuft, in `src/htaccess.njk` die drei
-   HTTPS-Zeilen aktivieren (Kommentarzeichen `#` entfernen).
+6. **HTTPS erzwingen:** in `src/htaccess.njk` aktiv (seit dem Livegang am 14.11.2026).
 7. Nach einigen Wochen ohne Probleme kann WordPress gelöscht werden
    (Ordner `www/` und Datenbank) – das beendet auch dessen Sicherheitsupdates.
 
