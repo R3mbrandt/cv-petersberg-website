@@ -1,11 +1,10 @@
-# Die laufende Kampagne – wird auf der Startseite gezeigt.
-titel: "Kampagne 2027"
-motto: ""
+titel: Kampagne 2027
+motto: ''
 prinzenpaar:
   zeigen: true
-  kicker: "Amtierende Prinzenmannschaft · 75. Jubiläumskampagne"
-  titel: "Ready for Foaset!"
-  namen: "Prinz Frank der 73. von Moderation und Touchdown & Showtanz-Prinzessin Anna-Lena"
-  text: "Unterstützt von den Adjutanten Dominik Hüfner und Patrick Müller sowie Hofdame Vanessa Arens. Bei den Kleinen regieren Kinderprinz Pepe der 44. und Kinderprinzessin Lena."
-  bild: "/uploads/2025/11/Prinzenmannschaft_Homepage.jpg"
-  link: "/2025/11/15/ready-for-foaset/"
+  kicker: Amtierende Prinzenmannschaft 2027
+  titel: Inthronisierung
+  namen: ???
+  text: 'Am 14.11.2027 ist es soweit: Der CVP startet mit der Inthronisierung der neuen Prinzenmannschaft in die Kampagne 2027'
+  bild: /uploads/2027/Inthronisierung.png
+  link: ''
