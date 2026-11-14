@@ -70,7 +70,7 @@ jobs:
             PRUEFUNG="set sftp:auto-confirm no; set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$KH';"
           else
             echo "::warning::Kein FTP_HOSTKEY hinterlegt – Serverschlüssel wird ungeprüft akzeptiert. Aktueller Schlüssel des Servers (für das Secret FTP_HOSTKEY):"
-            ssh-keyscan -p "$PORT" -t ed25519 "$SERVER" 2>/dev/null | cut -d' ' -f2- | sed 's/^/    /' || true
+            ssh-keyscan -p "$PORT" -t ed25519 "$SERVER" 2>/dev/null | grep -v '^#' | cut -d' ' -f2- | sed 's/^/    /' || true
             : > "$KH"
             PRUEFUNG="set sftp:auto-confirm yes; set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$KH';"
           fi
