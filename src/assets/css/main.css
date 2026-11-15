@@ -542,6 +542,10 @@ address { font-style: normal; overflow-wrap: anywhere; }
 .post-body img { border-radius: var(--radius); margin-block: 1.5rem; height: auto; }
 .post-body .zoom--beitrag { border-radius: var(--radius); margin-block: 1.5rem; }
 .post-body .zoom--beitrag img { margin-block: 0; }
+/* Hochformat-Fotos in Beiträgen: schmaler und mittig statt über die ganze Breite */
+.post-body img.hochformat { width: min(100%, 26rem); margin-inline: auto; display: block; }
+.post-body .zoom--beitrag[data-hochformat] { width: min(100%, 26rem); margin-inline: auto; }
+.post-body .zoom--beitrag[data-hochformat] img { width: 100%; }
 .post-body table { width: 100%; border-collapse: collapse; margin-block: 1.5rem; font-size: .95rem; display: block; overflow-x: auto; }
 .post-body td, .post-body th { padding: .5rem .75rem; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
 .post-body iframe, .post-body video { max-width: 100%; }

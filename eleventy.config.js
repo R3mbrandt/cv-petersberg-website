@@ -154,13 +154,16 @@ export default function (eleventyConfig) {
 
   /** Breite eines Bildes aus src/uploads in Pixeln (0, falls unbekannt) – z. B. ob sich Vergrößern lohnt */
   const breiten = new Map();
-  const bildBreite = async (src) => {
-    if (!src || !src.startsWith("/")) return 0;
+  /** Breite und Höhe eines Bildes aus src/ ({ width: 0, height: 0 }, falls unbekannt) */
+  const bildMasse = (src) => {
+    if (!src || !src.startsWith("/")) return Promise.resolve({ width: 0, height: 0 });
     if (!breiten.has(src)) {
-      breiten.set(src, imageSizeFromFile(path.join("src", src)).then((d) => d.width || 0).catch(() => 0));
+      breiten.set(src, imageSizeFromFile(path.join("src", src))
+        .then((d) => ({ width: d.width || 0, height: d.height || 0 })).catch(() => ({ width: 0, height: 0 })));
     }
     return breiten.get(src);
   };
+  const bildBreite = async (src) => (await bildMasse(src)).width;
   eleventyConfig.addAsyncFilter("bildBreite", bildBreite);
 
   /** "2026-02-10" -> "2026/02/10" (für Beitrags-URLs wie bei WordPress) */
@@ -238,10 +241,13 @@ export default function (eleventyConfig) {
       if (vorher.lastIndexOf("<a ") > vorher.lastIndexOf("</a>")) continue; // schon verlinkt
       const src = (m[0].match(/\bsrc="([^"]+)"/) || [])[1];
       if (!src || !src.startsWith("/uploads/")) continue;
+      // Hochformat-Fotos schmaler darstellen, damit sie nicht den ganzen Bildschirm füllen
+      const masse = await bildMasse(decodeURI(src));
+      const tag = masse.height > masse.width * 1.1 ? m[0].replace("<img", '<img class="hochformat"') : m[0];
       const { beste, breite } = await groessteFassung(decodeURI(src));
-      if (breite < 700) continue;
+      if (breite < 700) { if (tag !== m[0]) ersetzungen.push([m.index, m[0], tag]); continue; }
       const alt = (m[0].match(/\balt="([^"]*)"/) || [])[1] || "";
-      ersetzungen.push([m.index, m[0], `<a class="zoom zoom--beitrag" href="${encodeURI(beste)}" data-lightbox="beitrag" data-caption="${alt}" aria-label="Foto vergrößern${alt ? ": " + alt : ""}">${m[0]}</a>`]);
+      ersetzungen.push([m.index, m[0], `<a class="zoom zoom--beitrag" href="${encodeURI(beste)}" data-lightbox="beitrag" data-caption="${alt}" aria-label="Foto vergrößern${alt ? ": " + alt : ""}"${tag !== m[0] ? ' data-hochformat' : ""}>${tag}</a>`]);
     }
     let neu = teil;
     for (const [i, alt, ersatz] of ersetzungen.reverse()) neu = neu.slice(0, i) + ersatz + neu.slice(i + alt.length);
