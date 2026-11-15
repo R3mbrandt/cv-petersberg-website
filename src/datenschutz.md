@@ -35,8 +35,6 @@ Diese Daten sind technisch nötig, um die Website auszuliefern, und dienen der S
 
 Aus den Zugriffsdaten erstellt OVH für uns außerdem eine anonyme Besucherstatistik (Anzahl der Aufrufe, Herkunftsland, Browser). IP-Adressen werden dafür nur gekürzt verwendet; Rückschlüsse auf einzelne Personen sind nicht möglich. Cookies werden dafür nicht gesetzt.
 
-Zur schnelleren Auslieferung nutzt OVH ein Content Delivery Network (CDN). Dabei werden Kopien der Website auf Servern an verschiedenen Standorten zwischengespeichert, und Anfragen können von einem Server in der Nähe des Besuchers beantwortet werden – auch außerhalb der EU. Auch dort fallen die oben genannten Zugriffsdaten an; OVH verarbeitet sie im Rahmen des Auftragsverarbeitungsvertrags.
-
 ## Helles oder dunkles Design
 
 Die Website erscheint im hellen Design. Über das Symbol im Kopfbereich kannst du zum dunklen Design wechseln. Diese Auswahl speichert dein Browser lokal auf deinem Gerät (im sogenannten Local Storage), damit sie beim nächsten Besuch erhalten bleibt. Sie wird nicht an uns oder Dritte übertragen und enthält keine personenbezogenen Daten. Das Speichern ist für die von dir gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst die Einstellung jederzeit über die Browsereinstellungen („Websitedaten löschen“) entfernen; die Seite erscheint dann wieder im hellen Design. Wechselst du über das Symbol zurück zum hellen Design, wird die gespeicherte Einstellung automatisch gelöscht.
