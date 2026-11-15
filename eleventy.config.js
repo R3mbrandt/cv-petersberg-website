@@ -154,13 +154,14 @@ export default function (eleventyConfig) {
 
   /** Breite eines Bildes aus src/uploads in Pixeln (0, falls unbekannt) – z. B. ob sich Vergrößern lohnt */
   const breiten = new Map();
-  eleventyConfig.addAsyncFilter("bildBreite", async (src) => {
+  const bildBreite = async (src) => {
     if (!src || !src.startsWith("/")) return 0;
     if (!breiten.has(src)) {
       breiten.set(src, imageSizeFromFile(path.join("src", src)).then((d) => d.width || 0).catch(() => 0));
     }
     return breiten.get(src);
-  });
+  };
+  eleventyConfig.addAsyncFilter("bildBreite", bildBreite);
 
   /** "2026-02-10" -> "2026/02/10" (für Beitrags-URLs wie bei WordPress) */
   eleventyConfig.addFilter("datumsPfad", (d) => {
@@ -213,6 +214,40 @@ export default function (eleventyConfig) {
   });
 
   // Bilder in Texten: verzögert laden
+  // Fotos in Beiträgen per Klick vergrößern (Lightbox aus main.js). Nur Bilder ab
+  // 700 px Breite, die nicht schon verlinkt sind; verweist auf die größte vorhandene Fassung.
+  const BEITRAG_START = '<div class="container prose section post-body">';
+  const BEITRAG_ENDE = '<p class="post-back">';
+  const groessteFassung = async (src) => {
+    const basis = src.replace(/-\d+x\d+(?=\.\w+$)/, "").replace(/-scaled(?=\.\w+$)/, "");
+    let beste = src, breite = await bildBreite(src);
+    for (const k of [basis, basis.replace(/(\.\w+)$/, "-scaled$1")]) {
+      if (k === src) continue;
+      const b = await bildBreite(k);
+      if (b > breite) { beste = k; breite = b; }
+    }
+    return { beste, breite };
+  };
+  eleventyConfig.addTransform("beitragsbilder-zoom", async function (content) {
+    const a = content.indexOf(BEITRAG_START), e = content.indexOf(BEITRAG_ENDE, a);
+    if (a < 0 || e < 0) return content;
+    const teil = content.slice(a, e);
+    const ersetzungen = [];
+    for (const m of teil.matchAll(/<img\b[^>]*>/g)) {
+      const vorher = teil.slice(0, m.index);
+      if (vorher.lastIndexOf("<a ") > vorher.lastIndexOf("</a>")) continue; // schon verlinkt
+      const src = (m[0].match(/\bsrc="([^"]+)"/) || [])[1];
+      if (!src || !src.startsWith("/uploads/")) continue;
+      const { beste, breite } = await groessteFassung(decodeURI(src));
+      if (breite < 700) continue;
+      const alt = (m[0].match(/\balt="([^"]*)"/) || [])[1] || "";
+      ersetzungen.push([m.index, m[0], `<a class="zoom zoom--beitrag" href="${encodeURI(beste)}" data-lightbox="beitrag" data-caption="${alt}" aria-label="Foto vergrößern${alt ? ": " + alt : ""}">${m[0]}</a>`]);
+    }
+    let neu = teil;
+    for (const [i, alt, ersatz] of ersetzungen.reverse()) neu = neu.slice(0, i) + ersatz + neu.slice(i + alt.length);
+    return content.slice(0, a) + neu + content.slice(e);
+  });
+
   eleventyConfig.addTransform("lazy-images", function (content) {
     if (!(this.page.outputPath || "").endsWith(".html")) return content;
     return content.replace(/<img(?![^>]*\bloading=)/g, '<img loading="lazy" decoding="async"');
