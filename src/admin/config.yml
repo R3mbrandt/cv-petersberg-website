@@ -35,6 +35,13 @@ collections:
             display_fields: ["{{title}} ({{date}})"]
             required: false
             hint: "Erscheint groß auf der Startseite (und so lange nicht zusätzlich unter „Aktuelles“). Leer = Block „Kampagne & Prinzenpaar“."
+          - name: gruppen
+            label: "Gruppen auf der Startseite"
+            widget: select
+            multiple: true
+            required: false
+            options: [{ label: "Elferrat", value: elferrat }, { label: "Ratsfrauen", value: ratsfrauen }, { label: "Kinder-Jugend-Elferrat", value: kinder-jugend-elferrat }, { label: "Green Diamonds", value: green-diamonds }, { label: "Shotzz", value: shotzz }, { label: "Tanzmariechen Angelina", value: tanzmariechen }, { label: "Blue Babes", value: blue-babes }, { label: "Little Blue Babes", value: little-blue-babes }, { label: "Crazy Kids", value: crazy-kids }, { label: "Tanzmäuse", value: tanzmaeuse }]
+            hint: "Erscheinen im Block „Unsere Garden & Gruppen“. Leer = alle Gruppen. Neue Gruppe? Dann muss sie hier in der Auswahl ergänzt werden (src/admin/config.yml)."
           - name: aufruf
             label: Aufruf unten
             widget: object

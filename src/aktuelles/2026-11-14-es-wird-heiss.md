@@ -19,9 +19,9 @@ Angekündigt von den Sitzungspräsidenten Jochen Dentel und Ralf Bott zog zunäc
 
 ## Neues Kinderprinzenpaar
 
-Danach gehörte die Bühne dem närrischen Nachwuchs: **Kinderprinz Jonas der 45.** und **Kinderprinzessin Ida** wurden feierlich in ihre Ämter eingeführt und erhielten Zepter und Krone. Damit ist auch bei den kleinen Narren die Regentschaft für die neue Kampagne gesichert.
+Danach gehörte die Bühne dem närrischen Nachwuchs: **Kinderprinz Jonas der 45.** (Jonas Völler) und **Kinderprinzessin Ida** (Ida Leipold) wurden feierlich in ihre Ämter eingeführt und erhielten Zepter und Krone. Damit ist auch bei den kleinen Narren die Regentschaft für die neue Kampagne gesichert.
 
-![Kinderprinz Jonas der 45. und Kinderprinzessin Ida](/uploads/2026/11/kinderprinzenpaar-2027.jpg)
+![Kinderprinz Jonas der 45. (Jonas Völler) und Kinderprinzessin Ida (Ida Leipold)](/uploads/2026/11/kinderprinzenpaar-2027.jpg)
 
 ## Ehrungen
 

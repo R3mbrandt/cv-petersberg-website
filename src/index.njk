@@ -112,7 +112,9 @@ bodyClass: home
       <a class="link-arrow" href="/gruppen/">Alle Gruppen</a>
     </div>
     <ul class="chip-scroller" role="list">
-      {% for g in gruppen %}
+      {%- set auswahl = [] %}
+      {%- for id in (startseite.gruppen or []) %}{% for g in gruppen %}{% if g.id == id %}{% set auswahl = (auswahl.push(g), auswahl) %}{% endif %}{% endfor %}{% endfor %}
+      {% for g in (auswahl if auswahl.length else gruppen) %}
       <li class="chip-card">
         <a href="/gruppen/#{{ g.id }}">
           {% if g.bild %}<img src="{{ g.bild | thumb }}" alt="" loading="lazy" decoding="async" width="480" height="320">{% endif %}

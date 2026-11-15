@@ -2,6 +2,12 @@ ueberschrift1: Petersberg,
 ueberschrift2: Helau!
 einleitung: ''
 hauptbeitrag: ''
+# Gruppen im Block „Unsere Garden & Gruppen“ (Kurznamen aus gruppen.yaml, in dieser Reihenfolge).
+# Leer = alle Gruppen.
+gruppen:
+  - elferrat
+  - ratsfrauen
+  - green-diamonds
 aufruf:
   titel: Mach mit beim CVP!
   text: Ob aktiv in der Vereinsarbeit oder als passives Mitglied – dabei bist du schon für 21 € im Jahr, Kinder für 12 €.
