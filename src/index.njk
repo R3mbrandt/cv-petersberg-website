@@ -51,25 +51,27 @@ bodyClass: home
     </div>
   </div>
 </section>
-{% elif kampagne.prinzenpaar.zeigen %}
-<section class="section">
-  <div class="container feature">
-    <div class="feature-media{% if not kampagne.prinzenpaar.bild %} feature-media--placeholder{% endif %}">
-      {% if kampagne.prinzenpaar.bild %}
-        <img src="{{ kampagne.prinzenpaar.bild }}" alt="{{ kampagne.prinzenpaar.namen }}" loading="lazy" decoding="async">
+{% else %}
+{%- for pp in [kampagne.prinzenpaar, kampagne.kinderprinzenpaar] %}{% if pp and pp.zeigen %}
+<section class="section{% if loop.index > 1 %} section--tight{% endif %}">
+  <div class="container feature{% if loop.index > 1 %} feature--gespiegelt{% endif %}">
+    <div class="feature-media{% if not pp.bild %} feature-media--placeholder{% endif %}">
+      {% if pp.bild %}
+        <img src="{{ pp.bild }}" alt="{{ pp.namen }}" loading="lazy" decoding="async">
       {% else %}
         <img src="{{ site.logo }}" alt="" class="feature-logo">
       {% endif %}
     </div>
     <div class="feature-copy">
-      <p class="kicker">{{ kampagne.prinzenpaar.kicker or kampagne.titel }}</p>
-      <h2>{{ kampagne.prinzenpaar.titel }}</h2>
-      <p class="feature-names">{{ kampagne.prinzenpaar.namen }}</p>
-      <p>{{ kampagne.prinzenpaar.text }}</p>
-      {% if kampagne.prinzenpaar.link %}<a class="link-arrow" href="{{ kampagne.prinzenpaar.link }}">Zum Bericht</a>{% endif %}
+      <p class="kicker">{{ pp.kicker or kampagne.titel }}</p>
+      <h2>{{ pp.titel }}</h2>
+      <p class="feature-names">{{ pp.namen }}</p>
+      <p>{{ pp.text }}</p>
+      {% if pp.link %}<a class="link-arrow" href="{{ pp.link }}">Zum Bericht</a>{% endif %}
     </div>
   </div>
 </section>
+{%- endif %}{% endfor %}
 {% endif %}
 
 <section class="section section--tint">

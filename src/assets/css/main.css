@@ -303,6 +303,13 @@ main:focus { outline: none; }
   display: grid; place-items: center; font-size: clamp(4rem, 10vw, 7rem);
   background: linear-gradient(135deg, var(--primary), color-mix(in oklab, var(--cv-dunkel) 60%, var(--cv-gruen)));
 }
+.section--tight { padding-top: 0; }
+@media (min-width: 48rem) {
+  .feature--gespiegelt { grid-template-columns: 1.2fr 1fr; }
+  .feature--gespiegelt .feature-media { order: 2; }
+}
+.feature-media img { object-position: 50% 25%; }
+.feature--gespiegelt .feature-media img { object-position: 50% 10%; }
 .feature-names { font-family: var(--font-display); font-size: var(--step-2); font-weight: 700; color: var(--primary); line-height: 1.2; }
 :root[data-theme="dark"] .feature-names { color: var(--accent); }
 

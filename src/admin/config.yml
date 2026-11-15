@@ -85,7 +85,7 @@ collections:
               - { name: beschreibung, label: Beschreibung, widget: text, required: false }
               - { name: tickets, label: Ticket-Link, widget: string, required: false }
       - name: kampagne
-        label: Kampagne & Prinzenpaar
+        label: Kampagne & Prinzenpaare
         file: src/_data/kampagne.yaml
         fields:
           - { name: titel, label: Kampagne, widget: string, hint: "z. B. Kampagne 2026/27" }
@@ -93,6 +93,18 @@ collections:
           - name: prinzenpaar
             label: Prinzenpaar
             widget: object
+            fields:
+              - { name: zeigen, label: Auf Startseite zeigen, widget: boolean, default: true }
+              - { name: kicker, label: Dachzeile, widget: string, required: false }
+              - { name: titel, label: Überschrift, widget: string }
+              - { name: namen, label: Namen, widget: string }
+              - { name: text, label: Text, widget: text }
+              - { name: bild, label: Foto, widget: image, required: false }
+              - { name: link, label: Link zum Bericht, widget: string, required: false }
+          - name: kinderprinzenpaar
+            label: Kinderprinzenpaar
+            widget: object
+            required: false
             fields:
               - { name: zeigen, label: Auf Startseite zeigen, widget: boolean, default: true }
               - { name: kicker, label: Dachzeile, widget: string, required: false }

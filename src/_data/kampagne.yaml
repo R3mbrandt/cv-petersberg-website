@@ -1,10 +1,19 @@
+# Die laufende Kampagne – wird auf der Startseite gezeigt.
 titel: Kampagne 2027
-motto: ''
+motto: Es wird heiß!
 prinzenpaar:
   zeigen: true
-  kicker: Amtierende Prinzenmannschaft 2027
-  titel: Inthronisierung
-  namen: '? ? ? ? ?'
-  text: 'Am 14.11.2027 ist es soweit: Der CVP startet mit der Inthronisierung der neuen Prinzenmannschaft in die Kampagne 2027'
-  bild: /uploads/2027/Inthronisierung.png
-  link: ''
+  kicker: Prinzenmannschaft 2027
+  titel: Es wird heiß!
+  namen: Prinz Falko der 74. von Löschzug & Logistik & Prinzessin Janine
+  text: Unterstützt von Prinzenadjutant Andy, Jamie als Adjutant der Prinzessin und Prinzenmariechen Feli. Seit der Inthronisierung am 14. November regieren sie die Petersberger Narren.
+  bild: /uploads/2026/11/prinzenmannschaft-2027.jpg
+  link: /2026/11/14/es-wird-heiss/
+kinderprinzenpaar:
+  zeigen: true
+  kicker: Kinderprinzenpaar 2027
+  titel: Die kleinen Tollitäten
+  namen: Kinderprinz Jonas der 45. & Kinderprinzessin Ida
+  text: Bei der Inthronisierung erhielten die beiden Zepter und Krone – damit ist auch bei den kleinen Narren die Regentschaft für die neue Kampagne gesichert.
+  bild: /uploads/2026/11/kinderprinzenpaar-2027.jpg
+  link: /2026/11/14/es-wird-heiss/
