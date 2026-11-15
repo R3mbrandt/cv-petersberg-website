@@ -24,23 +24,23 @@ ErrorDocument 404 /404.html
 
   # www.cv-petersberg.de -> cv-petersberg.de
   RewriteCond %{HTTP_HOST} ^www\.cv-petersberg\.de$ [NC]
-  RewriteRule ^ https://cv-petersberg.de%{REQUEST_URI} [R=301,L]
+  RewriteRule ^ {{ site.url }}%{REQUEST_URI} [R=301,L]
 
   # HTTP -> HTTPS (SSL-Zertifikate für cv-petersberg.de und www sind bei OVH aktiv)
   RewriteCond %{HTTPS} off
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
-  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+  RewriteRule ^ {{ site.url }}%{REQUEST_URI} [R=301,L]
 
   # Alte Adressen der WordPress-Seite (dauerhaft umgezogen)
 {%- for w in weiterleitungen %}
-  RewriteRule ^{{ w.von | htRegex | safe }}/?$ https://%{HTTP_HOST}{{ w.nach | safe }} [R=301,NE,L]
+  RewriteRule ^{{ w.von | htRegex | safe }}/?$ {{ site.url }}{{ w.nach | safe }} [R=301,NE,L]
 {%- endfor %}
 
   # Kennzeichendatei des Uploads nicht ausliefern
   RewriteRule ^\.cvp-website$ - [R=404,L]
 
   # Alte WordPress-Pfade, die es nicht mehr gibt
-  RewriteRule ^wp-content/uploads/(.*)$ https://%{HTTP_HOST}/uploads/$1 [R=301,NE,L]
+  RewriteRule ^wp-content/uploads/(.*)$ {{ site.url }}/uploads/$1 [R=301,NE,L]
   RewriteRule ^(wp-admin|wp-login\.php|xmlrpc\.php) - [R=410,L]
 </IfModule>
 
@@ -49,6 +49,12 @@ ErrorDocument 404 /404.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # Content-Security-Policy: nur eigene Dateien; die zwei Inline-Blöcke im <head>
+  # sind per Prüfsumme erlaubt (src/_data/inline.js). Der Redaktionsbereich /admin/
+  # lädt Teile von externen Servern und bekommt daher keine CSP.
+  <If "%{REQUEST_URI} !~ m#^/admin/#">
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' {{ inline.skriptHash | safe }}; style-src 'self' {{ inline.stilHash | safe }}; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+  </If>
 </IfModule>
 
 <IfModule mod_expires.c>

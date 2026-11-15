@@ -1,0 +1,11 @@
+# Die GitHub Actions im Ablauf sind auf feste Commit-Kennungen festgelegt (Schutz vor
+# nachträglich veränderten Versionen). Dependabot schlägt monatlich Updates als
+# Pull Request vor – prüfen und zusammenführen genügt.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "Actions"

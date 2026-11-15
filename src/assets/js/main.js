@@ -82,16 +82,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ---------------------------------------------------------------
   //  Termine im Browser aktuell halten – die Seite ist statisch und wird
-  //  nur nachts neu gebaut. Ein Termin gilt bis zum Ende seines Tages.
+  //  nur nachts neu gebaut. Alle Termine sind in deutscher Zeit (Europe/Berlin)
+  //  angegeben; ein Termin gilt bis zum Ende seines Tages – unabhängig davon,
+  //  in welcher Zeitzone der Besucher gerade ist.
   // ---------------------------------------------------------------
-  const parse = (iso) => new Date(iso.length > 10 ? iso : iso + "T00:00");
-  const tagesende = (iso) => { const d = parse(iso); d.setHours(23, 59, 59, 999); return d; };
-  const jetzt = () => new Date();
+  const TZ = "Europe/Berlin";
+  /** Heutiges Datum in Berlin als "JJJJ-MM-TT" */
+  const heute = () => new Intl.DateTimeFormat("sv-SE", { timeZone: TZ }).format(new Date());
+  /** Abstand Berliner Ortszeit zu UTC (ms) für einen Zeitpunkt */
+  const versatz = (ms) => {
+    const t = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
+      timeZone: TZ, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
+    }).formatToParts(new Date(ms)).map((x) => [x.type, x.value]));
+    return Date.UTC(+t.year, +t.month - 1, +t.day, +t.hour, +t.minute) - ms;
+  };
+  /** "JJJJ-MM-TT" oder "JJJJ-MM-TTTHH:MM" (Berliner Zeit) -> Zeitpunkt */
+  const beginn = (iso) => {
+    const [d, z = "00:00"] = iso.split("T");
+    const [y, m, t] = d.split("-").map(Number), [hh, mm] = z.split(":").map(Number);
+    const wand = Date.UTC(y, m - 1, t, hh, mm);
+    return new Date(wand - versatz(wand - versatz(wand)));
+  };
+  const vorbei = (iso) => iso.slice(0, 10) < heute();
 
   // Listen: vergangene Termine entfernen, höchstens "data-termine-max" zeigen
   document.querySelectorAll("[data-termine]").forEach((list) => {
     list.querySelectorAll("[data-datum]").forEach((el) => {
-      if (tagesende(el.dataset.datum) < jetzt()) el.remove();
+      if (vorbei(el.dataset.datum)) el.remove();
     });
     const max = Number(list.dataset.termineMax) || Infinity;
     [...list.children].forEach((el, i) => { el.hidden = i >= max; });
@@ -111,11 +128,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const dateEl = card.querySelector("[data-next-date]");
     const out = card.querySelector("[data-countdown-out]");
     const tick = () => {
-      const t = termine.find((x) => tagesende(x.start) >= jetzt());
+      const t = termine.find((x) => !vorbei(x.start));
       if (!t) { card.hidden = true; return; }
       titleEl.textContent = t.titel;
       dateEl.textContent = t.text;
-      const diff = parse(t.start) - jetzt();
+      const diff = beginn(t.start) - Date.now();
       if (diff <= 0) { out.textContent = "Heute – wir sehen uns!"; return; }
       const tage = Math.floor(diff / 864e5), h = Math.floor(diff / 36e5) % 24, m = Math.floor(diff / 6e4) % 60;
       out.textContent = tage > 0 ? `Noch ${tage} ${tage === 1 ? "Tag" : "Tage"}, ${h} Std.` : `Noch ${h} Std. ${m} Min.`;

@@ -93,10 +93,11 @@ export default function (eleventyConfig) {
 
   /** Termine sortiert; mit "kommend" nur solche ab heute (Stand: Build). */
   eleventyConfig.addFilter("termineSortiert", (list = [], modus = "alle") => {
-    const heute = new Date();
-    heute.setUTCHours(0, 0, 0, 0);
+    // "Heute" in deutscher Zeit – wie im Browser (main.js); Termine gelten bis Tagesende
+    const heute = new Intl.DateTimeFormat("sv-SE", { timeZone: TZ }).format(new Date());
+    const tag = (t) => { const p = parts(t.datum); return `${p.y}-${pad(p.m)}-${pad(p.d)}`; };
     return [...list]
-      .filter((t) => modus !== "kommend" || asUTC(parts(t.datum)) >= heute)
+      .filter((t) => modus !== "kommend" || tag(t) >= heute)
       .sort((a, b) => asUTC(parts(a.datum)) - asUTC(parts(b.datum)));
   });
 

@@ -92,6 +92,13 @@ Die erzeugte `.htaccess` sorgt für echte 301-Weiterleitungen aller alten
 WordPress-Adressen (Liste: `src/_data/weiterleitungen.yaml`), die eigene
 Fehlerseite, Browser-Caching und Sicherheits-Header.
 
+**Content-Security-Policy:** Die Seite darf nur eigene Dateien laden (Schutz vor
+eingeschleustem Code). Sollen später fremde Inhalte eingebettet werden – etwa ein
+YouTube-Video, eine Karte oder ein Instagram-Beitrag –, muss die Richtlinie in
+`src/htaccess.njk` um die jeweilige Adresse ergänzt werden, sonst bleibt der Bereich leer.
+Der Redaktionsbereich `/admin/` ist davon ausgenommen. Termine werden einheitlich in
+deutscher Zeit (Europe/Berlin) ausgewertet, egal wo Besucher oder Build-Server stehen.
+
 ### GitHub Pages (Testadresse)
 
 https://r3mbrandt.github.io/cv-petersberg-website/ – einmalig unter

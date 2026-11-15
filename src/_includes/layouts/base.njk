@@ -9,11 +9,8 @@
   <link rel="canonical" href="{{ page.url | absoluteUrl(site.url) }}">
   <meta name="theme-color" content="{{ site.farben.primaer }}">
   <meta name="color-scheme" content="light">
-  <script>
-    document.documentElement.classList.add("js");
-    // Standard ist hell; gewähltes dunkles Design sofort anwenden – kein Cookie, nur lokaler Speicher im Browser
-    try { var d = localStorage.getItem("cvp-design"); if (d === "light" || d === "dark") document.documentElement.dataset.theme = d; } catch (e) {}
-  </script>
+  {#- Inhalt und Prüfsumme (für die Content-Security-Policy): src/_data/inline.js #}
+  <script>{{ inline.skript | safe }}</script>
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ site.name }}">
@@ -32,8 +29,8 @@
 
   <link rel="preload" href="/assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  {# Vereinsfarben aus src/_data/site.yaml – alle Abstufungen berechnet das Stylesheet #}
-  <style>:root{--cv-primaer:{{ site.farben.primaer }};--cv-akzent:{{ site.farben.akzent }};--cv-gruen:{{ site.farben.gruen }};--cv-dunkel:{{ site.farben.dunkel }}}</style>
+  {#- Vereinsfarben aus src/_data/site.yaml (über src/_data/inline.js) – alle Abstufungen berechnet das Stylesheet #}
+  <style>{{ inline.stil | safe }}</style>
   <link rel="stylesheet" href="/assets/css/main.css?v={{ build.version }}">
   <script src="/assets/js/main.js?v={{ build.version }}" defer></script>
 
